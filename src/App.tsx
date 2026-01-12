@@ -9,6 +9,7 @@ import Market from "./pages/Market";
 import Team from "./pages/Team";
 import Assets from "./pages/Assets";
 import Profile from "./pages/Profile";
+import RechargeRecord from "./pages/RechargeRecord";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/team" element={<Team />} />
             <Route path="/assets" element={<Assets />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/recharge-record" element={<RechargeRecord />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BottomNav />
