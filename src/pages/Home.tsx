@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Volume2, CreditCard, ArrowDownToLine, MessageCircle, Megaphone, Share2 } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 
@@ -8,6 +9,8 @@ const marketData = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="page-content bg-background">
       {/* Header with balance */}
@@ -37,12 +40,15 @@ const Home = () => {
 
       {/* Quick Actions Grid */}
       <div className="grid grid-cols-2 gap-3 px-3">
-        <div className="action-card p-4 flex items-center gap-3">
+        <button 
+          onClick={() => navigate("/recharge")}
+          className="action-card p-4 flex items-center gap-3"
+        >
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <CreditCard className="text-primary" size={24} />
           </div>
           <span className="font-bold text-foreground">Recharge</span>
-        </div>
+        </button>
         <div className="action-card p-4 flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <ArrowDownToLine className="text-primary" size={24} />
