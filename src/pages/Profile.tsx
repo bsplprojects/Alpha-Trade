@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { 
   CreditCard, 
   ArrowDownToLine, 
@@ -7,23 +8,38 @@ import {
   MessageSquare,
   Heart,
   ChevronRight,
-  Settings
+  Settings,
+  LucideIcon
 } from "lucide-react";
 
-const menuItems = [
-  { icon: CreditCard, label: "Recharge record" },
+interface MenuItem {
+  icon: LucideIcon;
+  label: string;
+  path?: string;
+}
+
+const menuItems: MenuItem[] = [
+  { icon: CreditCard, label: "Recharge record", path: "/recharge-record" },
   { icon: ArrowDownToLine, label: "Withdrawal record" },
   { icon: FileText, label: "My Order" },
   { icon: RefreshCw, label: "Acc change" },
   { icon: BankCard, label: "Bank card" },
 ];
 
-const menuItems2 = [
+const menuItems2: MenuItem[] = [
   { icon: MessageSquare, label: "Message Center" },
   { icon: Heart, label: "Invite Friends" },
 ];
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const handleMenuClick = (path?: string) => {
+    if (path) {
+      navigate(path);
+    }
+  };
+
   return (
     <div className="page-content bg-background">
       {/* Profile Header */}
@@ -72,7 +88,11 @@ const Profile = () => {
       {/* Menu Items */}
       <div className="bg-card mt-2">
         {menuItems.map((item, index) => (
-          <button key={index} className="menu-item w-full text-left">
+          <button 
+            key={index} 
+            className="menu-item w-full text-left"
+            onClick={() => handleMenuClick(item.path)}
+          >
             <div className="flex items-center gap-3">
               <item.icon size={20} className="text-muted-foreground" />
               <span className="text-foreground">{item.label}</span>
@@ -84,7 +104,11 @@ const Profile = () => {
 
       <div className="bg-card mt-2">
         {menuItems2.map((item, index) => (
-          <button key={index} className="menu-item w-full text-left">
+          <button 
+            key={index} 
+            className="menu-item w-full text-left"
+            onClick={() => handleMenuClick(item.path)}
+          >
             <div className="flex items-center gap-3">
               <item.icon size={20} className="text-muted-foreground" />
               <span className="text-foreground">{item.label}</span>
