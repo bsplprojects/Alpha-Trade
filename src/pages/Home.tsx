@@ -49,12 +49,15 @@ const Home = () => {
           </div>
           <span className="font-bold text-foreground">Recharge</span>
         </button>
-        <div className="action-card p-4 flex items-center gap-3">
+        <button 
+          onClick={() => navigate("/withdraw")}
+          className="action-card p-4 flex items-center gap-3"
+        >
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <ArrowDownToLine className="text-primary" size={24} />
           </div>
           <span className="font-bold text-foreground">Withdraw</span>
-        </div>
+        </button>
         <div className="action-card p-4 flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <MessageCircle className="text-primary" size={24} />
