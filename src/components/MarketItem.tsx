@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface MarketItemProps {
   code: string;
   name: string;
@@ -8,10 +10,14 @@ interface MarketItemProps {
 }
 
 const MarketItem = ({ code, name, volume, price, change, icon }: MarketItemProps) => {
+  const navigate = useNavigate();
   const isPositive = change >= 0;
 
   return (
-    <div className="flex items-center justify-between py-3 px-4 border-b border-border animate-fade-in">
+    <div 
+      className="flex items-center justify-between py-3 px-4 border-b border-border animate-fade-in cursor-pointer hover:bg-muted/50 transition-colors"
+      onClick={() => navigate(`/market/${code}`)}
+    >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-lg">
           {icon}
