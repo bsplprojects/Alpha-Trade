@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import RechargeRecord from "./pages/RechargeRecord";
 import Recharge from "./pages/Recharge";
 import Withdraw from "./pages/Withdraw";
+import MarketDetail from "./pages/MarketDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/recharge-record" element={<RechargeRecord />} />
             <Route path="/recharge" element={<Recharge />} />
             <Route path="/withdraw" element={<Withdraw />} />
+            <Route path="/market/:code" element={<MarketDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <BottomNav />
