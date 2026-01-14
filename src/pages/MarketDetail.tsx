@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ChevronLeft, Star } from "lucide-react";
+import { ChevronLeft, Star, Activity } from "lucide-react";
 import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import { Button } from "@/components/ui/button";
+import { useRealtimePrice } from "@/hooks/useRealtimePrice";
 
 const marketData: Record<string, { name: string; price: number; change: number; volume: string; icon: string }> = {
   ARB: { name: "ARB/USDT", price: 0.20, change: -2.78, volume: "36196.99K", icon: "🔷" },
@@ -18,28 +19,16 @@ const marketData: Record<string, { name: string; price: number; change: number; 
   RNDR: { name: "RNDR/USDT", price: 7.03, change: 2.58, volume: "233.25K", icon: "🎨" },
 };
 
-// Generate chart data
-const generateChartData = (basePrice: number, isPositive: boolean) => {
-  const data = [];
-  let price = basePrice * 0.95;
-  for (let i = 0; i < 24; i++) {
-    const variance = (Math.random() - 0.5) * basePrice * 0.1;
-    price = price + variance + (isPositive ? basePrice * 0.002 : -basePrice * 0.001);
-    data.push({
-      time: `${i}:00`,
-      price: Math.max(price, basePrice * 0.8),
-    });
-  }
-  return data;
-};
-
-const timeFrames = ["Time", "15m", "1H", "4H", "1D", "1W", "1M"];
+const timeFrames = ["Live", "15m", "1H", "4H", "1D", "1W", "1M"];
 
 const MarketDetail = () => {
   const { code } = useParams<{ code: string }>();
   const navigate = useNavigate();
   
   const data = code ? marketData[code] : null;
+  
+  // Use realtime price hook
+  const realtimeData = useRealtimePrice(data?.price || 0, data?.change || 0);
   
   if (!data) {
     return (
@@ -49,35 +38,51 @@ const MarketDetail = () => {
     );
   }
 
-  const isPositive = data.change >= 0;
-  const chartData = generateChartData(data.price, isPositive);
+  const isPositive = realtimeData.change >= 0;
   const chartColor = isPositive ? "#22c55e" : "#ef4444";
 
+  // Format price based on value magnitude
+  const formatPrice = (price: number) => {
+    if (price >= 100) return price.toFixed(2);
+    if (price >= 1) return price.toFixed(4);
+    return price.toFixed(6);
+  };
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20">
       {/* Header */}
       <div className="flex items-center justify-between p-4 bg-card border-b border-border">
         <button onClick={() => navigate(-1)} className="p-2 -ml-2">
           <ChevronLeft className="w-6 h-6 text-foreground" />
         </button>
-        <h1 className="text-lg font-semibold text-foreground">{data.name}</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-semibold text-foreground">{data.name}</h1>
+          <span className="flex items-center gap-1 text-xs text-green-500 animate-pulse">
+            <Activity className="w-3 h-3" />
+            LIVE
+          </span>
+        </div>
         <button className="p-2 -mr-2">
           <Star className="w-5 h-5 text-muted-foreground" />
         </button>
       </div>
 
-      {/* Price Info */}
+      {/* Price Info - Now with live updates */}
       <div className="p-4 bg-card">
         <div className="flex items-baseline gap-3">
-          <span className={`text-3xl font-bold ${isPositive ? "text-green-500" : "text-red-500"}`}>
-            {data.price.toFixed(2)}
+          <span 
+            className={`text-3xl font-bold transition-colors duration-300 ${isPositive ? "text-green-500" : "text-red-500"}`}
+          >
+            {formatPrice(realtimeData.currentPrice)}
           </span>
-          <span className={`text-lg ${isPositive ? "text-green-500" : "text-red-500"}`}>
-            {isPositive ? "+" : ""}{data.change.toFixed(2)}%
+          <span 
+            className={`text-lg transition-colors duration-300 ${isPositive ? "text-green-500" : "text-red-500"}`}
+          >
+            {isPositive ? "+" : ""}{realtimeData.change.toFixed(2)}%
           </span>
         </div>
         <div className="flex gap-6 mt-2 text-sm text-muted-foreground">
-          <span>≈ ${data.price.toFixed(2)}</span>
+          <span>≈ ${formatPrice(realtimeData.currentPrice)}</span>
           <span>24H Vol: {data.volume}</span>
         </div>
       </div>
@@ -98,10 +103,10 @@ const MarketDetail = () => {
         ))}
       </div>
 
-      {/* Chart */}
+      {/* Chart - Now with live animated data */}
       <div className="h-64 bg-card p-4">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData}>
+          <AreaChart data={realtimeData.chartData}>
             <defs>
               <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={chartColor} stopOpacity={0.3} />
@@ -113,15 +118,15 @@ const MarketDetail = () => {
               axisLine={false} 
               tickLine={false}
               tick={{ fill: '#888', fontSize: 10 }}
-              interval={5}
+              interval={9}
             />
             <YAxis 
               domain={['auto', 'auto']}
               axisLine={false}
               tickLine={false}
               tick={{ fill: '#888', fontSize: 10 }}
-              width={50}
-              tickFormatter={(value) => value.toFixed(2)}
+              width={55}
+              tickFormatter={(value) => formatPrice(value)}
             />
             <Area
               type="monotone"
@@ -130,20 +135,21 @@ const MarketDetail = () => {
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#colorPrice)"
+              isAnimationActive={false}
             />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
-      {/* Stats Grid */}
+      {/* Stats Grid - Now with live high/low */}
       <div className="grid grid-cols-2 gap-4 p-4 bg-card mt-2">
         <div>
           <p className="text-xs text-muted-foreground">24H High</p>
-          <p className="text-sm font-medium text-foreground">{(data.price * 1.05).toFixed(4)}</p>
+          <p className="text-sm font-medium text-green-500">{formatPrice(realtimeData.high24h)}</p>
         </div>
         <div>
           <p className="text-xs text-muted-foreground">24H Low</p>
-          <p className="text-sm font-medium text-foreground">{(data.price * 0.95).toFixed(4)}</p>
+          <p className="text-sm font-medium text-red-500">{formatPrice(realtimeData.low24h)}</p>
         </div>
         <div>
           <p className="text-xs text-muted-foreground">24H Volume</p>
