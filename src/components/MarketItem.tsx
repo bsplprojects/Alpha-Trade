@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 
 interface MarketItemProps {
   code: string;
@@ -12,6 +13,28 @@ interface MarketItemProps {
 const MarketItem = ({ code, name, volume, price, change, icon }: MarketItemProps) => {
   const navigate = useNavigate();
   const isPositive = change >= 0;
+  const [flash, setFlash] = useState<"up" | "down" | null>(null);
+  const prevPriceRef = useRef(price);
+
+  // Flash effect when price changes
+  useEffect(() => {
+    if (price > prevPriceRef.current) {
+      setFlash("up");
+    } else if (price < prevPriceRef.current) {
+      setFlash("down");
+    }
+    prevPriceRef.current = price;
+
+    const timer = setTimeout(() => setFlash(null), 300);
+    return () => clearTimeout(timer);
+  }, [price]);
+
+  // Format price based on magnitude
+  const formatPrice = (p: number) => {
+    if (p >= 100) return p.toFixed(2);
+    if (p >= 1) return p.toFixed(2);
+    return p.toFixed(2);
+  };
 
   return (
     <div 
@@ -28,8 +51,18 @@ const MarketItem = ({ code, name, volume, price, change, icon }: MarketItemProps
         </div>
       </div>
       <div className="text-center">
-        <div className={isPositive ? "price-up font-medium" : "price-down font-medium"}>
-          {price.toFixed(2)}
+        <div 
+          className={`font-medium transition-all duration-300 ${
+            flash === "up" 
+              ? "text-green-400 scale-105" 
+              : flash === "down" 
+              ? "text-red-400 scale-105" 
+              : isPositive 
+              ? "text-green-500" 
+              : "text-red-500"
+          }`}
+        >
+          {formatPrice(price)}
         </div>
       </div>
       <div>
