@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { Volume2, CreditCard, ArrowDownToLine, MessageCircle, Megaphone, Share2 } from "lucide-react";
+import { Volume2, CreditCard, ArrowDownToLine, MessageCircle, Megaphone, Share2, ChevronRight } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
-
-const marketData = [
-  { code: "ARB", name: "ARB/USDT", volume: "36192.40K", price: 0.20, change: -2.83, icon: "🔷" },
-  { code: "AAVE", name: "AAVE/USDT", volume: "55.37K", price: 164.70, change: -0.98, icon: "👻" },
-  { code: "DOGE", name: "DOGE/USDT", volume: "677658.70K", price: 0.14, change: -2.17, icon: "🐕" },
-];
+import { useMarketData } from "@/hooks/useMarketData";
+import { Button } from "@/components/ui/button";
 
 const Home = () => {
   const navigate = useNavigate();
+  const marketData = useMarketData();
+  
+  // Show only first 3 items
+  const displayedMarket = marketData.slice(0, 3);
 
   return (
     <div className="page-content bg-background">
@@ -96,10 +96,20 @@ const Home = () => {
             <span className="text-center">Price</span>
             <span className="text-right">Increase</span>
           </div>
-          {marketData.map((item) => (
+          {displayedMarket.map((item) => (
             <MarketItem key={item.code} {...item} />
           ))}
         </div>
+        
+        {/* View More Button */}
+        <Button 
+          variant="outline" 
+          className="w-full mt-3 text-primary border-primary hover:bg-primary/10"
+          onClick={() => navigate("/market")}
+        >
+          View More
+          <ChevronRight className="w-4 h-4 ml-1" />
+        </Button>
       </div>
 
       <div className="h-8" />
