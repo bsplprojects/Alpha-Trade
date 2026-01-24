@@ -1,13 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import { Volume2, CreditCard, ArrowDownToLine, MessageCircle, Megaphone, Share2, ChevronRight } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Volume2,
+  CreditCard,
+  ArrowDownToLine,
+  MessageCircle,
+  Megaphone,
+  Share2,
+  ChevronRight,
+  Bell,
+} from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 import { useMarketData } from "@/hooks/useMarketData";
 import { Button } from "@/components/ui/button";
+import Login from "./Login";
 
 const Home = () => {
   const navigate = useNavigate();
   const marketData = useMarketData();
-  
+
   // Show only first 3 items
   const displayedMarket = marketData.slice(0, 3);
 
@@ -16,9 +26,17 @@ const Home = () => {
       {/* Header with balance */}
       <div className="gradient-header flex items-center justify-between px-4 py-3">
         <div className="font-bold text-lg">₹3,971.82</div>
-        <div className="text-xl font-bold tracking-wide">PLW</div>
-        <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-          <span className="text-sm">🔔</span>
+
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+            <Bell size={16} className="text-white" />
+          </div>
+          <Link
+            to={"/login"}
+            className="bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-1 rounded-md"
+          >
+            Login
+          </Link>
         </div>
       </div>
 
@@ -26,10 +44,15 @@ const Home = () => {
       <div className="mx-3 mt-3 rounded-xl overflow-hidden gradient-banner p-4 relative">
         <div className="text-primary font-bold text-lg">PLW</div>
         <h2 className="text-xl font-bold text-foreground mt-1">
-          Daily returns up to <span className="text-destructive text-3xl font-extrabold">10%</span>
+          Daily returns up to{" "}
+          <span className="text-destructive text-3xl font-extrabold">10%</span>
         </h2>
-        <p className="text-sm text-muted-foreground mt-1">powered by advanced ai algorithms</p>
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 text-6xl opacity-20">💰</div>
+        <p className="text-sm text-muted-foreground mt-1">
+          powered by advanced ai algorithms
+        </p>
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 text-6xl opacity-20">
+          💰
+        </div>
       </div>
 
       {/* Welcome Message */}
@@ -40,7 +63,7 @@ const Home = () => {
 
       {/* Quick Actions Grid */}
       <div className="grid grid-cols-2 gap-3 px-3">
-        <button 
+        <button
           onClick={() => navigate("/recharge")}
           className="action-card p-4 flex items-center gap-3"
         >
@@ -49,7 +72,7 @@ const Home = () => {
           </div>
           <span className="font-bold text-foreground">Recharge</span>
         </button>
-        <button 
+        <button
           onClick={() => navigate("/withdraw")}
           className="action-card p-4 flex items-center gap-3"
         >
@@ -68,7 +91,9 @@ const Home = () => {
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <Megaphone className="text-primary" size={24} />
           </div>
-          <span className="font-bold text-foreground text-sm">Official Channel</span>
+          <span className="font-bold text-foreground text-sm">
+            Official Channel
+          </span>
         </div>
       </div>
 
@@ -78,7 +103,9 @@ const Home = () => {
           <div className="text-3xl">🪙</div>
           <div className="flex-1">
             <h3 className="font-bold text-lg">LEVEL UP YOUR EARNINGS</h3>
-            <p className="text-sm opacity-90">Get 10% rewards when your friends make their first deposit</p>
+            <p className="text-sm opacity-90">
+              Get 10% rewards when your friends make their first deposit
+            </p>
           </div>
           <button className="bg-white/20 px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-1">
             <Share2 size={14} />
@@ -100,10 +127,10 @@ const Home = () => {
             <MarketItem key={item.code} {...item} />
           ))}
         </div>
-        
+
         {/* View More Button */}
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           className="w-full mt-3 text-primary border-primary hover:bg-primary/10"
           onClick={() => navigate("/market")}
         >

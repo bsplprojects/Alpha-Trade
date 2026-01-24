@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Check, Circle } from "lucide-react";
+import Popup from "../components/Popup";
+import { Button } from "@/components/ui/button";
 
 interface PaymentChannel {
   id: string;
@@ -22,6 +24,7 @@ const quickAmounts = [1000, 2000, 5000, 10000, 50000, 100000];
 const Recharge = () => {
   const navigate = useNavigate();
   const [selectedChannel, setSelectedChannel] = useState("pay1");
+  const [showPopup, setShowPopup] = useState(false);
   const [amount, setAmount] = useState("");
 
   const handleQuickSelect = (value: number) => {
@@ -29,16 +32,15 @@ const Recharge = () => {
   };
 
   const handleConfirm = () => {
-    // Handle recharge confirmation
-    console.log("Recharge:", { channel: selectedChannel, amount });
+    setShowPopup(true);
   };
 
   return (
-    <div className="page-content bg-background">
+    <div className="page-content bg-background relative">
       {/* Header with back button */}
       <header className="header-gradient flex items-center px-4 relative">
-        <button 
-          onClick={() => navigate(-1)} 
+        <button
+          onClick={() => navigate(-1)}
           className="absolute left-4 text-white"
         >
           <ChevronLeft size={24} />
@@ -47,8 +49,10 @@ const Recharge = () => {
       </header>
 
       {/* Channels Section */}
-      <div className="mx-4 mt-4 bg-card rounded-xl p-4">
-        <h3 className="font-bold text-foreground mb-3 pb-3 border-b border-border">Channels</h3>
+      <div className="mx-4 mt-4 bg-card rounded-xl p-4 ">
+        <h3 className="font-bold text-foreground mb-3 pb-3 border-b border-border">
+          Channels
+        </h3>
         <div className="space-y-1">
           {channels.map((channel) => (
             <button
@@ -57,7 +61,9 @@ const Recharge = () => {
               className="w-full flex items-center justify-between py-3 text-left"
             >
               <div>
-                <div className="font-medium text-foreground">{channel.name}</div>
+                <div className="font-medium text-foreground">
+                  {channel.name}
+                </div>
                 {channel.range && (
                   <div className="text-sm text-muted-foreground">
                     Amount range: {channel.range}
@@ -92,7 +98,9 @@ const Recharge = () => {
 
         {/* Quick Selection */}
         <div className="mt-4">
-          <p className="text-center text-muted-foreground text-sm mb-3">Quick Selection</p>
+          <p className="text-center text-muted-foreground text-sm mb-3">
+            Quick Selection
+          </p>
           <div className="grid grid-cols-4 gap-2">
             {quickAmounts.slice(0, 4).map((value) => (
               <button
@@ -135,6 +143,34 @@ const Recharge = () => {
           confirm
         </button>
       </div>
+
+      <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}>
+        <div className="p-2 flex flex-col items-center gap-3 justify-center mt-8">
+          {/* QR */}
+          <div className="h-56 w-64 max-w-64 border rounded shadow"></div>
+
+          <div className="flex items-center justify-between w-full text-sm gap-2">
+            <div className="p-1 px-5 rounded-md border border-primary bg-primary/40 w-1/2 shadow">
+              <p className="font-semibold">Amount</p>
+              <span>₹ {amount}</span>
+            </div>
+            <div className="p-1 px-5 rounded-md border border-primary bg-primary/40 w-1/2 shadow">
+              <p className="font-semibold">Pay type</p>
+              <span>Gpay</span>
+            </div>
+          </div>
+
+          <span className="w-full font-bold">Hash</span>
+          <div className="w-64 p-1 px-5 border rounded-md shadow">
+            <p className="break-words">
+              asdhafhasfjakjfalksdjasdhafhasfjakjfalksdjasdhafhasfjakjfalksdj
+            </p>
+          </div>
+
+            <Button className="w-full">Submit</Button>
+
+        </div>
+      </Popup>
     </div>
   );
 };

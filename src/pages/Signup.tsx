@@ -1,33 +1,53 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import {
+  Mail,
+  User,
+  SquareUserRound,
+  UserCog,
+  Phone,
+  CircleUserRound,
+  Lock,
+  MailOpen,
+  ShieldHalf,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { http } from "@/utils/http";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [data, setData] = useState({
+    password: "",
+    confPassword: "",
+    contact: "",
+    verificationCode: "",
+    invitationCode: "",
+  });
+
   const [agreeTerms, setAgreeTerms] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const signupMutation = useMutation({
+    mutationFn: async () => {
+      const response = await http.post("/ConsumerSignup", {
+        // Referral: data.sponsorAccountNumber,
+        // ReferralName: data.sponsorAccountName,
+        // FirstName: data.fullName,
+        // MobileNo: data.contact,
+        // EmailID: data.email,
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      navigate("/login");
+    },
+  });
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (password !== confirmPassword) {
-      toast({
-        title: "Error",
-        description: "Passwords do not match",
-        variant: "destructive",
-      });
-      return;
-    }
 
     if (!agreeTerms) {
       toast({
@@ -38,40 +58,47 @@ const Signup = () => {
       return;
     }
 
-    setIsLoading(true);
-    
-    // Simulate signup - replace with actual auth later
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: "Account Created",
-        description: "Welcome to the platform!",
-      });
-      navigate("/");
-    }, 1000);
+    signupMutation.mutate();
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <div className="flex-1 flex flex-col justify-center px-6 py-12">
-        <div className="text-center mb-8">
+        <div className="text-center mb-4">
           <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-4xl">🚀</span>
+            <span className="text-4xl">
+              <CircleUserRound size={40} className="text-primary" />
+            </span>
           </div>
           <h1 className="text-2xl font-bold text-foreground">Create Account</h1>
-          <p className="text-muted-foreground mt-2">Start your trading journey</p>
+          <p className="text-muted-foreground mt-2">
+            Start your trading journey
+          </p>
         </div>
 
-        <form onSubmit={handleSignup} className="space-y-4">
-          {/* Name Input */}
+        <form onSubmit={handleSignup} className="space-y-3">
+          {/* CONTACT NUMBER */}
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Full name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              placeholder="Contact number"
+              value={data.contact}
+              onChange={(e) => setData({ ...data, contact: e.target.value })}
+              className="pl-10 h-12 bg-muted border-border"
+              required
+            />
+          </div>
+
+          {/* Name Input */}
+          <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              type="password"
+              placeholder="Password"
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
               className="pl-10 h-12 bg-muted border-border"
               required
             />
@@ -79,56 +106,48 @@ const Signup = () => {
 
           {/* Email Input */}
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="password"
+              placeholder="Confirm Password"
+              value={data.confPassword}
+              onChange={(e) =>
+                setData({ ...data, confPassword: e.target.value })
+              }
               className="pl-10 h-12 bg-muted border-border"
               required
             />
           </div>
 
-          {/* Password Input */}
+          {/* INVITATION CODE */}
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="pl-10 pr-10 h-12 bg-muted border-border"
+              type="text"
+              placeholder="Invitation code"
+              className="pl-10 h-12 bg-muted border-border"
+              value={data.invitationCode}
+              onChange={(e) =>
+                setData({ ...data, invitationCode: e.target.value })
+              }
               required
             />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-            >
-              {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-            </button>
           </div>
 
-          {/* Confirm Password Input */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          {/* VERIFICATION CODE */}
+          {/* <div className="relative">
+            <ShieldHalf className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="pl-10 pr-10 h-12 bg-muted border-border"
+              type="text"
+              placeholder="Verification code"
+              className="pl-10 h-12 bg-muted border-border"
               required
+              value={data.verificationCode}
+              onChange={(e) => {
+                setData({ ...data, verificationCode: e.target.value });
+              }}
             />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-            >
-              {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-            </button>
-          </div>
+          </div> */}
 
           {/* Terms Checkbox */}
           <div className="flex items-start space-x-3">
@@ -138,7 +157,10 @@ const Signup = () => {
               onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
               className="mt-1"
             />
-            <label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed">
+            <label
+              htmlFor="terms"
+              className="text-sm text-muted-foreground leading-relaxed"
+            >
               I agree to the{" "}
               <Link to="/terms" className="text-primary hover:underline">
                 Terms of Service
@@ -154,35 +176,21 @@ const Signup = () => {
           <Button
             type="submit"
             className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-            disabled={isLoading}
+            disabled={signupMutation.isPending}
           >
-            {isLoading ? "Creating account..." : "Create Account"}
+            {signupMutation.isPending
+              ? "Creating account..."
+              : "Create Account"}
           </Button>
         </form>
 
-        {/* Divider */}
-        <div className="flex items-center my-6">
-          <div className="flex-1 border-t border-border"></div>
-          <span className="px-4 text-muted-foreground text-sm">or continue with</span>
-          <div className="flex-1 border-t border-border"></div>
-        </div>
-
-        {/* Social Login */}
-        <div className="flex gap-4">
-          <Button variant="outline" className="flex-1 h-12 border-border">
-            <span className="text-xl mr-2">🍎</span>
-            Apple
-          </Button>
-          <Button variant="outline" className="flex-1 h-12 border-border">
-            <span className="text-xl mr-2">🔵</span>
-            Google
-          </Button>
-        </div>
-
         {/* Login Link */}
-        <p className="text-center mt-8 text-muted-foreground">
+        <p className="text-center mt-1 text-muted-foreground">
           Already have an account?{" "}
-          <Link to="/login" className="text-primary font-semibold hover:underline">
+          <Link
+            to="/login"
+            className="text-primary font-semibold hover:underline"
+          >
             Sign In
           </Link>
         </p>

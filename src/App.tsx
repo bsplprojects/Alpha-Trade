@@ -16,6 +16,34 @@ import MarketDetail from "./pages/MarketDetail";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminLayout from "./pages/Admin/AdminLayout";
+import MemberDetails from "./admin/features/Members/pages/MemberDetails";
+import MemberModify from "./admin/features/Members/components/MemberModify";
+import ChangeMemberPassword from "./admin/features/Members/components/ChangeMemberPassword";
+import EnterMember from "./admin/features/Members/components/EnterMember";
+import Activation from "./admin/features/Members/components/Activation";
+import MemberProfile from "./admin/features/Profile/pages/MemberProfile";
+import ProfileChangePassword from "./admin/features/Profile/components/ProfileChangePassword";
+import Settings from "./admin/features/Profile/components/Settings";
+import ControlPanel from "./admin/features/Profile/components/ControlPanel";
+import Reports from "./admin/features/Reports/pages/Reports";
+import JoiningReport from "./admin/features/Reports/components/JoiningReport";
+import ActivationReport from "./admin/features/Reports/components/ActivationReport";
+import LedgerReport from "./admin/features/Reports/components/LedgerReport";
+import Payout from "./admin/features/Payout/pages/Payout";
+import PayoutStakingBonus from "./admin/features/Payout/components/PayoutStakingBonus";
+import PayoutSponsorBonus from "./admin/features/Payout/components/PayoutSponsorBonus";
+import PayoutWalletBonus from "./admin/features/Payout/components/PayoutWalletBonus";
+import PayoutPerformanceBonus from "./admin/features/Payout/components/PayoutPerformanceBonus";
+import PayoutRewards from "./admin/features/Payout/components/PayoutRewards";
+import WithdrawlHistory from "./admin/features/Withdrawl/WithdrawlHistory";
+import SupportHistory from "./admin/features/Support/SupportHistory";
+import AdminFundHistory from "./admin/features/Funds/pages/AdminFundHistory";
+import TransferHistory from "./admin/features/Funds/components/TransferHistory";
+import Request from "./admin/features/Funds/components/Request";
+import RequestHistory from "./admin/features/Funds/components/RequestHistory";
+import FundTransfer from "./admin/features/Funds/components/FundTransfer";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +67,64 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+
+              {/* MEMBER DETAILS */}
+              <Route path="member-details" element={<MemberDetails />}>
+                <Route index element={<MemberModify />} />
+                <Route
+                  path="change-password"
+                  element={<ChangeMemberPassword />}
+                />
+                <Route path="enter-member" element={<EnterMember />} />
+                <Route path="activation" element={<Activation />} />
+              </Route>
+
+              {/* PROFILE */}
+              <Route path="profile" element={<MemberProfile />}>
+                <Route index element={<ProfileChangePassword />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="control-panel" element={<ControlPanel />} />
+              </Route>
+
+              {/* REPORTS */}
+              <Route path="reports" element={<Reports />}>
+                <Route index element={<JoiningReport />} />
+                <Route
+                  path="activation-report"
+                  element={<ActivationReport />}
+                />
+                <Route path="ledger-report" element={<LedgerReport />} />
+              </Route>
+
+              {/* PAYOUT */}
+              <Route path="payout" element={<Payout />}>
+                <Route index element={<PayoutStakingBonus />} />
+                <Route path="sponsor-bonus" element={<PayoutSponsorBonus />} />
+                <Route
+                  path="wallet-compound-bonus"
+                  element={<PayoutWalletBonus />}
+                />
+                <Route
+                  path="performance-bonus"
+                  element={<PayoutPerformanceBonus />}
+                />
+                <Route path="rewards" element={<PayoutRewards />} />
+              </Route>
+
+              {/* WITHDRAWL */}
+              <Route path="withdrawl-history" element={<WithdrawlHistory />} />
+              <Route path="support-history" element={<SupportHistory />} />
+
+              {/* FUNDS */}
+              <Route path="funds-history" element={<AdminFundHistory />}>
+                <Route index element={<FundTransfer />} />
+                <Route path="transfer-history" element={<TransferHistory />} />
+                <Route path="request" element={<Request />} />
+                <Route path="request-history" element={<RequestHistory />} />
+              </Route>
+            </Route>
           </Routes>
           <BottomNav />
         </div>

@@ -1,5 +1,6 @@
 import PageHeader from "@/components/PageHeader";
 import { CreditCard, ArrowDownToLine, RefreshCw, RotateCw } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Assets = () => {
   return (
@@ -8,14 +9,14 @@ const Assets = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-3 gap-4 py-6 px-4 bg-card border-b border-border">
-        <button className="flex flex-col items-center gap-2 text-muted-foreground">
+        <Link to={"/recharge"} className="flex flex-col items-center gap-2 text-muted-foreground">
           <CreditCard size={24} />
           <span className="text-sm">Recharge</span>
-        </button>
-        <button className="flex flex-col items-center gap-2 text-muted-foreground">
+        </Link>
+        <Link to={"/withdraw"} className="flex flex-col items-center gap-2 text-muted-foreground">
           <ArrowDownToLine size={24} />
           <span className="text-sm">Withdraw</span>
-        </button>
+        </Link>
         <button className="flex flex-col items-center gap-2 text-muted-foreground">
           <RefreshCw size={24} />
           <span className="text-sm">Acc change</span>
@@ -37,11 +38,11 @@ const Assets = () => {
 
           <div className="border-t border-white/20 mt-4 pt-4 grid grid-cols-2 text-center">
             <div>
-              <div className="text-success text-xl font-bold">₹2000</div>
+              <div className="text-white text-xl font-bold">₹2000</div>
               <div className="text-sm opacity-80">Total recharge</div>
             </div>
             <div>
-              <div className="text-success text-xl font-bold">₹0</div>
+              <div className="text-white text-xl font-bold">₹0</div>
               <div className="text-sm opacity-80">Total withdraw</div>
             </div>
           </div>
