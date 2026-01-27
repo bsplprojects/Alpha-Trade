@@ -95,7 +95,6 @@ const SupportHistory = () => {
             }}
             disabled={mutation.isPending}
             className="w-full"
-            variant={"gold"}
           >
             {mutation.isPending ? "Loading..." : "All Members"}
           </Button>

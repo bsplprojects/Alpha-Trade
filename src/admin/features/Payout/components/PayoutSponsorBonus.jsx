@@ -89,7 +89,6 @@ const PayoutSponsorBonus = () => {
           <Button
             onClick={() => sponsorBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -98,7 +97,6 @@ const PayoutSponsorBonus = () => {
           <Button
             onClick={() => sponsorBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             {sponsorBonusMutation.isPending ? "Loading..." : "All Members"}
           </Button>

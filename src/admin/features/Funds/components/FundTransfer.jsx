@@ -106,12 +106,7 @@ const FundTransfer = () => {
           </Select>
         </div>
       </div>
-      <Button
-        onClick={() => transferMutation.mutate(formdata)}
-        variant={"gold"}
-      >
-        Submit
-      </Button>
+      <Button onClick={() => transferMutation.mutate(formdata)}>Submit</Button>
     </>
   );
 };

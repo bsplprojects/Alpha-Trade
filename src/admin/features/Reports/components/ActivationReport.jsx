@@ -89,7 +89,6 @@ const ActivationReport = () => {
           <Button
             onClick={() => activationDetailsMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -98,7 +97,6 @@ const ActivationReport = () => {
           <Button
             onClick={() => activationDetailsMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             {activationDetailsMutation.isPending ? "Loading..." : "All Members"}
           </Button>

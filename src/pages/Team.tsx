@@ -39,7 +39,7 @@ const Team = () => {
           </div>
           <div className="border-l border-white/20">
             <div className="text-sm opacity-80">Total Revenue</div>
-            <div className="text-xl font-bold">6146.82</div>
+            <div className="text-xl font-bold">0.00</div>
           </div>
         </div>
       </div>

@@ -116,7 +116,6 @@ const WithdrawlHistory = () => {
             }}
             disabled={withdrawlHistoryMutation.isPending}
             className="w-full"
-            variant={"gold"}
           >
             {withdrawlHistoryMutation.isPending ? "Loading..." : "Search"}
           </Button>
@@ -125,7 +124,6 @@ const WithdrawlHistory = () => {
           <Button
             onClick={() => handleExportToExcel(filteredMembers)}
             className="w-full"
-            variant={"gold"}
           >
             Export to Excel
           </Button>

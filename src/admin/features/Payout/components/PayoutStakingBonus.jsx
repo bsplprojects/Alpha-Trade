@@ -38,7 +38,7 @@ const PayoutStakingBonus = () => {
   const totalAmount = useMemo(() => {
     return stakingBonusMutation.data?.data?.data?.reduce(
       (total, d) => total + parseFloat(d.amount),
-      0
+      0,
     );
   }, [stakingBonusMutation.data?.data]);
 
@@ -89,7 +89,6 @@ const PayoutStakingBonus = () => {
           <Button
             onClick={() => stakingBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -98,7 +97,6 @@ const PayoutStakingBonus = () => {
           <Button
             onClick={() => stakingBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             {stakingBonusMutation.isPending ? "Loading..." : "All Members"}
           </Button>

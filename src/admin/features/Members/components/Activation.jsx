@@ -102,9 +102,7 @@ const Activation = () => {
         </div>
       </div>
       <div className=" mt-4">
-        <Button onClick={handleSubmit} variant={"gold"}>
-          Submit
-        </Button>
+        <Button onClick={handleSubmit}>Submit</Button>
       </div>
     </div>
   );

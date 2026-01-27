@@ -49,16 +49,12 @@ const TransferHistory = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <Button
-          onClick={() => fundHistoryMutation.mutate(searchQuery)}
-          variant={"gold"}
-        >
+        <Button onClick={() => fundHistoryMutation.mutate(searchQuery)}>
           Search
         </Button>
         <Button
           disabled={fundHistoryMutation.isPending}
           onClick={() => fundHistoryMutation.mutate(searchQuery)}
-          variant={"gold"}
         >
           All Members
         </Button>

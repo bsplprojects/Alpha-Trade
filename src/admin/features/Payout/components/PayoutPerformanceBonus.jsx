@@ -89,7 +89,6 @@ const PayoutPerformanceBonus = () => {
           <Button
             onClick={() => performanceBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -98,7 +97,6 @@ const PayoutPerformanceBonus = () => {
           <Button
             onClick={() => performanceBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             {performanceBonusMutation.isPending ? "Loading..." : "All Members"}
           </Button>

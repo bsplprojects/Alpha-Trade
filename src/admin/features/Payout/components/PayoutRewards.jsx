@@ -89,7 +89,6 @@ const PayoutRewards = () => {
           <Button
             onClick={() => rewardsMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -98,7 +97,6 @@ const PayoutRewards = () => {
           <Button
             onClick={() => rewardsMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             {rewardsMutation.isPending ? "Loading..." : "All Members"}
           </Button>

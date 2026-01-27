@@ -89,7 +89,6 @@ const PayoutWalletBonus = () => {
           <Button
             onClick={() => walletBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -98,7 +97,6 @@ const PayoutWalletBonus = () => {
           <Button
             onClick={() => walletBonusMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             {walletBonusMutation.isPending ? "Loading..." : "All Members"}
           </Button>

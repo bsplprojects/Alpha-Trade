@@ -19,7 +19,10 @@ const channels: PaymentChannel[] = [
   { id: "usdt", name: "USDT" },
 ];
 
-const quickAmounts = [1000, 2000, 5000, 10000, 50000, 100000];
+const quickAmounts = [
+  1000, 2000, 5000, 10000, 50000, 100000, 500000, 1000000, 1500000, 2000000,
+  2500000, 3000000,
+];
 
 const Recharge = () => {
   const navigate = useNavigate();
@@ -141,12 +144,9 @@ const Recharge = () => {
 
       {/* Confirm Button */}
       <div className="mx-4 mt-6">
-        <button
-          onClick={handleConfirm}
-          className="w-full py-4 rounded-full bg-blue-500 text-white font-semibold text-lg hover:bg-blue-600 transition-colors"
-        >
-          confirm
-        </button>
+        <Button onClick={handleConfirm} disabled={!amount} className="w-full">
+          Confirm
+        </Button>
       </div>
     </div>
   );

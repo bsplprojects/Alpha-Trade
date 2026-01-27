@@ -43,7 +43,7 @@ const JoiningReport = () => {
   const totalAmount = useMemo(() => {
     return reportMembers.data?.data?.reduce(
       (total, member) => total + parseFloat(member.Price),
-      0
+      0,
     );
   }, [reportMembers.data?.data]);
 
@@ -111,7 +111,6 @@ const JoiningReport = () => {
           <Button
             onClick={() => reportMembers.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -122,7 +121,6 @@ const JoiningReport = () => {
               reportMembers.mutate(searchQuery);
             }}
             className="w-full"
-            variant={"gold"}
           >
             {reportMembers.isPending ? "Loading..." : "All Members"}
           </Button>

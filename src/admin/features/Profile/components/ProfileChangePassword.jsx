@@ -19,7 +19,7 @@ const ProfileChangePassword = () => {
 
   const fetchPass = async () => {
     const response = await http.get(
-      `/GetMemberPinList/?search=${data?.ConsumerID}`
+      `/GetMemberPinList/?search=${data?.ConsumerID}`,
     );
     setOldPass(response.data?.data?.[0]?.Password);
   };
@@ -99,7 +99,7 @@ const ProfileChangePassword = () => {
             }
           />
         </div>
-        <Button onClick={handleSubmit} variant={"gold"} className="w-1/4 my-2">
+        <Button onClick={handleSubmit} className="w-1/4 my-2">
           {updateAdminPassword.isPending ? "Saving..." : "Save"}
         </Button>
       </div>

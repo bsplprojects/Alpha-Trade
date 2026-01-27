@@ -1,9 +1,9 @@
 import PageHeader from "@/components/PageHeader";
 import qr from "../../assets/qr.png";
 import { Input } from "@/components/ui/input";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Image, X } from "lucide-react";
+import { ArrowLeft, Image, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { http } from "@/utils/http";
@@ -66,6 +66,9 @@ const ConfirmRecharge = () => {
   return (
     <main className="page-content">
       <PageHeader title="Confirm recharge" />
+      <Link to="/recharge" className="px-5 mt-2 flex items-center gap-2">
+        <ArrowLeft size={16} /> Go back
+      </Link>
       <div className="flex items-center justify-center py-3">
         <img src={qr} alt="qr" width={280} />
       </div>

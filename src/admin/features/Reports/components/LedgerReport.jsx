@@ -113,7 +113,6 @@ const LedgerReport = () => {
           <Button
             onClick={() => ledgerDetailsMutation.mutate(searchQuery)}
             className="w-full"
-            variant={"gold"}
           >
             Search
           </Button>
@@ -125,7 +124,6 @@ const LedgerReport = () => {
               ledgerDetailsMutation.mutate(searchQuery);
             }}
             className="w-full"
-            variant={"gold"}
           >
             {ledgerDetailsMutation.isPending ? "Loading..." : "All Members"}
           </Button>
