@@ -1,4 +1,15 @@
-import { BadgeDollarSign, BadgeInfo, Banknote, FileText, HandCoins, Home, User, UsersRound } from "lucide-react";
+import {
+  BadgeDollarSign,
+  BadgeInfo,
+  Banknote,
+  FileText,
+  HandCoins,
+  Home,
+  User,
+  UsersRound,
+} from "lucide-react";
+
+export const IMAGE_BASE_URL = "https://api.bctrade1.in";
 
 export const adminItems = [
   {

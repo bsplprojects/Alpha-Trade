@@ -11,7 +11,7 @@ const Breadcrumbs = ({ breadcrumbs = [] }) => {
   if (!breadcrumbs.length) return null;
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className>
       <BreadcrumbList>
         {/* Home */}
         <BreadcrumbItem>
@@ -22,7 +22,7 @@ const Breadcrumbs = ({ breadcrumbs = [] }) => {
           const isLast = index === breadcrumbs.length - 1;
 
           return (
-            <div key={index} className="flex items-center">
+            <div key={index} className="flex items-center ">
               <BreadcrumbSeparator />
 
               <BreadcrumbItem>

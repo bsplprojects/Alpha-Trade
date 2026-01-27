@@ -1,79 +1,90 @@
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Loader } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { http } from "@/utils/http";
 
-interface RecordCardProps {
-  amount: number;
-  orderNo: string;
-  state: "pending" | "success" | "failed";
-  time: string;
-  expireTime: string;
-}
-
-const RecordCard = ({ amount, orderNo, state, time, expireTime }: RecordCardProps) => {
+const RecordCard = ({ record }) => {
   const stateStyles = {
-    pending: "text-foreground font-semibold",
-    success: "text-success font-semibold",
-    failed: "text-destructive font-semibold",
+    Pending: "text-foreground font-semibold",
+    Success: "text-success font-semibold",
+    Failed: "text-destructive font-semibold",
   };
 
-  const stateLabels = {
-    pending: "pending",
-    success: "Succed",
-    failed: "Failed",
+  const formatDate = (date) => {
+    const day = date?.split("T")[0];
+    const time = date?.split("T")[1]?.split(".")[0];
+
+    return `${day}, ${time}`;
   };
 
   return (
     <div className="bg-muted rounded-xl p-4 space-y-2 animate-fade-in">
       <div className="flex gap-2">
         <span className="text-muted-foreground">Recharge Amount:</span>
-        <span className="text-primary font-bold">{amount}</span>
+        <span className="text-primary font-bold">₹{record?.Amount || 0}</span>
       </div>
       <div className="flex gap-2">
         <span className="text-muted-foreground">Order No.:</span>
-        <span className="font-semibold text-foreground">{orderNo}</span>
+        <span className="font-semibold text-foreground">
+          {record?.Refrence || "-"}
+        </span>
       </div>
       <div className="flex gap-2">
-        <span className="text-muted-foreground">State:</span>
-        <span className={stateStyles[state]}>{stateLabels[state]}</span>
+        <span className="text-muted-foreground">Status:</span>
+        <span className={stateStyles[record?.Status]}>{record?.Status}</span>
       </div>
       <div className="flex gap-2">
         <span className="text-muted-foreground">Time:</span>
-        <span className="text-muted-foreground">{time}</span>
+        <span className="text-muted-foreground">
+          {formatDate(record?.rDate)}
+        </span>
       </div>
-      <div className="flex gap-2">
+      {/* <div className="flex gap-2">
         <span className="text-muted-foreground">Expire Time:</span>
         <span className="text-muted-foreground">{expireTime}</span>
+      </div> */}
+      <div className="flex gap-2">
+        <span className="text-muted-foreground">Transaction ID:</span>
+        <span className="text-muted-foreground">{record?.tNo}</span>
       </div>
     </div>
   );
 };
 
-const rechargeRecords: RecordCardProps[] = [
-  {
-    amount: 1000,
-    orderNo: "26109153148it8",
-    state: "pending",
-    time: "2026-01-09 15:31:48",
-    expireTime: "2027-01-09 15:31:48",
-  },
-  {
-    amount: 2000,
-    orderNo: "25A09170835naf",
-    state: "success",
-    time: "2025-10-09 17:08:35",
-    expireTime: "2026-10-09 17:08:35",
-  },
-];
-
 const RechargeRecord = () => {
   const navigate = useNavigate();
+  const memberId = sessionStorage.getItem("memberId");
+  const { data, isLoading } = useQuery({
+    queryKey: ["recharge-record"],
+    queryFn: async () => {
+      const res = await http.get(
+        `/GetAddFundRequestForMember/?MID=${memberId}`,
+      );
+      return res.data;
+    },
+  });
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <Loader className="animate-spin" />
+      </div>
+    );
+  }
+
+  if (!data || data?.total === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        No records found
+      </div>
+    );
+  }
   return (
     <div className="page-content bg-background">
       {/* Header with back button */}
       <header className="header-gradient flex items-center px-4">
-        <button 
-          onClick={() => navigate(-1)} 
+        <button
+          onClick={() => navigate(-1)}
           className="absolute left-4 text-white"
         >
           <ChevronLeft size={24} />
@@ -83,8 +94,8 @@ const RechargeRecord = () => {
 
       {/* Records List */}
       <div className="p-4 space-y-4">
-        {rechargeRecords.map((record, index) => (
-          <RecordCard key={index} {...record} />
+        {data?.data?.map((record, index) => (
+          <RecordCard key={index} record={record} />
         ))}
       </div>
     </div>

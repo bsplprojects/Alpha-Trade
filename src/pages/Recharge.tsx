@@ -32,7 +32,12 @@ const Recharge = () => {
   };
 
   const handleConfirm = () => {
-    setShowPopup(true);
+    navigate("/confirm", {
+      state: {
+        channel: selectedChannel,
+        amount,
+      },
+    });
   };
 
   return (
@@ -143,34 +148,6 @@ const Recharge = () => {
           confirm
         </button>
       </div>
-
-      <Popup isOpen={showPopup} onClose={() => setShowPopup(false)}>
-        <div className="p-2 flex flex-col items-center gap-3 justify-center mt-8">
-          {/* QR */}
-          <div className="h-56 w-64 max-w-64 border rounded shadow"></div>
-
-          <div className="flex items-center justify-between w-full text-sm gap-2">
-            <div className="p-1 px-5 rounded-md border border-primary bg-primary/40 w-1/2 shadow">
-              <p className="font-semibold">Amount</p>
-              <span>₹ {amount}</span>
-            </div>
-            <div className="p-1 px-5 rounded-md border border-primary bg-primary/40 w-1/2 shadow">
-              <p className="font-semibold">Pay type</p>
-              <span>Gpay</span>
-            </div>
-          </div>
-
-          <span className="w-full font-bold">Hash</span>
-          <div className="w-64 p-1 px-5 border rounded-md shadow">
-            <p className="break-words">
-              asdhafhasfjakjfalksdjasdhafhasfjakjfalksdjasdhafhasfjakjfalksdj
-            </p>
-          </div>
-
-            <Button className="w-full">Submit</Button>
-
-        </div>
-      </Popup>
     </div>
   );
 };

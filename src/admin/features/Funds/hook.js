@@ -1,6 +1,7 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { http } from "../../../utils/http";
 export const useFunds = (search) => {
+  const client = useQueryClient();
   const { data, isLoading } = useQuery({
     queryKey: ["request-history"],
     queryFn: async () => {
@@ -27,10 +28,24 @@ export const useFunds = (search) => {
     },
   });
 
+  const updateStatus = useMutation({
+    mutationFn: async ({ val, id }) => {
+      const res = await http.post(`/UpdateFundById`, {
+        Id: id,
+        Status: val,
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      client.invalidateQueries(["request-history"]);
+    },
+  });
+
   return {
     transferMutation,
     fundHistoryMutation,
     data,
     isLoading,
+    updateStatus,
   };
 };

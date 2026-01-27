@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Eye, EyeOff, Mail, Lock, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { http } from "@/utils/http";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,20 +13,38 @@ const Login = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+  const { mob, pass } = location.state || {};
+
+  const loginMutation = useMutation({
+    mutationFn: async () => {
+      const res = await http.post("/Authentication", {
+        Email: phone,
+        PIN: password,
+      });
+      return res.data;
+    },
+    onSuccess: (data) => {
+      if (data?.status === "SUCCESS") {
+        navigate("/");
+      }
+      sessionStorage.setItem("memberId", data?.data?.ConsumerID);
+      setPhone("");
+      setPassword("");
+    },
+  });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-      toast({
-        title: "Login Successful",
-        description: "Welcome back!",
-      });
-      navigate("/");
-    }, 1000);
+    loginMutation.mutate();
   };
+
+  useEffect(() => {
+    if (mob && pass) {
+      setPhone(mob);
+      setPassword(pass);
+    }
+  }, [mob, pass]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

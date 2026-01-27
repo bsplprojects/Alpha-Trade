@@ -17,9 +17,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
+import Popup from "../components/Popup";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const [data, setData] = useState({
     password: "",
     confPassword: "",
@@ -33,16 +35,30 @@ const Signup = () => {
   const signupMutation = useMutation({
     mutationFn: async () => {
       const response = await http.post("/ConsumerSignup", {
-        // Referral: data.sponsorAccountNumber,
-        // ReferralName: data.sponsorAccountName,
-        // FirstName: data.fullName,
-        // MobileNo: data.contact,
-        // EmailID: data.email,
+        Referral: data.invitationCode,
+        MobileNo: data.contact,
+        Password: data.password,
       });
       return response.data;
     },
-    onSuccess: () => {
-      navigate("/login");
+    onSuccess: (data) => {
+      if (data?.status === "INVALID") {
+        toast({
+          title: "Error",
+          description: data.message,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      setOpen(true);
+      setData({
+        password: "",
+        confPassword: "",
+        contact: "",
+        verificationCode: "",
+        invitationCode: "",
+      });
     },
   });
 
@@ -53,6 +69,15 @@ const Signup = () => {
       toast({
         title: "Error",
         description: "Please agree to the terms and conditions",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (data.password !== data.confPassword) {
+      toast({
+        title: "Error",
+        description: "Passwords does not match",
         variant: "destructive",
       });
       return;
@@ -82,7 +107,7 @@ const Signup = () => {
           <div className="relative">
             <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
-              type="text"
+              type="number"
               placeholder="Contact number"
               value={data.contact}
               onChange={(e) => setData({ ...data, contact: e.target.value })}
@@ -176,13 +201,69 @@ const Signup = () => {
           <Button
             type="submit"
             className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-            disabled={signupMutation.isPending}
+            disabled={signupMutation.isPending || !agreeTerms}
           >
             {signupMutation.isPending
               ? "Creating account..."
               : "Create Account"}
           </Button>
         </form>
+
+        <Popup isOpen={open} onClose={() => setOpen(false)}>
+          <div className="mt-3 max-w-md mx-auto rounded-xl p-6 shadow-sm">
+            {/* Header */}
+            <div className="text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-600">
+                ✓
+              </div>
+              <h1 className="text-lg font-semibold text-zinc-900">
+                Account Created Successfully
+              </h1>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Please save your login credentials for future access
+              </p>
+            </div>
+
+            <div className="mt-6 space-y-3 text-sm">
+              <div className="flex justify-between rounded-lg border px-4 py-2">
+                <span className="font-medium text-zinc-600">
+                  Invitation Code
+                </span>
+                <span className="font-semibold text-primary">
+                  {signupMutation.data?.data?.UserID}
+                </span>
+              </div>
+
+              <div className="flex justify-between rounded-lg border px-4 py-2">
+                <span className="font-medium text-zinc-600">Password</span>
+                <span className="font-semibold text-primary">
+                  {signupMutation.data?.data?.Pass}
+                </span>
+              </div>
+
+              <div className="flex justify-between rounded-lg border px-4 py-2">
+                <span className="font-medium text-zinc-600">Phone</span>
+                <span className="font-semibold text-primary">
+                  {signupMutation.data?.data?.MobileNo}
+                </span>
+              </div>
+            </div>
+
+            <Button
+              onClick={() =>
+                navigate("/login", {
+                  state: {
+                    mob: signupMutation.data?.data.MobileNo,
+                    pass: signupMutation.data?.data.Pass,
+                  },
+                })
+              }
+              className="mt-6 w-full"
+            >
+              Sign In to Your Account
+            </Button>
+          </div>
+        </Popup>
 
         {/* Login Link */}
         <p className="text-center mt-1 text-muted-foreground">

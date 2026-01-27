@@ -1,6 +1,6 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Circle, Menu } from "lucide-react";
+import { Circle, Menu, Shield, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import {
   Accordion,
@@ -12,6 +12,7 @@ import { adminItems } from "../../utils/constants";
 
 const AdminLayout = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
   return (
     <main className="h-full page-content relative">
       <header className="header-gradient flex items-center justify-between">
@@ -25,8 +26,12 @@ const AdminLayout = () => {
         <div
           className={`h-full w-1/2 top-0 border absolute z-10 bg-background transform transition-transform duration-500 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
         >
+          <h1 className="p-2 px-3 flex items-center gap-2 font-medium text-lg border-b">
+            <ShieldCheck className="w-5 h-5 flex-shrink-0" /> Admin Panel
+          </h1>
+
           <nav className="flex-1 space-y-2">
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible className="p-3">
               {adminItems.map((item) => {
                 if (item.children) {
                   const isParentActive = item.children.some(
@@ -42,8 +47,8 @@ const AdminLayout = () => {
                       <AccordionTrigger
                         className={`flex items-center gap-3 px-3 py-2 transition-all duration-300 ${
                           isParentActive
-                            ? "bg-gradient-to-r bg-primary text-gold border border-gold/30"
-                            : "text-muted-foreground hover:bg-gold/5"
+                            ? "bg-primary rounded text-white"
+                            : "text-muted-foreground hover:bg-primary/10"
                         }`}
                       >
                         <p className="flex items-center gap-2 w-full">
@@ -61,8 +66,8 @@ const AdminLayout = () => {
                             className={({ isActive }) =>
                               `block px-3 py-2  text-sm transition-colors ${
                                 isActive
-                                  ? "bg-primary"
-                                  : "text-muted-foreground hover:text-gold hover:bg-gold/5"
+                                  ? "text-primary"
+                                  : "text-muted-foreground hover:bg-primary/10"
                               }`
                             }
                           >
@@ -83,10 +88,10 @@ const AdminLayout = () => {
                     to={item.link}
                     end
                     className={({ isActive }) =>
-                      `w-full flex items-center font-medium gap-3 px-2 py-1 rounded-lg transition-all duration-300 ${
+                      `w-full flex items-center font-medium gap-3  p-2 transition-all duration-300 ${
                         isActive
-                          ? "bg-gradient-to-r from-gold/10 to-gold/20 text-gold border border-gold/30 "
-                          : "text-muted-foreground hover:bg-gold/5 border border-transparent"
+                          ? "bg-primary text-white rounded"
+                          : "text-muted-foreground hover:bg-primary/10 border border-transparent"
                       }`
                     }
                   >
@@ -100,7 +105,9 @@ const AdminLayout = () => {
         </div>
       )}
 
-      <Outlet />
+      <div className="p-2">
+        <Outlet />
+      </div>
     </main>
   );
 };

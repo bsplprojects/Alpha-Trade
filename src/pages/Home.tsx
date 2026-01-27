@@ -8,15 +8,33 @@ import {
   Share2,
   ChevronRight,
   Bell,
+  User2Icon,
 } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 import { useMarketData } from "@/hooks/useMarketData";
 import { Button } from "@/components/ui/button";
 import Login from "./Login";
+import { useQuery } from "@tanstack/react-query";
+import { http } from "@/utils/http";
 
 const Home = () => {
   const navigate = useNavigate();
   const marketData = useMarketData();
+  const memberId = sessionStorage.getItem("memberId");
+
+  const { data } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: async () => {
+      const res = await http.post("/MySpDashbordData", {
+        UserID: memberId,
+      });
+      return res.data;
+    },
+  });
+
+  if (!memberId) {
+    return <Login />;
+  }
 
   // Show only first 3 items
   const displayedMarket = marketData.slice(0, 3);
@@ -25,27 +43,35 @@ const Home = () => {
     <div className="page-content bg-background">
       {/* Header with balance */}
       <div className="gradient-header flex items-center justify-between px-4 py-3">
-        <div className="font-bold text-lg">₹3,971.82</div>
+        <div className="font-bold text-lg text-white">
+          ₹{data?.data[0]?.Balance}
+        </div>
 
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
             <Bell size={16} className="text-white" />
           </div>
-          <Link
-            to={"/login"}
-            className="bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-1 rounded-md"
-          >
-            Login
-          </Link>
+          {memberId ? (
+            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+              <User2Icon size={16} className="text-white" />
+            </div>
+          ) : (
+            <Link
+              to={"/login"}
+              className="bg-gradient-to-r from-amber-400 to-amber-500 px-4 py-1 rounded-md"
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
 
       {/* Hero Banner */}
       <div className="mx-3 mt-3 rounded-xl overflow-hidden gradient-banner p-4 relative">
-        <div className="text-primary font-bold text-lg">PLW</div>
+        <div className="text-primary font-bold text-lg">BC Trade</div>
         <h2 className="text-xl font-bold text-foreground mt-1">
           Daily returns up to{" "}
-          <span className="text-destructive text-3xl font-extrabold">10%</span>
+          <span className="text-destructive text-3xl font-extrabold">5-8%</span>
         </h2>
         <p className="text-sm text-muted-foreground mt-1">
           powered by advanced ai algorithms
@@ -58,7 +84,7 @@ const Home = () => {
       {/* Welcome Message */}
       <div className="flex items-center gap-2 px-4 py-3">
         <Volume2 size={18} className="text-primary" />
-        <span className="text-primary font-medium">Welcome to PLW</span>
+        <span className="text-primary font-medium">Welcome to BC Trade</span>
       </div>
 
       {/* Quick Actions Grid */}

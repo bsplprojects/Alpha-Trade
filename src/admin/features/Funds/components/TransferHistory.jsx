@@ -31,8 +31,6 @@ const TransferHistory = () => {
 
   const { fundHistoryMutation } = useFunds();
 
-  console.log(fundHistoryMutation.data);
-
   if (fundHistoryMutation.isPending) {
     <div className="h-screen w-full grid place-items-center">
       <Loader2 className="animate-spin" />

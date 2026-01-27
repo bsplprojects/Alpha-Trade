@@ -23,6 +23,7 @@ import {
 import { useMemo, useState } from "react";
 import { useFunds } from "../hook";
 import { Loader2 } from "lucide-react";
+import { IMAGE_BASE_URL } from "../../../../utils/constants";
 
 const RequestHistory = () => {
   const [fromDate, setFromDate] = useState("");
@@ -42,14 +43,14 @@ const RequestHistory = () => {
     },
   ];
 
-  const { data, isLoading } = useFunds(searchQuery);
+  const { data, isLoading, updateStatus } = useFunds(searchQuery);
 
   const filtered = useMemo(() => {
     let items = data?.data || [];
 
     if (status) {
       items = items.filter(
-        (item) => item?.Status?.toLowerCase() === status.toLowerCase()
+        (item) => item?.Status?.toLowerCase() === status.toLowerCase(),
       );
     }
 
@@ -73,7 +74,7 @@ const RequestHistory = () => {
       const from = new Date(fromDate);
       const to = new Date(toDate);
       items = items.filter(
-        (item) => new Date(item?.rDate) >= from && new Date(item?.rDate) <= to
+        (item) => new Date(item?.rDate) >= from && new Date(item?.rDate) <= to,
       );
     }
 
@@ -88,10 +89,21 @@ const RequestHistory = () => {
     );
   }
 
+  const handleStatusChange = async (val, id) => {
+    setNewStatus(val);
+    await updateStatus.mutate({ val, id });
+  };
+
+  const statusColorMap = {
+    Pending: "text-yellow-500",
+    Success: "text-green-500",
+    Cancelled: "text-red-500",
+  };
+
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div className="py-5 grid lg:grid-cols-7 gap-3">
+      <div className="py-5 grid lg:grid-cols-7 gap-3 mt-5">
         <div>
           <Label>Member Id</Label>
           <Input
@@ -135,7 +147,7 @@ const RequestHistory = () => {
       </div>
 
       {data?.status === "SUCCESS" && (
-        <Table className="border">
+        <Table className="border bg-background mt-5">
           <TableHeader>
             <TableRow className="text-nowrap bg-muted">
               <TableHead className="w-[100px]">Sr</TableHead>
@@ -145,6 +157,9 @@ const RequestHistory = () => {
               <TableHead>Status</TableHead>
               <TableHead>Remark</TableHead>
               <TableHead>HKey</TableHead>
+              <TableHead>TxnID</TableHead>
+              <TableHead>Image</TableHead>
+              <TableHead>Action</TableHead>
               {/* <TableHead className="text-right">Action</TableHead> */}
             </TableRow>
           </TableHeader>
@@ -165,38 +180,43 @@ const RequestHistory = () => {
                   <TableCell>
                     {d.rDate?.split("T")[0]} {d.rDate?.split("T")[1]}
                   </TableCell>
-                  <TableCell>{d.Amount > 0 ? `$${d.Amount}` : `-`}</TableCell>
-                  <TableCell
-                    className={` ${
-                      d.Status === "Pending"
-                        ? "text-yellow-500"
-                        : d.Status === "Success"
-                        ? "text-green-500"
-                        : "text-rose-500"
-                    } `}
-                  >
+                  <TableCell>{d.Amount > 0 ? `₹${d.Amount}` : `-`}</TableCell>
+                  <TableCell className={` ${statusColorMap[d.Status]} `}>
                     {d.Status}
                   </TableCell>
                   <TableCell>{d.Remark || "-"}</TableCell>
 
                   <TableCell>{d.Refrence || "-"}</TableCell>
-                  {/* <TableCell>
+                  <TableCell>{d.tNo || "-"}</TableCell>
+                  <TableCell>
+                    <a
+                      href={`${IMAGE_BASE_URL}/${d?.ImageUrl}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img
+                        src={`${IMAGE_BASE_URL}/${d?.ImageUrl}`}
+                        alt="img"
+                        className="cursor-pointer"
+                      />
+                    </a>
+                  </TableCell>
+                  <TableCell>
                     <Select
                       value={newStatus}
-                      onValueChange={(val) => setNewStatus(val)}
+                      onValueChange={(val) => handleStatusChange(val, d.ID)}
                     >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select Status" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Pending">Pending</SelectItem>
-                          <SelectItem value="Success">Success</SelectItem>
-                          <SelectItem value="Cancelled">Rejected</SelectItem>
+                          <SelectItem value="Success">Accept</SelectItem>
+                          <SelectItem value="Cancelled">Reject</SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

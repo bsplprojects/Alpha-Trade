@@ -44,6 +44,7 @@ import TransferHistory from "./admin/features/Funds/components/TransferHistory";
 import Request from "./admin/features/Funds/components/Request";
 import RequestHistory from "./admin/features/Funds/components/RequestHistory";
 import FundTransfer from "./admin/features/Funds/components/FundTransfer";
+import ConfirmRecharge from "./pages/ConfirmRecharge";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/market" element={<Market />} />
+            <Route path="/confirm" element={<ConfirmRecharge />} />
             <Route path="/team" element={<Team />} />
             <Route path="/assets" element={<Assets />} />
             <Route path="/profile" element={<Profile />} />

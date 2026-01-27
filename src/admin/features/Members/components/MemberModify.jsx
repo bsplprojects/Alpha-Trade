@@ -68,7 +68,7 @@ const MemberModify = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Enter Consumer Id"
           />
-          <Button onClick={() => mutation.mutate()} variant="gold">
+          <Button onClick={() => mutation.mutate()}>
             {mutation.isPending ? "Searching..." : "Search"}
           </Button>
         </div>
@@ -191,7 +191,6 @@ const MemberModify = () => {
             </div>
             <div>
               <Button
-                variant="gold"
                 className={"lg:w-1/2 w-full my-3"}
                 onClick={() => updateMutation.mutate(formData)}
               >
