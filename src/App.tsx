@@ -45,6 +45,7 @@ import Request from "./admin/features/Funds/components/Request";
 import RequestHistory from "./admin/features/Funds/components/RequestHistory";
 import FundTransfer from "./admin/features/Funds/components/FundTransfer";
 import ConfirmRecharge from "./pages/ConfirmRecharge";
+import AdminLogin from "./pages/Admin/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
 

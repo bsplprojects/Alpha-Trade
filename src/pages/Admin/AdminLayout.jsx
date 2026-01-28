@@ -1,7 +1,7 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Circle, Menu, Shield, ShieldCheck } from "lucide-react";
-import { useState } from "react";
+import { Circle, LogOut, Menu, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -13,13 +13,34 @@ import { adminItems } from "../../utils/constants";
 const AdminLayout = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const memberId = sessionStorage.getItem("memberId");
+    if (!memberId || memberId !== "Admin") {
+      navigate("/admin/login");
+    }
+  }, [navigate]);
+
   return (
     <main className="h-full page-content relative">
       <header className="header-gradient flex items-center justify-between">
         <h2>Admin</h2>
-        <Button variant="ghost" size="icon" onClick={() => setOpen(!open)}>
-          <Menu />
-        </Button>
+        <div className="flex items-center justify-between gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              sessionStorage.removeItem("memberId");
+              navigate("/admin/login");
+            }}
+          >
+            <LogOut />
+          </Button>
+          <Button variant="ghost" size="icon" onClick={() => setOpen(!open)}>
+            <Menu />
+          </Button>
+        </div>
       </header>
 
       {open && (
