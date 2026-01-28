@@ -1,9 +1,36 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PageHeader from "@/components/PageHeader";
 import { FileText } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { http } from "@/utils/http";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const Team = () => {
   const [activeLevel, setActiveLevel] = useState(1);
+  const memberId = sessionStorage.getItem("memberId");
+
+  const { data: teams } = useQuery({
+    queryKey: ["team"],
+    queryFn: async () => {
+      const res = await http.post("/MyLevelTeamWithDirect", {
+        UserID: memberId,
+      });
+      return res.data;
+    },
+  });
+
+  const filteredTeams = useMemo(() => {
+    return teams?.data?.filter((t) => Number(t?.Level) === activeLevel - 1);
+  }, [teams, activeLevel]);
 
   return (
     <div className="page-content bg-background">
@@ -14,7 +41,7 @@ const Team = () => {
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
             <div className="text-sm opacity-80">Teams size</div>
-            <div className="text-2xl font-bold">0</div>
+            <div className="text-2xl font-bold">{teams?.data?.length || 0}</div>
             <div className="text-xs opacity-70 mt-1">Team size today</div>
             <div className="font-semibold">0</div>
           </div>
@@ -50,10 +77,10 @@ const Team = () => {
           <button
             key={level}
             onClick={() => setActiveLevel(level)}
-            className={`flex-1 py-4 text-center font-medium transition-colors ${
+            className={`flex-1 py-4 text-center font-medium transition-colors  ${
               activeLevel === level
                 ? "text-primary border-b-2 border-primary"
-                : "text-muted-foreground"
+                : "text-muted-foreground hover:border-b"
             }`}
           >
             Level {level}
@@ -61,13 +88,46 @@ const Team = () => {
         ))}
       </div>
 
+      {filteredTeams?.length > 0 && (
+        <>
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-white">
+                <TableHead className="w-[100px]">Sr.</TableHead>
+                <TableHead className="text-nowrap">Invitation Id</TableHead>
+                <TableHead className="text-nowrap">Sponsor Id</TableHead>
+                <TableHead className="text-nowrap">Joining Date</TableHead>
+                <TableHead className="text-nowrap">Activation Date</TableHead>
+                <TableHead className="text-nowrap">Mobile</TableHead>
+                <TableHead className="text-right">Amount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredTeams?.map((d, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>{idx + 1}</TableCell>
+                  <TableCell>{d?.ConsumerId}</TableCell>
+                  <TableCell>{d?.SponsorId}</TableCell>
+                  <TableCell>{d?.JoiningDate}</TableCell>
+                  <TableCell>{d?.ActiveDate}</TableCell>
+                  <TableCell>{d?.Mobile}</TableCell>
+                  <TableCell className="text-right">{d?.Amount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </>
+      )}
+
       {/* Empty State */}
-      <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
-        <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mb-4">
-          <FileText size={40} className="opacity-50" />
+      {filteredTeams?.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
+          <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mb-4">
+            <FileText size={40} className="opacity-50" />
+          </div>
+          <span>No data found</span>
         </div>
-        <span>No more data</span>
-      </div>
+      )}
     </div>
   );
 };

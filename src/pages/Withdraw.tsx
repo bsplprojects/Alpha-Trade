@@ -56,11 +56,11 @@ const Withdraw = () => {
         <div className="space-y-1 mb-4">
           <div className="text-foreground">
             <span className="font-medium">Amount available: </span>
-            <span className="font-bold">₹1971.82</span>
+            <span className="font-bold">₹0</span>
           </div>
           <div className="text-foreground">
             <span className="font-medium">Fee: </span>
-            <span className="font-bold">₹1839984933.40</span>
+            <span className="font-bold">₹0</span>
           </div>
         </div>
 

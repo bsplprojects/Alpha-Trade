@@ -65,10 +65,11 @@ const ConfirmRecharge = () => {
 
   return (
     <main className="page-content">
-      <PageHeader title="Confirm recharge" />
-      <Link to="/recharge" className="px-5 mt-2 flex items-center gap-2">
-        <ArrowLeft size={16} /> Go back
-      </Link>
+      <div className="header-gradient flex items-center gap-2">
+        <ArrowLeft onClick={() => navigate(-1)} />
+        Confirm Recharge
+      </div>
+
       <div className="flex items-center justify-center py-3">
         <img src={qr} alt="qr" width={280} />
       </div>

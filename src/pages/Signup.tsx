@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  useNavigate,
+  Link,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import {
   Mail,
   User,
@@ -21,6 +26,7 @@ import Popup from "../components/Popup";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
     password: "",
@@ -85,6 +91,15 @@ const Signup = () => {
 
     signupMutation.mutate();
   };
+
+  useEffect(() => {
+    if (searchParams.get("ref")) {
+      setData({
+        ...data,
+        invitationCode: searchParams.get("ref"),
+      });
+    }
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

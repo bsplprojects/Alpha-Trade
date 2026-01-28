@@ -107,20 +107,28 @@ const Home = () => {
           </div>
           <span className="font-bold text-foreground">Withdraw</span>
         </button>
-        <div className="action-card p-4 flex items-center gap-3">
+        <Link
+          to={"https://t.me/+dn1BMosSi1hmZmQ1"}
+          target="_blank"
+          className="action-card p-4 flex items-center gap-3"
+        >
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <MessageCircle className="text-primary" size={24} />
           </div>
           <span className="font-bold text-foreground text-sm">Telegram</span>
-        </div>
-        <div className="action-card p-4 flex items-center gap-3">
+        </Link>
+        <Link
+          to={"https://t.me/+kwzbxbtYbQFhZjU1"}
+          target="_blank"
+          className="action-card p-4 flex items-center gap-3"
+        >
           <div className="w-12 h-12 rounded-full bg-white/50 flex items-center justify-center">
             <Megaphone className="text-primary" size={24} />
           </div>
           <span className="font-bold text-foreground text-sm">
             Official Channel
           </span>
-        </div>
+        </Link>
       </div>
 
       {/* Referral Banner */}
@@ -157,7 +165,7 @@ const Home = () => {
         {/* View More Button */}
         <Button
           variant="outline"
-          className="w-full mt-3 text-primary border-primary hover:bg-primary/10"
+          className="w-full mt-3 text-primary border-primary hover:bg-primary/10 hover:text-primary"
           onClick={() => navigate("/market")}
         >
           View More

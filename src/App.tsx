@@ -46,6 +46,7 @@ import RequestHistory from "./admin/features/Funds/components/RequestHistory";
 import FundTransfer from "./admin/features/Funds/components/FundTransfer";
 import ConfirmRecharge from "./pages/ConfirmRecharge";
 import AdminLogin from "./pages/Admin/AdminLogin";
+import Invitation from "./pages/Invitation";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/market/:code" element={<MarketDetail />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/invite-friends" element={<Invitation />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
