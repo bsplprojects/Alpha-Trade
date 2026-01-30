@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useMember } from "../hooks/useMember";
+import { useQuery } from "@tanstack/react-query";
+import { http } from "@/utils/http";
 
 interface MenuItem {
   icon: LucideIcon;
@@ -22,10 +24,14 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { icon: CreditCard, label: "Recharge record", path: "/recharge-record" },
-  { icon: ArrowDownToLine, label: "Withdrawal record" },
-  { icon: FileText, label: "My Order" },
+  {
+    icon: ArrowDownToLine,
+    label: "Withdrawal record",
+    path: "/withdrawal-record",
+  },
+  { icon: FileText, label: "My Order", path: "/order" },
   { icon: RefreshCw, label: "Acc change" },
-  { icon: BankCard, label: "Bank card" },
+  { icon: BankCard, label: "Bank card", path: "/bank" },
 ];
 
 const menuItems2: MenuItem[] = [
@@ -43,6 +49,16 @@ const Profile = () => {
       navigate(path);
     }
   };
+
+  const { data: dashboardData } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: async () => {
+      const res = await http.post("/MySpDashbordData", {
+        UserID: memberId,
+      });
+      return res.data;
+    },
+  });
 
   return (
     <div className="page-content bg-background">
@@ -71,22 +87,30 @@ const Profile = () => {
         <div className="grid grid-cols-2 gap-4 mt-6">
           <div className="text-center">
             <div className="text-white/70 text-sm">Total assets</div>
-            <div className="text-white text-xl font-bold">₹0</div>
+            <div className="text-white text-xl font-bold">
+              ₹{dashboardData?.data[0]?.TotalIncome || 0}
+            </div>
           </div>
           <div className="text-center border-l border-white/20">
             <div className="text-white/70 text-sm">Balance</div>
-            <div className="text-white text-xl font-bold">₹0</div>
+            <div className="text-white text-xl font-bold">
+              ₹{dashboardData?.data[0]?.Balance || 0}
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div className="text-center">
             <div className="text-white/70 text-sm">Time deposit(1 yr)</div>
-            <div className="text-white text-xl font-bold">₹0</div>
+            <div className="text-white text-xl font-bold">
+              ₹{dashboardData?.data[0]?.TotalMemberDeactive || 0}
+            </div>
           </div>
           <div className="text-center border-l border-white/20">
             <div className="text-white/70 text-sm">Estimated income</div>
-            <div className="text-white text-xl font-bold">₹0</div>
+            <div className="text-white text-xl font-bold">
+              ₹{dashboardData?.data[0]?.ROIIncome || 0}
+            </div>
           </div>
         </div>
       </div>

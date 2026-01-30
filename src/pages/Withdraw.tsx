@@ -1,24 +1,93 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Lock, AlertTriangle } from "lucide-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { http } from "@/utils/http";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Withdraw = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<"bank" | "usdt">("bank");
   const [amount, setAmount] = useState("");
   const [password, setPassword] = useState("");
+  const memberId = sessionStorage.getItem("memberId");
+
+  const { data: bankDetails } = useQuery({
+    queryKey: ["bank-details"],
+    queryFn: async () => {
+      const res = await http.post("/BankDetails", {
+        UserID: memberId,
+      });
+      return res.data;
+    },
+  });
+
+  const { data: dashboardData } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: async () => {
+      const res = await http.post("/MySpDashbordData", {
+        UserID: memberId,
+      });
+      return res.data;
+    },
+  });
+
+  const fee = 0.2 * Number(amount);
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const res = await http.post("/InsertBankTransfer", {
+        MID: memberId,
+        Amount: amount,
+        Password: password,
+      });
+      return res.data;
+    },
+    onSuccess: (data) => {
+      if (data?.status === "SUCCESS") {
+        navigate("/withdrawal-record");
+        toast.success(data?.message);
+      }
+    },
+  });
 
   const handleConfirm = () => {
-    // Handle withdrawal confirmation
-    console.log("Withdraw:", { method: activeTab, amount, password: "***" });
+    // check for bank details
+    if (bankDetails?.status === "FAILURE") {
+      navigate("/bank");
+    }
+
+    if (!amount) {
+      toast.error("Please enter amount");
+      return;
+    }
+
+    if (!password) {
+      toast.error("Please enter password");
+      return;
+    }
+
+    // if (Number(amount) < 300 || Number(amount) >= 60000) {
+    //   toast.error("Please enter amount between 300 to 60000");
+    //   return;
+    // }
+
+    // const currentTime = new Date().getTime();
+    // if (currentTime < 7 * 60 * 60 * 1000 || currentTime > 8 * 60 * 60 * 1000) {
+    //   toast.error("You can withdraw only between 7 am to 8 am");
+    //   return;
+    // }
+
+    mutation.mutate();
   };
 
   return (
     <div className="page-content bg-background">
       {/* Header with back button */}
       <header className="header-gradient flex items-center px-4 relative">
-        <button 
-          onClick={() => navigate(-1)} 
+        <button
+          onClick={() => navigate(-1)}
           className="absolute left-4 text-white"
         >
           <ChevronLeft size={24} />
@@ -56,11 +125,13 @@ const Withdraw = () => {
         <div className="space-y-1 mb-4">
           <div className="text-foreground">
             <span className="font-medium">Amount available: </span>
-            <span className="font-bold">₹0</span>
+            <span className="font-bold">
+              ₹{dashboardData?.data[0]?.Balance}
+            </span>
           </div>
           <div className="text-foreground">
             <span className="font-medium">Fee: </span>
-            <span className="font-bold">₹0</span>
+            <span className="font-bold">₹{fee ? fee?.toFixed(2) : 0}</span>
           </div>
         </div>
 
@@ -70,7 +141,13 @@ const Withdraw = () => {
           <input
             type="number"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              if (
+                Number(e.target.value) > Number(dashboardData?.data[0]?.Balance)
+              )
+                return;
+              setAmount(e.target.value);
+            }}
             placeholder="Enter amount"
             className="flex-1 bg-transparent text-lg outline-none text-foreground placeholder:text-muted-foreground"
           />
@@ -92,44 +169,61 @@ const Withdraw = () => {
       {/* TIP Section */}
       <div className="mx-4 mt-4 bg-card rounded-xl p-4">
         <h3 className="font-bold text-foreground mb-3">TIP</h3>
-        
+
         <div className="bg-red-50 rounded-lg p-4 space-y-4">
           <p className="text-foreground">
-            <span className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 text-blue-600 rounded text-xs font-bold mr-1">1</span>
-            {" "}Withdrawal time: <span className="text-primary font-semibold underline">Monday to Friday</span>。
-            amount range: <span className="text-primary font-semibold">₹300 - ₹30,000</span>.
+            <span className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 text-blue-600 rounded text-xs font-bold mr-1">
+              1
+            </span>{" "}
+            Withdrawal time:{" "}
+            <span className="text-primary font-semibold underline">
+              Monday to Friday
+            </span>
+            。 amount range:{" "}
+            <span className="text-primary font-semibold">₹300 - ₹60,000</span>.
           </p>
 
           <p className="text-foreground">
-            <span className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 text-blue-600 rounded text-xs font-bold mr-1">2</span>
-            {" "}Handling fee: 20% tax on each withdrawal (paid to the Indian Monetary Authority)
+            <span className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 text-blue-600 rounded text-xs font-bold mr-1">
+              2
+            </span>{" "}
+            Handling fee: 20% tax on each withdrawal (paid to the Indian
+            Monetary Authority)
           </p>
 
           <p className="text-destructive font-medium">
-            <span className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 text-blue-600 rounded text-xs font-bold mr-1">3</span>
-            {" "}Important reminder: If the withdrawal fails, please check whether the bank information is correct.
+            <span className="inline-flex items-center justify-center w-5 h-5 bg-blue-100 text-blue-600 rounded text-xs font-bold mr-1">
+              3
+            </span>{" "}
+            Important reminder: If the withdrawal fails, please check whether
+            the bank information is correct.
           </p>
 
           <p className="text-destructive font-medium flex items-start gap-1">
-            <AlertTriangle size={18} className="text-amber-500 mt-0.5 flex-shrink-0" />
-            Please make sure the information is accurate to avoid affecting your account!
+            <AlertTriangle
+              size={18}
+              className="text-amber-500 mt-0.5 flex-shrink-0"
+            />
+            Please make sure the information is accurate to avoid affecting your
+            account!
           </p>
         </div>
 
         <div className="mt-4 bg-muted rounded-lg px-4 py-3">
           <span className="text-foreground font-medium">Withdrawal time: </span>
-          <span className="text-foreground">08:00 am - 09:00 am</span>
+          <span className="text-foreground">07:00 am - 08:00 am</span>
         </div>
       </div>
 
       {/* Confirm Button */}
-      <div className="mx-4 mt-6 mb-4">
-        <button
+      <div className="mt-6 w-full flex items-center justify-center px-8">
+        <Button
+          disabled={!amount || mutation.isPending}
           onClick={handleConfirm}
-          className="w-full py-4 rounded-full bg-blue-500 text-white font-semibold text-lg hover:bg-blue-600 transition-colors"
+          className="w-full"
         >
-          confirm
-        </button>
+          {mutation.isPending ? "Please Wait..." : "Confirm"}
+        </Button>
       </div>
     </div>
   );

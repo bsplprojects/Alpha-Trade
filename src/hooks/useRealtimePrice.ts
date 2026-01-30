@@ -35,12 +35,13 @@ export const useRealtimePrice = (basePrice: number, initialChange: number) => {
     const newPrice = priceRef.current * (1 + randomChange);
     priceRef.current = newPrice;
 
-    const newChange = ((newPrice - startPriceRef.current) / startPriceRef.current) * 100;
+    const newChange =
+      ((newPrice - startPriceRef.current) / startPriceRef.current) * 100;
 
     setState((prev) => {
       const now = new Date();
       const timeStr = `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`;
-      
+
       // Keep last 50 data points for smooth animation
       const newChartData = [
         ...prev.chartData.slice(-49),
@@ -60,14 +61,11 @@ export const useRealtimePrice = (basePrice: number, initialChange: number) => {
   useEffect(() => {
     priceRef.current = basePrice;
     startPriceRef.current = basePrice;
-    
+
     // Update price every 500ms for smooth animation
     const interval = setInterval(updatePrice, 500);
-    
-    console.log("[Realtime] Started price simulation for base price:", basePrice);
-    
+
     return () => {
-      console.log("[Realtime] Stopped price simulation");
       clearInterval(interval);
     };
   }, [basePrice, updatePrice]);
@@ -75,21 +73,27 @@ export const useRealtimePrice = (basePrice: number, initialChange: number) => {
   return state;
 };
 
-function generateInitialData(basePrice: number, isPositive: boolean): PriceData[] {
+function generateInitialData(
+  basePrice: number,
+  isPositive: boolean,
+): PriceData[] {
   const data: PriceData[] = [];
   let price = basePrice * 0.98;
   const now = new Date();
-  
+
   for (let i = 30; i >= 0; i--) {
     const variance = (Math.random() - 0.5) * basePrice * 0.02;
-    price = price + variance + (isPositive ? basePrice * 0.0005 : -basePrice * 0.0003);
+    price =
+      price +
+      variance +
+      (isPositive ? basePrice * 0.0005 : -basePrice * 0.0003);
     price = Math.max(price, basePrice * 0.9);
-    
+
     const time = new Date(now.getTime() - i * 500);
     const timeStr = `${time.getHours()}:${time.getMinutes().toString().padStart(2, "0")}:${time.getSeconds().toString().padStart(2, "0")}`;
-    
+
     data.push({ time: timeStr, price });
   }
-  
+
   return data;
 }

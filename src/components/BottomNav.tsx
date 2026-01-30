@@ -6,11 +6,16 @@ const navItems = [
   { icon: BarChart3, label: "Market", path: "/market" },
   { icon: Users, label: "Team", path: "/team" },
   { icon: Wallet, label: "Assets", path: "/assets" },
-  { icon: User, label: "My", path: "/profile" },
+  { icon: User, label: "Profile", path: "/profile" },
 ];
 
 const BottomNav = () => {
   const location = useLocation();
+  const memberId = sessionStorage.getItem("memberId");
+
+  if (!memberId) {
+    return null;
+  }
 
   return (
     <nav className="bottom-nav">

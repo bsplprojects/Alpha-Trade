@@ -23,6 +23,7 @@ import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import Popup from "../components/Popup";
+import BCTrade from "../../assets/BC_Trade.png";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -106,9 +107,9 @@ const Signup = () => {
       {/* Header */}
       <div className="flex-1 flex flex-col justify-center px-6 py-12">
         <div className="text-center mb-4">
-          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="w-20 h-20  rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-4xl">
-              <CircleUserRound size={40} className="text-primary" />
+              <img src={BCTrade} alt="logo" />
             </span>
           </div>
           <h1 className="text-2xl font-bold text-foreground">Create Account</h1>

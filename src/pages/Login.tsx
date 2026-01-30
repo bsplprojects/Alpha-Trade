@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
+import BCTrade from "../../assets/BC_Trade.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,7 +28,14 @@ const Login = () => {
     onSuccess: (data) => {
       if (data?.status === "SUCCESS") {
         navigate("/");
+      } else if (data?.status === "FAILURE") {
+        toast({
+          title: "Error",
+          description: data.message,
+          variant: "destructive",
+        });
       }
+      console.log(data);
       sessionStorage.setItem("memberId", data?.data?.ConsumerID);
       setPhone("");
       setPassword("");
@@ -51,8 +59,10 @@ const Login = () => {
       {/* Header */}
       <div className="flex-1 flex flex-col justify-center px-6 py-12">
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-4xl">💰</span>
+          <div className="w-20 h-20  rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-4xl">
+              <img src={BCTrade} alt="logo" />
+            </span>
           </div>
           <h1 className="text-2xl font-bold text-foreground">Welcome Back</h1>
           <p className="text-muted-foreground mt-2">Sign in to your account</p>

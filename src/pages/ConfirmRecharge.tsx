@@ -4,16 +4,30 @@ import { Input } from "@/components/ui/input";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Image, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { http } from "@/utils/http";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import useLiveUsdtRate from "@/hooks/useLiveUsdtRate";
 
 const ConfirmRecharge = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-  const memberId = sessionStorage.getItem("memberId");
+  const { rate: usdtInrRate } = useLiveUsdtRate();
+  const [currentChannel, setCurrentChannel] = useState("");
+  const [currentAmount, setCurrentAmount] = useState(0);
   const { channel, amount } = location.state || {};
   const navigate = useNavigate();
+
+  const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
     txnId: "",
@@ -52,7 +66,6 @@ const ConfirmRecharge = () => {
         navigate("/recharge-record");
       }
     } catch (error) {
-      console.log(error);
       toast({
         title: "Error",
         description: "Something went wrong",
@@ -62,6 +75,21 @@ const ConfirmRecharge = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (channel && amount) {
+      setCurrentChannel(channel);
+      setCurrentAmount(amount);
+    }
+  }, [channel, amount]);
+
+  const displayAmount = useMemo(() => {
+    if (!usdtInrRate) return "...";
+    if (currentChannel === "usdt") {
+      return (currentAmount / usdtInrRate).toFixed(2);
+    }
+    return Number(currentAmount)?.toFixed(2);
+  }, [currentChannel, currentAmount, usdtInrRate]);
 
   return (
     <main className="page-content">
@@ -78,13 +106,32 @@ const ConfirmRecharge = () => {
       <div className="flex items-center justify-center gap-3 px-10">
         <div className="border border-zinc-300 w-1/2 rounded-2xl shadow p-2 bg-white">
           <h1 className="font-medium px-2">Channel</h1>
-          <span className="px-2 text-primary font-bold uppercase">
-            {channel}
-          </span>
+          {channel === "usdt" ? (
+            <Select
+              value={currentChannel}
+              onValueChange={(e) => setCurrentChannel(e)}
+            >
+              <SelectTrigger className="w-full max-w-48 px-3 mt-1">
+                <SelectValue placeholder="Select Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Type</SelectLabel>
+                  <SelectItem value="inr">INR</SelectItem>
+                  <SelectItem value="usdt">USDT</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          ) : (
+            <span className="px-2 text-primary font-bold">{channel}</span>
+          )}
         </div>
         <div className="border border-zinc-300 w-1/2 rounded-2xl shadow p-2 bg-white">
           <h1 className="font-medium px-2">Amount</h1>
-          <span className="px-2 text-primary font-bold">₹{amount || 0}</span>
+          <p className="px-2 text-primary font-bold mt-2">
+            {currentChannel === "usdt" ? `$` : `₹`}
+            {displayAmount || 0}
+          </p>
         </div>
       </div>
 
@@ -112,7 +159,7 @@ const ConfirmRecharge = () => {
       {/* transaction id */}
       <div className="px-10 my-4">
         <label htmlFor="hash" className="font-semibold px-2">
-          Transaction ID
+          UTR/Transaction No
         </label>
         <Input
           placeholder="Enter Transaction ID"

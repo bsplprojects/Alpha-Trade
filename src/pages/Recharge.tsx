@@ -15,7 +15,7 @@ const channels: PaymentChannel[] = [
   { id: "pay2", name: "Pay2", range: "1000 ~ 100000" },
   { id: "pay3", name: "pay3", range: "1000 ~ 50000" },
   { id: "pay4", name: "pay4", range: "1000 ~ 50000" },
-  { id: "pay5", name: "Pay5", range: "1000 ~ 100000" },
+  { id: "pay5", name: "Pay5", range: "500000 ~ 1000000" },
   { id: "usdt", name: "USDT" },
 ];
 
@@ -23,6 +23,21 @@ const quickAmounts = [
   1000, 2000, 5000, 10000, 50000, 100000, 500000, 1000000, 1500000, 2000000,
   2500000, 3000000,
 ];
+
+const rupeesWordsMap = {
+  1000: "one thousand",
+  2000: "two thousand",
+  5000: "five thousand",
+  10000: "ten thousand",
+  50000: "fifty thousand",
+  100000: "one lakh",
+  500000: "five lakh",
+  1000000: "Ten lakh",
+  1500000: "Fifteen lakh",
+  2000000: "Twenty lakh",
+  2500000: "Twenty five lakh",
+  3000000: "Thirty lakh",
+};
 
 const Recharge = () => {
   const navigate = useNavigate();
@@ -103,6 +118,9 @@ const Recharge = () => {
             className="flex-1 bg-transparent text-lg outline-none text-foreground placeholder:text-muted-foreground"
           />
         </div>
+        <p className="text-muted-foreground mt-1 uppercase font-semibold">
+          {rupeesWordsMap[Number(amount)]} only
+        </p>
 
         {/* Quick Selection */}
         <div className="mt-4">

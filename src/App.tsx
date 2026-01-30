@@ -47,6 +47,10 @@ import FundTransfer from "./admin/features/Funds/components/FundTransfer";
 import ConfirmRecharge from "./pages/ConfirmRecharge";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import Invitation from "./pages/Invitation";
+import MyOrder from "./pages/MyOrder";
+import Protected from "./components/Protected";
+import WithdrawalRecord from "./pages/WithdrawalRecord";
+import Bank from "./pages/Bank";
 
 const queryClient = new QueryClient();
 
@@ -58,21 +62,123 @@ const App = () => (
       <BrowserRouter>
         <div className="mobile-container bg-muted">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/market" element={<Market />} />
-            <Route path="/confirm" element={<ConfirmRecharge />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/assets" element={<Assets />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/recharge-record" element={<RechargeRecord />} />
-            <Route path="/recharge" element={<Recharge />} />
-            <Route path="/withdraw" element={<Withdraw />} />
-            <Route path="/market/:code" element={<MarketDetail />} />
+            <Route
+              path="/"
+              element={
+                <Protected>
+                  <Home />
+                </Protected>
+              }
+            />
+            <Route
+              path="/market"
+              element={
+                <Protected>
+                  <Market />
+                </Protected>
+              }
+            />
+            <Route
+              path="/confirm"
+              element={
+                <Protected>
+                  <ConfirmRecharge />
+                </Protected>
+              }
+            />
+            <Route
+              path="/team"
+              element={
+                <Protected>
+                  <Team />
+                </Protected>
+              }
+            />
+            <Route
+              path="/assets"
+              element={
+                <Protected>
+                  <Assets />
+                </Protected>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Protected>
+                  <Profile />
+                </Protected>
+              }
+            />
+            <Route
+              path="/recharge-record"
+              element={
+                <Protected>
+                  <RechargeRecord />
+                </Protected>
+              }
+            />
+            <Route
+              path="/withdrawal-record"
+              element={
+                <Protected>
+                  <WithdrawalRecord />
+                </Protected>
+              }
+            />
+            <Route
+              path="/bank"
+              element={
+                <Protected>
+                  <Bank />
+                </Protected>
+              }
+            />
+            <Route
+              path="/recharge"
+              element={
+                <Protected>
+                  <Recharge />
+                </Protected>
+              }
+            />
+            <Route
+              path="/withdraw"
+              element={
+                <Protected>
+                  <Withdraw />
+                </Protected>
+              }
+            />
+            <Route
+              path="/order"
+              element={
+                <Protected>
+                  <MyOrder />
+                </Protected>
+              }
+            />
+            <Route
+              path="/market/:code"
+              element={
+                <Protected>
+                  <MarketDetail />
+                </Protected>
+              }
+            />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/invite-friends" element={<Invitation />} />
+            <Route
+              path="/invite-friends"
+              element={
+                <Protected>
+                  <Invitation />
+                </Protected>
+              }
+            />
             <Route path="*" element={<NotFound />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
 

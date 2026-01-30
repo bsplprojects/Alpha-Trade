@@ -105,6 +105,7 @@ const MarketDetail = () => {
   const { code } = useParams();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [type, setType] = useState("BUY");
 
   const data = code ? marketData[code] : null;
 
@@ -255,13 +256,19 @@ const MarketDetail = () => {
         {/* Trade Buttons */}
         <div className="flex items-center gap-2 mt-2">
           <Button
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setOpen(true);
+              setType("BUY");
+            }}
             className="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold py-6"
           >
             Buy
           </Button>
           <Button
-            onClick={() => setOpen(true)}
+            onClick={() => {
+              setOpen(true);
+              setType("SELL");
+            }}
             className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-6"
           >
             Sell
@@ -272,7 +279,7 @@ const MarketDetail = () => {
       {/* POPUP */}
       <Popup isOpen={open} onClose={() => setOpen(false)} title="Confirm Order">
         <div className="w-[300px]">
-          <ConfirmOrder data={data} />
+          <ConfirmOrder data={data} type={type} />
         </div>
       </Popup>
     </>
