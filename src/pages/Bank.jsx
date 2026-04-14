@@ -116,7 +116,7 @@ const Bank = () => {
           />
 
           {/* Form Fields */}
-          <div className="space-y-1 relative z-10">
+          <div className="space-y-1 mt-3 mr-1  relative z-10">
             <label className="text-sm font-medium text-gray-600">
               Account Holder Name
             </label>
@@ -141,7 +141,7 @@ const Bank = () => {
             />
           </div>
 
-          <div className="space-y-1 mt-3 relative z-10">
+          <div className="space-y-1 mt-3 mr-1 relative z-10">
             <label className="text-sm font-medium text-gray-600">
               IFSC Code <span className="text-red-500">*</span>
             </label>
@@ -166,12 +166,12 @@ const Bank = () => {
             />
           </div>
 
-          <div className="space-y-1 md:col-span-2 mt-3 mb-3 relative z-10">
+          <div className="space-y-1 md:col-span-2 mr-1 mt-3 mb-3 relative z-10">
             <label className="text-sm font-medium text-gray-600">
               Branch Name
             </label>
             <Input
-              placeholder="Kokar"
+              placeholder="XYZ"
               name="Branch"
               value={data.Branch}
               onChange={handleInputChange}
@@ -191,7 +191,7 @@ const Bank = () => {
             />
           </div>
           {bankDetails?.status !== "FAILURE" && (
-            <div className="mt-5 flex ml-auto relative z-10">
+            <div className="mt-5 bg-red-500 flex relative z-10">
               <Button
                 disabled={
                   mutation.isLoading || !data.Bank || !data.AcNo || !data.IFSC

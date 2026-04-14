@@ -20,6 +20,7 @@ import { useAdminReports } from "../../Reports/hook";
 const MemberModify = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [formData, setFormData] = useState({});
+  const { updateMutation } = useMember();
 
   const breadcrumbs = [
     {
@@ -47,8 +48,6 @@ const MemberModify = () => {
     }
   }, [mutation.isSuccess]);
 
-  const { updateMutation } = useMember();
-
   useEffect(() => {
     if (updateMutation.isSuccess) {
       setFormData({});
@@ -56,7 +55,7 @@ const MemberModify = () => {
   }, [updateMutation.isSuccess, updateMutation.data, formData]);
 
   return (
-    <div className="p-1">
+    <div className="p-1 ">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
 
       <div className="my-8">
@@ -171,6 +170,23 @@ const MemberModify = () => {
               </Select>
             </div>
             <div>
+              <Label>Trade</Label>
+              <Select
+                value={formData?.Fname}
+                onValueChange={(e) => setFormData({ ...formData, Fname: e })}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Trade Mode" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="on">On</SelectItem>
+                    <SelectItem value="off">Off</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            {/* <div>
               <Label>P2P</Label>
               <Select
                 value={formData?.Nominee_Relation}
@@ -188,7 +204,7 @@ const MemberModify = () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
             <div>
               <Button
                 className={"lg:w-1/2 w-full my-3"}

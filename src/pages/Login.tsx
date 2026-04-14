@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock, Phone } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Phone, MailOpen, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
-import BCTrade from "../../assets/BC_Trade.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,7 +34,6 @@ const Login = () => {
           variant: "destructive",
         });
       }
-      console.log(data);
       sessionStorage.setItem("memberId", data?.data?.ConsumerID);
       setPhone("");
       setPassword("");
@@ -55,89 +53,92 @@ const Login = () => {
   }, [mob, pass]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <div className="flex-1 flex flex-col justify-center px-6 py-12">
-        <div className="text-center mb-8">
-          <div className="w-20 h-20  rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-4xl">
-              <img src={BCTrade} alt="logo" />
-            </span>
-          </div>
-          <h1 className="text-2xl font-bold text-foreground">Welcome Back</h1>
-          <p className="text-muted-foreground mt-2">Sign in to your account</p>
-        </div>
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+      <div className="w-full max-w-md px-6">
+        {/* Card */}
+        <div className="rounded-2xl bg-background/80 backdrop-blur-xl shadow-xl border border-border p-8">
+          {/* Header */}
+          <header className="text-center mb-10">
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm"></div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          {/* Email Input */}
-          <div className="relative">
-            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="number"
-              placeholder="Contact number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="pl-10 h-12 bg-muted border-border"
-              required
-            />
-          </div>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
+              Welcome Back 👋
+            </h1>
+            <p className="text-muted-foreground mt-2">
+              Sign in to continue to your account
+            </p>
+          </header>
 
-          {/* Password Input */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="pl-10 pr-10 h-12 bg-muted border-border"
-              required
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+          {/* Form */}
+          <form onSubmit={handleLogin} className="space-y-5">
+            {/* Invitation ID */}
+            <div className="relative group">
+              <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
+              <Input
+                type="text"
+                placeholder="Invitation ID"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary "
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div className="relative group">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="pl-10 pr-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
+                required
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
+              >
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+
+            {/* Button */}
+            <Button
+              variant="gradient"
+              type="submit"
+              disabled={isLoading}
+              className="w-full h-12 text-white text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
             >
-              {showPassword ? (
-                <EyeOff className="w-5 h-5" />
+              {isLoading ? (
+                "Signing you in..."
               ) : (
-                <Eye className="w-5 h-5" />
+                <>
+                  <LogIn /> Sign In
+                </>
               )}
-            </button>
-          </div>
+            </Button>
+          </form>
 
-          {/* Forgot Password */}
-          <div className="text-right">
+          {/* Footer */}
+          <p className="text-center mt-8 text-sm text-muted-foreground">
+            Don&apos;t have an account?{" "}
             <Link
-              to="/forgot-password"
-              className="text-sm text-primary hover:underline"
+              to="/signup"
+              className="text-primary font-semibold hover:underline"
             >
-              Forgot Password?
+              Sign Up
             </Link>
-          </div>
-
-          {/* Login Button */}
-          <Button
-            type="submit"
-            className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-            disabled={isLoading}
-          >
-            {isLoading ? "Signing in..." : "Sign In"}
-          </Button>
-        </form>
-
-        {/* Sign Up Link */}
-        <p className="text-center mt-8 text-muted-foreground">
-          Don't have an account?{" "}
-          <Link
-            to="/signup"
-            className="text-primary font-semibold hover:underline"
-          >
-            Sign Up
-          </Link>
-        </p>
+          </p>
+        </div>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -15,9 +15,9 @@ const AdminLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const memberId = sessionStorage.getItem("memberId");
   useEffect(() => {
-    const memberId = sessionStorage.getItem("memberId");
-    if (!memberId || memberId !== "Admin") {
+    if (!memberId || (memberId !== "Admin" && memberId !== "Admins")) {
       navigate("/admin/login");
     }
   }, [navigate]);
@@ -45,10 +45,10 @@ const AdminLayout = () => {
 
       {open && (
         <div
-          className={`h-full w-1/2 top-0 border absolute z-10 bg-background transform transition-transform duration-500 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
+          className={`h-full md:w-1/2 top-0 border absolute z-10 bg-background transform transition-transform duration-500 ease-out ${open ? "translate-x-0" : "translate-x-full"}`}
         >
           <h1 className="p-2 px-3 flex items-center gap-2 font-medium text-lg border-b">
-            <ShieldCheck className="w-5 h-5 flex-shrink-0" /> Admin Panel
+            <ShieldCheck className="w-5 h-5 flex-shrink-0" /> Admin
           </h1>
 
           <nav className="flex-1 space-y-2">
@@ -81,6 +81,7 @@ const AdminLayout = () => {
                       <AccordionContent className="pl-5 space-y-1">
                         {item.children.map((child) => (
                           <NavLink
+                            onClick={() => setOpen(false)}
                             key={child.label}
                             to={child.link}
                             end
@@ -107,6 +108,7 @@ const AdminLayout = () => {
                   <NavLink
                     key={item.label}
                     to={item.link}
+                    onClick={() => setOpen(false)}
                     end
                     className={({ isActive }) =>
                       `w-full flex items-center font-medium gap-3  p-2 transition-all duration-300 ${

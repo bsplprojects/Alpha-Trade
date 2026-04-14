@@ -15,6 +15,8 @@ import {
   Lock,
   MailOpen,
   ShieldHalf,
+  LogIn,
+  Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,7 +25,7 @@ import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import Popup from "../components/Popup";
-import BCTrade from "../../assets/BC_Trade.png";
+import { Label } from "@radix-ui/react-menubar";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -100,199 +102,220 @@ const Signup = () => {
         invitationCode: searchParams.get("ref"),
       });
     }
-  }, [searchParams]);
+  }, [searchParams, data]);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <div className="flex-1 flex flex-col justify-center px-6 py-12">
-        <div className="text-center mb-4">
-          <div className="w-20 h-20  rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-4xl">
-              <img src={BCTrade} alt="logo" />
-            </span>
-          </div>
-          <h1 className="text-2xl font-bold text-foreground">Create Account</h1>
-          <p className="text-muted-foreground mt-2">
-            Start your trading journey
+    <main className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+      <div className="w-full max-w-md px-6 ">
+        {/* Card */}
+        <div className="rounded-2xl bg-background backdrop-blur-md shadow-xl border border-border p-8">
+          {/* Header */}
+          <header className="text-center mb-8">
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm"></div>
+
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
+              Create Account
+            </h1>
+            <p className="text-muted-foreground mt-2">
+              Start your trading journey in minutes
+            </p>
+          </header>
+
+          {/* Form */}
+          <form onSubmit={handleSignup} className="space-y-4">
+            {/* Contact */}
+            <div className="relative group">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
+              <Input
+                type="number"
+                placeholder="Contact number"
+                value={data.contact}
+                onChange={(e) => setData({ ...data, contact: e.target.value })}
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
+                required
+              />
+            </div>
+
+            {/* Password */}
+            <div className="relative group">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={data.password}
+                onChange={(e) => setData({ ...data, password: e.target.value })}
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
+                required
+              />
+            </div>
+
+            {/* Confirm Password */}
+            <div className="relative group">
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
+              <Input
+                type="password"
+                placeholder="Confirm password"
+                value={data.confPassword}
+                onChange={(e) =>
+                  setData({ ...data, confPassword: e.target.value })
+                }
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
+                required
+              />
+            </div>
+
+            {/* Invitation Code */}
+            <div className="relative group">
+              <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
+              <Input
+                type="text"
+                placeholder="Invitation code"
+                value={data.invitationCode}
+                onChange={(e) =>
+                  setData({ ...data, invitationCode: e.target.value })
+                }
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
+                required
+              />
+            </div>
+
+            {/* Terms */}
+            <div className="flex items-start space-x-3 pt-1">
+              <Checkbox
+                id="terms"
+                checked={agreeTerms}
+                onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
+                className="mt-1"
+              />
+              <label
+                htmlFor="terms"
+                className="text-sm text-muted-foreground leading-relaxed"
+              >
+                I agree to the{" "}
+                <Link
+                  to="/terms"
+                  className="text-primary font-medium hover:underline"
+                >
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link
+                  to="/privacy"
+                  className="text-primary font-medium hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+              </label>
+            </div>
+
+            {/* Button */}
+            <Button
+              type="submit"
+              variant="gradient"
+              disabled={signupMutation.isPending || !agreeTerms}
+              className="w-full h-12 text-white text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
+            >
+              {signupMutation.isPending ? (
+                "Creating account..."
+              ) : (
+                <>
+                  <LogIn /> Create Account
+                </>
+              )}
+            </Button>
+          </form>
+
+          {/* Footer */}
+          <p className="text-center mt-6 text-sm text-muted-foreground">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="text-primary font-semibold hover:underline"
+            >
+              Sign In
+            </Link>
           </p>
         </div>
-
-        <form onSubmit={handleSignup} className="space-y-3">
-          {/* CONTACT NUMBER */}
-          <div className="relative">
-            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="number"
-              placeholder="Contact number"
-              value={data.contact}
-              onChange={(e) => setData({ ...data, contact: e.target.value })}
-              className="pl-10 h-12 bg-muted border-border"
-              required
-            />
-          </div>
-
-          {/* Name Input */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="password"
-              placeholder="Password"
-              value={data.password}
-              onChange={(e) => setData({ ...data, password: e.target.value })}
-              className="pl-10 h-12 bg-muted border-border"
-              required
-            />
-          </div>
-
-          {/* Email Input */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="password"
-              placeholder="Confirm Password"
-              value={data.confPassword}
-              onChange={(e) =>
-                setData({ ...data, confPassword: e.target.value })
-              }
-              className="pl-10 h-12 bg-muted border-border"
-              required
-            />
-          </div>
-
-          {/* INVITATION CODE */}
-          <div className="relative">
-            <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Invitation code"
-              className="pl-10 h-12 bg-muted border-border"
-              value={data.invitationCode}
-              onChange={(e) =>
-                setData({ ...data, invitationCode: e.target.value })
-              }
-              required
-            />
-          </div>
-
-          {/* VERIFICATION CODE */}
-          {/* <div className="relative">
-            <ShieldHalf className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Verification code"
-              className="pl-10 h-12 bg-muted border-border"
-              required
-              value={data.verificationCode}
-              onChange={(e) => {
-                setData({ ...data, verificationCode: e.target.value });
-              }}
-            />
-          </div> */}
-
-          {/* Terms Checkbox */}
-          <div className="flex items-start space-x-3">
-            <Checkbox
-              id="terms"
-              checked={agreeTerms}
-              onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
-              className="mt-1"
-            />
-            <label
-              htmlFor="terms"
-              className="text-sm text-muted-foreground leading-relaxed"
-            >
-              I agree to the{" "}
-              <Link to="/terms" className="text-primary hover:underline">
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link to="/privacy" className="text-primary hover:underline">
-                Privacy Policy
-              </Link>
-            </label>
-          </div>
-
-          {/* Signup Button */}
-          <Button
-            type="submit"
-            className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-            disabled={signupMutation.isPending || !agreeTerms}
-          >
-            {signupMutation.isPending
-              ? "Creating account..."
-              : "Create Account"}
-          </Button>
-        </form>
-
-        <Popup isOpen={open} onClose={() => setOpen(false)}>
-          <div className="mt-3 max-w-md mx-auto rounded-xl p-6 shadow-sm">
-            {/* Header */}
-            <div className="text-center">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-600">
-                ✓
-              </div>
-              <h1 className="text-lg font-semibold text-zinc-900">
-                Account Created Successfully
-              </h1>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Please save your login credentials for future access
-              </p>
-            </div>
-
-            <div className="mt-6 space-y-3 text-sm">
-              <div className="flex justify-between rounded-lg border px-4 py-2">
-                <span className="font-medium text-zinc-600">
-                  Invitation Code
-                </span>
-                <span className="font-semibold text-primary">
-                  {signupMutation.data?.data?.UserID}
-                </span>
-              </div>
-
-              <div className="flex justify-between rounded-lg border px-4 py-2">
-                <span className="font-medium text-zinc-600">Password</span>
-                <span className="font-semibold text-primary">
-                  {signupMutation.data?.data?.Pass}
-                </span>
-              </div>
-
-              <div className="flex justify-between rounded-lg border px-4 py-2">
-                <span className="font-medium text-zinc-600">Phone</span>
-                <span className="font-semibold text-primary">
-                  {signupMutation.data?.data?.MobileNo}
-                </span>
-              </div>
-            </div>
-
-            <Button
-              onClick={() =>
-                navigate("/login", {
-                  state: {
-                    mob: signupMutation.data?.data.MobileNo,
-                    pass: signupMutation.data?.data.Pass,
-                  },
-                })
-              }
-              className="mt-6 w-full"
-            >
-              Sign In to Your Account
-            </Button>
-          </div>
-        </Popup>
-
-        {/* Login Link */}
-        <p className="text-center mt-1 text-muted-foreground">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="text-primary font-semibold hover:underline"
-          >
-            Sign In
-          </Link>
-        </p>
       </div>
-    </div>
+
+      <Popup
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="Account Created Successfully"
+      >
+        <div className="w-[360px] mt-4 space-y-4">
+          {/* Success message */}
+          <p className="text-sm text-zinc-600">
+            Your account has been created successfully. Please find your login
+            credentials below.
+          </p>
+
+          {/* Credentials Box */}
+          <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">User ID</span>
+              <span className="text-sm font-mono text-zinc-900">
+                {signupMutation?.data?.data?.UserID}
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Mobile Number
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.MobileNo}
+              </span>
+            </div>
+            {/* <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">Email</span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.Email}
+              </span>
+            </div> */}
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Joining Date
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.JoiningDate}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Referral ID
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.ReferralID}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Password
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.Pass}
+              </span>
+            </div>
+          </div>
+
+          {/* Info note */}
+          {/* <p className="text-xs text-zinc-500">
+            For security reasons, please change your password after first login.
+          </p> */}
+
+          {/* CTA */}
+          <Button onClick={() => navigate("/login")} className="w-full mt-2">
+            Proceed to Login
+          </Button>
+        </div>
+      </Popup>
+    </main>
   );
 };
 

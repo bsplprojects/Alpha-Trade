@@ -5,6 +5,7 @@ import {
   FileText,
   HandCoins,
   Home,
+  Settings,
   User,
   UsersRound,
 } from "lucide-react";
@@ -49,6 +50,10 @@ export const adminItems = [
         label: "Change Password",
         link: "/admin/profile",
       },
+      {
+        label: "Bank details",
+        link: "/admin/profile/bank",
+      },
       // {
       //   label: "Settings",
       //   link: "/admin/profile/settings",
@@ -69,13 +74,13 @@ export const adminItems = [
         link: "/admin/reports",
       },
       {
-        label: "Activation Report",
+        label: "Recharge Report",
         link: "/admin/reports/activation-report",
       },
-      {
-        label: "Ledger Report",
-        link: "/admin/reports/ledger-report",
-      },
+      // {
+      //   label: "Ledger Report",
+      //   link: "/admin/reports/ledger-report",
+      // },
     ],
   },
   {
@@ -120,13 +125,17 @@ export const adminItems = [
     label: "Funds",
     link: "/admin/funds-history",
     children: [
+      // {
+      //   label: "Fund Transfer",
+      //   link: "/admin/funds-history",
+      // },
+      // {
+      //   label: "Transfer History",
+      //   link: "/admin/funds-history/transfer-history",
+      // },
       {
-        label: "Fund Transfer",
-        link: "/admin/funds-history",
-      },
-      {
-        label: "Transfer History",
-        link: "/admin/funds-history/transfer-history",
+        label: "Add Fund",
+        link: "/admin/funds-history/add-fund",
       },
 
       {
@@ -134,5 +143,10 @@ export const adminItems = [
         link: "/admin/funds-history/request-history",
       },
     ],
+  },
+  {
+    icon: Settings,
+    label: "Settings",
+    link: "/admin/settings",
   },
 ];

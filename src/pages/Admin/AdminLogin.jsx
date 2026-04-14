@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 
@@ -34,6 +34,8 @@ const AdminLogin = () => {
       if (result?.data?.status === "SUCCESS") {
         sessionStorage.setItem("memberId", result?.data?.data?.AltMobileNo);
         navigate("/admin");
+      } else {
+        toast.error(result?.data?.message);
       }
       setPhone("");
       setPassword("");

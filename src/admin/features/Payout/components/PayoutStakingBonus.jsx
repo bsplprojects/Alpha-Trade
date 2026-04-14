@@ -59,7 +59,7 @@ const PayoutStakingBonus = () => {
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div className="grid lg:grid-cols-7 gap-2 py-8">
+      <div className="grid lg:grid-cols-7 gap-2 py-8 mt-5">
         <div>
           <Label>Member Id</Label>
           <Input

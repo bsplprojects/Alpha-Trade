@@ -1,4 +1,4 @@
-import { Home, BarChart3, Users, Wallet, User } from "lucide-react";
+import { Home, BarChart3, Users, Wallet, User, Sparkle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
@@ -6,6 +6,7 @@ const navItems = [
   { icon: BarChart3, label: "Market", path: "/market" },
   { icon: Users, label: "Team", path: "/team" },
   { icon: Wallet, label: "Assets", path: "/assets" },
+  // { icon: Sparkle, label: "VIP", path: "/vip" },
   { icon: User, label: "Profile", path: "/profile" },
 ];
 
@@ -13,7 +14,13 @@ const BottomNav = () => {
   const location = useLocation();
   const memberId = sessionStorage.getItem("memberId");
 
-  if (!memberId) {
+  if (
+    !memberId ||
+    memberId === "Admin" ||
+    memberId === "Admins" ||
+    location.pathname === "/login" ||
+    location.pathname === "/signup"
+  ) {
     return null;
   }
 

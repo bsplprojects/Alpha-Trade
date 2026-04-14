@@ -1,7 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { http } from "../../../utils/http";
+import { toast } from "sonner";
+
 export const useFunds = (search) => {
   const client = useQueryClient();
+
   const { data, isLoading } = useQuery({
     queryKey: ["request-history"],
     queryFn: async () => {
@@ -41,11 +44,28 @@ export const useFunds = (search) => {
     },
   });
 
+  const addfundMutation = useMutation({
+    mutationFn: async ({ memberId, amount }) => {
+      const res = await http.post(`/InsertRoyaltyIncome`, {
+        MID: memberId,
+        Amount: amount,
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      client.invalidateQueries(["request-history"]);
+    },
+    onError: (err) => {
+      toast.error(err.response.data.message);
+    },
+  });
+
   return {
     transferMutation,
     fundHistoryMutation,
     data,
     isLoading,
     updateStatus,
+    addfundMutation,
   };
 };

@@ -25,11 +25,12 @@ export function useMember(memberId) {
         Sponsname: data.ReferralName,
         Phonen: data.MobileNo,
         Email: data.PhoneNo,
-        Pa: data.Price,
+        Price: data.Price,
         mStatus: data.mStatus,
         Wallet: data.Password,
         PtoP: data.Nominee_Relation,
         Widh: data.Nominee,
+        Fname: data.Fname,
       });
       return response.data;
     },
