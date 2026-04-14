@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
-import logo from "../../assets/Alphatradelogo.png";
+import logo from "../../"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -57,17 +57,21 @@ const Login = () => {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl bg-white backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
-          {/* Glow Effect
+        <div className="relative rounded-3xl bg-white/70 backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
+          {/* Glow Effect */}
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div> */}
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div>
 
           {/* Header */}
           <header className="text-center mb-8 relative z-10">
             {/* Logo + Brand */}
             <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg">A</span>
+              </div>
+
               <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                <img src={logo} alt="" width={200} />
+                Alpha Trade
               </h1>
             </div>
 

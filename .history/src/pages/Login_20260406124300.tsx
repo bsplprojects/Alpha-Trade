@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
-import logo from "../../assets/Alphatradelogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -54,63 +53,53 @@ const Login = () => {
   }, [mob, pass]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl bg-white backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
-          {/* Glow Effect
-          <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div> */}
-
+        <div className="rounded-2xl bg-background/80 backdrop-blur-xl shadow-xl border border-border p-8">
           {/* Header */}
-          <header className="text-center mb-8 relative z-10">
-            {/* Logo + Brand */}
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                <img src={logo} alt="" width={200} />
-              </h1>
-            </div>
+          <header className="text-center mb-10">
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm"></div>
 
-            {/* Welcome Text */}
-            <h2 className="text-2xl font-semibold text-gray-900">
-              Welcome Back
-            </h2>
-
-            <p className="text-gray-500 mt-1 text-sm">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
+              Welcome Back 👋
+            </h1>
+            <p className="text-muted-foreground mt-2">
               Sign in to continue to your account
             </p>
           </header>
+
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-5 relative z-10">
+          <form onSubmit={handleLogin} className="space-y-5">
             {/* Invitation ID */}
             <div className="relative group">
-              <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
+              <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
               <Input
                 type="text"
                 placeholder="Invitation ID"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="pl-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary "
                 required
               />
             </div>
 
             {/* Password */}
             <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 pr-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="pl-10 pr-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
                 required
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -120,36 +109,29 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Forgot Password */}
-            <div className="flex justify-end text-sm">
-              <button className="text-indigo-600 hover:underline">
-                Forgot password?
-              </button>
-            </div>
-
             {/* Button */}
             <Button
+              variant="gradient"
               type="submit"
               disabled={isLoading}
-              className="w-full h-12 text-white text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
+              className="w-full h-12 text-white text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
             >
               {isLoading ? (
                 "Signing you in..."
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <LogIn className="w-5 h-5" />
-                  Sign In
-                </span>
+                <>
+                  <LogIn /> Sign In
+                </>
               )}
             </Button>
           </form>
 
           {/* Footer */}
-          <p className="text-center mt-6 text-sm text-gray-500">
+          <p className="text-center mt-8 text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
               to="/signup"
-              className="text-indigo-600 font-semibold hover:underline"
+              className="text-primary font-semibold hover:underline"
             >
               Sign Up
             </Link>

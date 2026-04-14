@@ -109,7 +109,7 @@ const Signup = () => {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl shadow-2xl border border-indigo-100 p-8 bg-white">
+        <div className="relative rounded-3xl shadow-2xl border border-indigo-100 p-8">
           {/* Header */}
           <header className="text-center mb-8 relative z-10">
             {/* Brand */}

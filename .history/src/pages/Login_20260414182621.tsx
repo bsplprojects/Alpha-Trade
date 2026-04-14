@@ -67,7 +67,7 @@ const Login = () => {
             {/* Logo + Brand */}
             <div className="flex items-center justify-center gap-3 mb-4">
               <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                <img src={logo} alt="" width={200} />
+                <img src={logo} alt="" width={160} />
               </h1>
             </div>
 

@@ -26,7 +26,6 @@ import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import Popup from "../components/Popup";
 import { Label } from "@radix-ui/react-menubar";
-import logo from "../../assets/Alphatradelogo.png";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -106,60 +105,53 @@ const Signup = () => {
   }, [searchParams, data]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
-      <div className="w-full max-w-md px-6">
+    <main className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+      <div className="w-full max-w-md px-6 ">
         {/* Card */}
-        <div className="relative rounded-3xl shadow-2xl border border-indigo-100 p-8 bg-white">
+        <div className="rounded-2xl bg-background backdrop-blur-md shadow-xl border border-border p-8">
           {/* Header */}
-          <header className="text-center mb-8 relative z-10">
-            {/* Brand */}
-            {/* Logo + Brand */}
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <h1 className="text-2xl">
-                <img src={logo} alt="" width={200} />
-              </h1>
-            </div>
+          <header className="text-center mb-8">
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm"></div>
 
-            <h2 className="text-2xl font-semibold text-gray-900">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">
               Create Account
-            </h2>
-
-            <p className="text-gray-500 mt-1 text-sm">
+            </h1>
+            <p className="text-muted-foreground mt-2">
               Start your trading journey in minutes
             </p>
           </header>
 
           {/* Form */}
-          <form onSubmit={handleSignup} className="space-y-5 relative z-10">
+          <form onSubmit={handleSignup} className="space-y-4">
             {/* Contact */}
             <div className="relative group">
-              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
               <Input
-                type="tel"
+                type="number"
                 placeholder="Contact number"
                 value={data.contact}
                 onChange={(e) => setData({ ...data, contact: e.target.value })}
-                className="pl-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
 
             {/* Password */}
             <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
               <Input
                 type="password"
                 placeholder="Password"
                 value={data.password}
                 onChange={(e) => setData({ ...data, password: e.target.value })}
-                className="pl-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
 
             {/* Confirm Password */}
             <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
               <Input
                 type="password"
                 placeholder="Confirm password"
@@ -167,14 +159,14 @@ const Signup = () => {
                 onChange={(e) =>
                   setData({ ...data, confPassword: e.target.value })
                 }
-                className="pl-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
 
             {/* Invitation Code */}
             <div className="relative group">
-              <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
+              <MailOpen className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition" />
               <Input
                 type="text"
                 placeholder="Invitation code"
@@ -182,7 +174,7 @@ const Signup = () => {
                 onChange={(e) =>
                   setData({ ...data, invitationCode: e.target.value })
                 }
-                className="pl-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="pl-10 h-12 bg-muted/50 border-border focus:ring-2 focus:ring-primary"
                 required
               />
             </div>
@@ -195,18 +187,21 @@ const Signup = () => {
                 onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
                 className="mt-1"
               />
-              <label className="text-sm text-gray-500 leading-relaxed">
+              <label
+                htmlFor="terms"
+                className="text-sm text-muted-foreground leading-relaxed"
+              >
                 I agree to the{" "}
                 <Link
                   to="/terms"
-                  className="text-indigo-600 font-medium hover:underline"
+                  className="text-primary font-medium hover:underline"
                 >
                   Terms of Service
                 </Link>{" "}
                 and{" "}
                 <Link
                   to="/privacy"
-                  className="text-indigo-600 font-medium hover:underline"
+                  className="text-primary font-medium hover:underline"
                 >
                   Privacy Policy
                 </Link>
@@ -216,26 +211,26 @@ const Signup = () => {
             {/* Button */}
             <Button
               type="submit"
+              variant="gradient"
               disabled={signupMutation.isPending || !agreeTerms}
-              className="w-full h-12 text-white text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
+              className="w-full h-12 text-white text-lg font-semibold rounded-xl shadow-md hover:shadow-lg transition-all"
             >
               {signupMutation.isPending ? (
                 "Creating account..."
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <LogIn className="w-5 h-5" />
-                  Create Account
-                </span>
+                <>
+                  <LogIn /> Create Account
+                </>
               )}
             </Button>
           </form>
 
           {/* Footer */}
-          <p className="text-center mt-6 text-sm text-gray-500">
+          <p className="text-center mt-6 text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-indigo-600 font-semibold hover:underline"
+              className="text-primary font-semibold hover:underline"
             >
               Sign In
             </Link>
@@ -243,37 +238,79 @@ const Signup = () => {
         </div>
       </div>
 
-      {/* SUCCESS POPUP (Improved UI) */}
       <Popup
         isOpen={open}
         onClose={() => setOpen(false)}
-        title="🎉 Account Created Successfully"
+        title="Account Created Successfully"
       >
         <div className="w-[360px] mt-4 space-y-4">
-          <p className="text-sm text-gray-600">
-            Your account has been created successfully. Here are your
-            credentials:
+          {/* Success message */}
+          <p className="text-sm text-zinc-600">
+            Your account has been created successfully. Please find your login
+            credentials below.
           </p>
 
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 space-y-3">
-            {[
-              ["User ID", signupMutation?.data?.data?.UserID],
-              ["Mobile", signupMutation?.data?.data?.MobileNo],
-              ["Joining Date", signupMutation?.data?.data?.JoiningDate],
-              ["Referral ID", signupMutation?.data?.data?.ReferralID],
-              ["Password", signupMutation?.data?.data?.Pass],
-            ].map(([label, value]) => (
-              <div key={label} className="flex justify-between">
-                <span className="text-sm text-gray-500">{label}</span>
-                <span className="text-sm font-mono text-gray-900">{value}</span>
-              </div>
-            ))}
+          {/* Credentials Box */}
+          <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4 space-y-3">
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">User ID</span>
+              <span className="text-sm font-mono text-zinc-900">
+                {signupMutation?.data?.data?.UserID}
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Mobile Number
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.MobileNo}
+              </span>
+            </div>
+            {/* <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">Email</span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.Email}
+              </span>
+            </div> */}
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Joining Date
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.JoiningDate}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Referral ID
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.ReferralID}
+              </span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm font-medium text-zinc-700">
+                Password
+              </span>
+              <span className="text-sm font-mono text-zinc-900">
+                {" "}
+                {signupMutation?.data?.data?.Pass}
+              </span>
+            </div>
           </div>
 
-          <Button
-            onClick={() => navigate("/login")}
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
-          >
+          {/* Info note */}
+          {/* <p className="text-xs text-zinc-500">
+            For security reasons, please change your password after first login.
+          </p> */}
+
+          {/* CTA */}
+          <Button onClick={() => navigate("/login")} className="w-full mt-2">
             Proceed to Login
           </Button>
         </div>

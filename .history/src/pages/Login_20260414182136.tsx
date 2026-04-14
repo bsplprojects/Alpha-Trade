@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
-import logo from "../../assets/Alphatradelogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -57,29 +56,23 @@ const Login = () => {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl bg-white backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
-          {/* Glow Effect
+        <div className="relative rounded-3xl bg-white/70 backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
+          {/* Glow Effect */}
           <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
-          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div> */}
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div>
 
           {/* Header */}
           <header className="text-center mb-8 relative z-10">
-            {/* Logo + Brand */}
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                <img src={logo} alt="" width={200} />
-              </h1>
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <LogIn className="text-white w-7 h-7" />
             </div>
 
-            {/* Welcome Text */}
-            <h2 className="text-2xl font-semibold text-gray-900">
-              Welcome Back
-            </h2>
-
-            <p className="text-gray-500 mt-1 text-sm">
-              Sign in to continue to your account
+            <h1 className="text-3xl font-bold text-gray-900">Welcome Back</h1>
+            <p className="text-gray-500 mt-2 text-sm">
+              Login to access your dashboard
             </p>
           </header>
+
           {/* Form */}
           <form onSubmit={handleLogin} className="space-y-5 relative z-10">
             {/* Invitation ID */}
@@ -143,6 +136,13 @@ const Login = () => {
               )}
             </Button>
           </form>
+
+          {/* Divider */}
+          <div className="flex items-center my-6">
+            <div className="flex-1 h-px bg-gray-200"></div>
+            <span className="px-3 text-sm text-gray-400">OR</span>
+            <div className="flex-1 h-px bg-gray-200"></div>
+          </div>
 
           {/* Footer */}
           <p className="text-center mt-6 text-sm text-gray-500">

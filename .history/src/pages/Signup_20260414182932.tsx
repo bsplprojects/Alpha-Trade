@@ -109,13 +109,17 @@ const Signup = () => {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl shadow-2xl border border-indigo-100 p-8 bg-white">
+        <div className="relative rounded-3xl  backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
+          {/* Glow Effects */}
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div>
+
           {/* Header */}
           <header className="text-center mb-8 relative z-10">
             {/* Brand */}
             {/* Logo + Brand */}
             <div className="flex items-center justify-center gap-3 mb-4">
-              <h1 className="text-2xl">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 <img src={logo} alt="" width={200} />
               </h1>
             </div>
