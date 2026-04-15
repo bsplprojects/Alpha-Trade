@@ -260,7 +260,7 @@ const Home = () => {
           <div>
             <p className="font-semibold text-black">Referral Link</p>
             <p className="text-sm text-amber-600">
-              https://alphatrade24.com/signup?ref=AT11111
+              07:00 PM – 08:00 PM (Daily)
             </p>
           </div>
         </div>

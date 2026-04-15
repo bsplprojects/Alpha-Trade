@@ -13,6 +13,7 @@ import {
   Clock,
   Clock1,
   Link2,
+  Copy,
 } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 import { useMarketData } from "@/hooks/useMarketData";
@@ -252,15 +253,47 @@ const Home = () => {
       </div>
 
       {/* Trading Time Reminder */}
-      <div className="mx-4 mt-8 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-5">
-        <div className="flex items-center gap-3">
-          <div className="text-3xl">
-            <Link2 color="black" size={36} />
+      <div className="mx-4 mt-8 bg-white border border-emerald-100 shadow-sm rounded-3xl p-6 hover:shadow-md transition-shadow">
+        <div className="flex items-start gap-4">
+          {/* Icon */}
+          <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center">
+            <Link2 className="w-7 h-7 text-emerald-600" />
           </div>
-          <div>
-            <p className="font-semibold text-black">Referral Link</p>
-            <p className="text-sm text-amber-600">
+
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-semibold text-lg text-emerald-950">
+                Your Referral Link
+              </h3>
+
+              {/* Copy Button */}
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    "https://alphatrade24.com/signup?ref=AT11111",
+                  );
+                  // You can add a toast notification here
+                }}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition-all active:scale-95"
+              >
+                <Copy className="w-4 h-4" />
+                Copy
+              </button>
+            </div>
+
+            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 font-mono text-sm text-emerald-800 break-all">
               https://alphatrade24.com/signup?ref=AT11111
+            </div>
+
+            <p className="mt-4 text-sm text-slate-600 leading-relaxed">
+              Share this link with your friends and earn rewards when they sign
+              up and trade.
+              <span className="text-emerald-600 font-medium">
+                {" "}
+                Earn up to 5% commission
+              </span>{" "}
+              on their activity.
             </p>
           </div>
         </div>

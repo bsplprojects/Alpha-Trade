@@ -121,8 +121,8 @@ const Signup = () => {
   return (
     <>
       {/* MAIN UI */}
-      <main className="min-h-screen flex items-center overflow-y-scroll justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50 isolate">
-        <div className="w-full max-w-md  py-8 ">
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50 isolate">
+        <div className="w-full max-w-md px-6 py-8">
           <div className="rounded-3xl shadow-xl border border-emerald-100/80 bg-white overflow-hidden">
             {/* Header with subtle gradient accent */}
             <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-8 py-8 text-center relative">
@@ -132,7 +132,7 @@ const Signup = () => {
                 src={logo}
                 alt="Logo"
                 width={92}
-                className="mx-auto mt-36 drop-shadow-md"
+                className="mx-auto mt-10 drop-shadow-md"
               />
 
               <h1 className="text-3xl font-semibold text-white tracking-tight">
@@ -150,7 +150,7 @@ const Signup = () => {
                 <div className="relative group">
                   <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500 w-5 h-5" />
                   <Input
-                    type="number"
+                    type="tel"
                     placeholder="Contact number"
                     value={data.contact}
                     onChange={(e) =>

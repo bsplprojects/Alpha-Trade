@@ -140,13 +140,18 @@ const Recharge = () => {
             <div className="text-sm font-medium text-emerald-600">USDT</div>
           </div>
 
+          {/* Helper Text */}
+          <p className="text-xs text-emerald-600/70 text-center mt-2">
+            You will pay in INR • Live rate: 1 USDT ≈ ₹{usdtInrRate}
+          </p>
+
           {/* Quick Selection - INR Buttons */}
           <div className="mt-6">
             <p className="text-center text-emerald-600/70 text-sm mb-4 font-medium">
               Quick Selection (INR)
             </p>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {quickAmounts.map((inrValue) => {
                 const isSelected = Math.round(amount) === inrValue; // Compare with INR amount
 

@@ -12,7 +12,6 @@ import {
   Brain,
   Clock,
   Clock1,
-  Link2,
 } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 import { useMarketData } from "@/hooks/useMarketData";
@@ -255,12 +254,12 @@ const Home = () => {
       <div className="mx-4 mt-8 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-5">
         <div className="flex items-center gap-3">
           <div className="text-3xl">
-            <Link2 color="black" size={36} />
+            <Link color="black" size={36} />
           </div>
           <div>
-            <p className="font-semibold text-black">Referral Link</p>
+            <p className="font-semibold text-black">Trading Window</p>
             <p className="text-sm text-amber-600">
-              https://alphatrade24.com/signup?ref=AT11111
+              07:00 PM – 08:00 PM (Daily)
             </p>
           </div>
         </div>

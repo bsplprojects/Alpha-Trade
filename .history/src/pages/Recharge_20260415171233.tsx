@@ -146,7 +146,7 @@ const Recharge = () => {
               Quick Selection (INR)
             </p>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {quickAmounts.map((inrValue) => {
                 const isSelected = Math.round(amount) === inrValue; // Compare with INR amount
 

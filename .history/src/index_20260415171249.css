@@ -151,7 +151,7 @@ html {
   }
 
   .page-content {
-    @apply flex-1 overflow-y-auto pb-10;
+    @apply flex-1 overflow-y-auto p;
   }
 
   .header-gradient {

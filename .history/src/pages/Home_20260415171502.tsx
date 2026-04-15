@@ -12,7 +12,6 @@ import {
   Brain,
   Clock,
   Clock1,
-  Link2,
 } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 import { useMarketData } from "@/hooks/useMarketData";
@@ -58,7 +57,7 @@ const Home = () => {
   return (
     <div className="page-content bg-white min-h-screen ">
       {/* Header - Premium Card */}
-      <div className="relative mx-4 mt-2 rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/80 p-5 sm:p-6 shadow-2xl overflow-hidden">
+      <div className="relative mx-4 mt-6 rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/80 p-5 sm:p-6 shadow-2xl overflow-hidden">
         {/* Background glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-violet-500/10" />
 
@@ -104,7 +103,7 @@ const Home = () => {
       </div>
 
       {/* Hero Banner - More Premium & Dynamic */}
-      <div className="relative mx-4 mt-2 rounded-3xl overflow-hidden h-[470px] shadow-2xl">
+      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[470px] shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-600" />
 
         {/* Glassmorphic overlay */}
@@ -255,12 +254,12 @@ const Home = () => {
       <div className="mx-4 mt-8 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-5">
         <div className="flex items-center gap-3">
           <div className="text-3xl">
-            <Link2 color="black" size={36} />
+            <Clock1 color="white" size={36} />
           </div>
           <div>
-            <p className="font-semibold text-black">Referral Link</p>
+            <p className="font-semibold text-black">Trading Window</p>
             <p className="text-sm text-amber-600">
-              https://alphatrade24.com/signup?ref=AT11111
+              07:00 PM – 08:00 PM (Daily)
             </p>
           </div>
         </div>
@@ -285,7 +284,7 @@ const Home = () => {
             </p>
 
             <h2 className="text-lg font-extrabold font-serif tracking-tighter leading-snug">
-              First time more & fast gain through ALPHA TRADE 🚀
+              First time more & fast gain through ALFA TRADE 🚀
             </h2>
 
             <p className="text-sm text-black/80 mt-1">

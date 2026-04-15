@@ -45,7 +45,7 @@ const Recharge = () => {
   const [selectedChannel, setSelectedChannel] = useState("pay1");
   const { rate: usdtInrRate } = useLiveUsdtRate();
   const [showPopup, setShowPopup] = useState(false);
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState("");
 
   const handleQuickSelect = (value: number) => {
     setAmount(value.toString());
@@ -117,55 +117,44 @@ const Recharge = () => {
         </div>
 
         {/* Amount Section */}
-        {/* Amount Section */}
         <div className="bg-white rounded-3xl shadow-sm border border-emerald-100 p-6">
           <h3 className="font-semibold text-lg text-emerald-950 mb-5">
             Enter Amount
           </h3>
 
-          {/* Big Display Input - Shows USDT Value */}
+          {/* Amount Input */}
           <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex items-center gap-3">
-            <div className="text-3xl font-bold text-emerald-700">$</div>
+            <div className="text-3xl font-bold text-emerald-700">₹</div>
             <input
               type="number"
-              step="0.01"
               value={(amount / usdtInrRate).toFixed(2)}
-              onChange={(e) => {
-                const usdtValue = parseFloat(e.target.value) || 0;
-                setAmount(usdtValue * usdtInrRate); // Convert typed USDT → INR amount
-              }}
+              onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
               className="flex-1 bg-transparent text-4xl font-semibold outline-none text-emerald-950 placeholder:text-emerald-300"
             />
-            <div className="text-sm font-medium text-emerald-600">USDT</div>
+            <div className="text-sm font-medium text-emerald-600">INR</div>
           </div>
 
-          {/* Quick Selection - INR Buttons */}
+          {/* Quick Selection */}
           <div className="mt-6">
             <p className="text-center text-emerald-600/70 text-sm mb-4 font-medium">
-              Quick Selection (INR)
+              Quick Amounts
             </p>
 
-            <div className="grid grid-cols-3 gap-3">
-              {quickAmounts.map((inrValue) => {
-                const isSelected = Math.round(amount) === inrValue; // Compare with INR amount
-
-                return (
-                  <button
-                    key={inrValue}
-                    onClick={() => {
-                      setAmount(inrValue); // Set internal amount as INR
-                    }}
-                    className={`py-3.5 rounded-2xl border text-sm font-semibold transition-all ${
-                      isSelected
-                        ? "border-emerald-600 bg-emerald-600 text-white shadow-sm"
-                        : "border-emerald-100 hover:border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50"
-                    }`}
-                  >
-                    ₹{inrValue}
-                  </button>
-                );
-              })}
+            <div className="grid grid-cols-4 gap-3">
+              {quickAmounts.map((value) => (
+                <button
+                  key={value}
+                  onClick={() => handleQuickSelect(value)}
+                  className={`py-3.5 rounded-2xl border text-sm font-semibold transition-all ${
+                    amount === value.toString()
+                      ? "border-emerald-600 bg-emerald-600 text-white shadow-sm"
+                      : "border-emerald-100 hover:border-emerald-300 bg-white text-emerald-800 hover:bg-emerald-50"
+                  }`}
+                >
+                  ₹{value}
+                </button>
+              ))}
             </div>
           </div>
         </div>

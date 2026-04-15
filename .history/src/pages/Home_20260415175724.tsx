@@ -12,7 +12,6 @@ import {
   Brain,
   Clock,
   Clock1,
-  Link2,
 } from "lucide-react";
 import MarketItem from "@/components/MarketItem";
 import { useMarketData } from "@/hooks/useMarketData";
@@ -251,20 +250,7 @@ const Home = () => {
         </Link>
       </div>
 
-      {/* Trading Time Reminder */}
-      <div className="mx-4 mt-8 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-5">
-        <div className="flex items-center gap-3">
-          <div className="text-3xl">
-            <Link2 color="black" size={36} />
-          </div>
-          <div>
-            <p className="font-semibold text-black">Referral Link</p>
-            <p className="text-sm text-amber-600">
-              https://alphatrade24.com/signup?ref=AT11111
-            </p>
-          </div>
-        </div>
-      </div>
+      
 
       <div
         onClick={() => window.open("/alpha-trade.pdf", "_blank")}
@@ -285,7 +271,7 @@ const Home = () => {
             </p>
 
             <h2 className="text-lg font-extrabold font-serif tracking-tighter leading-snug">
-              First time more & fast gain through ALPHA TRADE 🚀
+              First time more & fast gain through ALFA TRADE 🚀
             </h2>
 
             <p className="text-sm text-black/80 mt-1">

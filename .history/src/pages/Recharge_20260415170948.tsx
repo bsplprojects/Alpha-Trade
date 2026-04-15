@@ -45,7 +45,7 @@ const Recharge = () => {
   const [selectedChannel, setSelectedChannel] = useState("pay1");
   const { rate: usdtInrRate } = useLiveUsdtRate();
   const [showPopup, setShowPopup] = useState(false);
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number>();
 
   const handleQuickSelect = (value: number) => {
     setAmount(value.toString());
@@ -125,7 +125,7 @@ const Recharge = () => {
 
           {/* Big Display Input - Shows USDT Value */}
           <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5 flex items-center gap-3">
-            <div className="text-3xl font-bold text-emerald-700">$</div>
+            <div className="text-3xl font-bold text-emerald-700">₹</div>
             <input
               type="number"
               step="0.01"
@@ -140,13 +140,18 @@ const Recharge = () => {
             <div className="text-sm font-medium text-emerald-600">USDT</div>
           </div>
 
+          {/* Helper Text */}
+          <p className="text-xs text-emerald-600/70 text-center mt-2">
+            You will pay in INR • Live rate: 1 USDT ≈ ₹{usdtInrRate}
+          </p>
+
           {/* Quick Selection - INR Buttons */}
           <div className="mt-6">
             <p className="text-center text-emerald-600/70 text-sm mb-4 font-medium">
               Quick Selection (INR)
             </p>
 
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-4 gap-3">
               {quickAmounts.map((inrValue) => {
                 const isSelected = Math.round(amount) === inrValue; // Compare with INR amount
 

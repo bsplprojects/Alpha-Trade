@@ -121,7 +121,7 @@ const Signup = () => {
   return (
     <>
       {/* MAIN UI */}
-      <main className="min-h-screen flex items-center overflow-y-scroll justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50 isolate">
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-emerald-50 isolate">
         <div className="w-full max-w-md  py-8 ">
           <div className="rounded-3xl shadow-xl border border-emerald-100/80 bg-white overflow-hidden">
             {/* Header with subtle gradient accent */}
