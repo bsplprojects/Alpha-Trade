@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
-import logo from "../../assets/AlphaLogo2.png";
+import logo from "../../assets/AlphaLogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -127,10 +127,7 @@ const Login = () => {
 
             {/* Forgot Password */}
             <div className="flex justify-end text-sm">
-              <button
-                type="button"
-                className="text-blue-900 hover:text-yellow-500 transition"
-              >
+              <button type className="text-blue-900 hover:text-yellow-500 transition">
                 Forgot password?
               </button>
             </div>

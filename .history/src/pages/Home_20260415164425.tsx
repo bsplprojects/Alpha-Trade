@@ -88,7 +88,7 @@ const Home = () => {
           </div>
 
           {/* Total Assets */}
-          <div className="text-left sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
+          <div className="text-center sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
             <p className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-[2px] text-zinc-500 font-medium">
               TOTAL ASSETS
             </p>

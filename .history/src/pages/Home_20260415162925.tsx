@@ -21,7 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import Popup from "@/components/Popup";
 import { useEffect, useState } from "react";
-import logo from "../../assets/AlphaLogo2.png";
+import logo from "../../assets/AlphaLogo.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -65,11 +65,11 @@ const Home = () => {
           {/* Brand */}
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="relative">
-              <div className="p-2 sm:p-3 rounded-2xl  ">
+              <div className="p-2 sm:p-3 rounded-2xl bg-gradient-to-br from-blue-200 to-violet-300 shadow-lg shadow-blue-500/30">
                 <img
                   src={logo}
                   alt="Alpha Trade"
-                  className="w-16 h-16 sm:w-14 sm:h-14 object-contain drop-shadow-md"
+                  className="w-12 h-12 sm:w-14 sm:h-14 object-contain drop-shadow-md"
                 />
               </div>
 
@@ -103,7 +103,7 @@ const Home = () => {
       </div>
 
       {/* Hero Banner - More Premium & Dynamic */}
-      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[470px] shadow-2xl">
+      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[400px] shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-600" />
 
         {/* Glassmorphic overlay */}
@@ -119,7 +119,7 @@ const Home = () => {
               LIVE TRADING ACTIVE
             </div>
 
-            <h2 className="text-5xl font-bold font-serif tracking-tighter leading-none">
+            <h2 className="text-5xl font-bold tracking-tighter leading-none">
               Up to <span className="text-amber-200">5%</span>
               <br />
               Daily Returns
@@ -261,53 +261,6 @@ const Home = () => {
             <p className="text-sm text-amber-600">
               07:00 PM – 08:00 PM (Daily)
             </p>
-          </div>
-        </div>
-      </div>
-
-      <div
-        onClick={() => window.open("/alpha-trade.pdf", "_blank")}
-        className="mx-4 mt-4 rounded-3xl p-5 cursor-pointer relative overflow-hidden shadow-2xl text-black"
-        style={{
-          background: "linear-gradient(135deg, #f59e0b, #ea580c, #7f1d1d)",
-        }}
-      >
-        {/* Glossy shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/30 opacity-40" />
-
-        {/* Content */}
-        <div className="relative flex items-center justify-between gap-4">
-          {/* Text */}
-          <div>
-            <p className="text-xs uppercase tracking-wider text-black/70 mb-1 font-semibold">
-              Announcement
-            </p>
-
-            <h2 className="text-lg font-extrabold font-serif tracking-tighter leading-snug">
-              First time more & fast gain through ALFA TRADE 🚀
-            </h2>
-
-            <p className="text-sm text-black/80 mt-1">
-              Alpha Trade has reached a record $35 trillion+ in 2025
-            </p>
-          </div>
-
-          {/* Arrow */}
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-black"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
           </div>
         </div>
       </div>

@@ -103,7 +103,7 @@ const Home = () => {
       </div>
 
       {/* Hero Banner - More Premium & Dynamic */}
-      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[470px] shadow-2xl">
+      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[420px] shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-600" />
 
         {/* Glassmorphic overlay */}
@@ -119,7 +119,7 @@ const Home = () => {
               LIVE TRADING ACTIVE
             </div>
 
-            <h2 className="text-5xl font-bold font-serif tracking-tighter leading-none">
+            <h2 className="text-5xl font-bold tracking-tighter leading-none">
               Up to <span className="text-amber-200">5%</span>
               <br />
               Daily Returns
@@ -267,36 +267,33 @@ const Home = () => {
 
       <div
         onClick={() => window.open("/alpha-trade.pdf", "_blank")}
-        className="mx-4 mt-4 rounded-3xl p-5 cursor-pointer relative overflow-hidden shadow-2xl text-black"
-        style={{
-          background: "linear-gradient(135deg, #f59e0b, #ea580c, #7f1d1d)",
-        }}
+        className="relative mx-4 mt-4 rounded-2xl p-5 cursor-pointer overflow-hidden group bg-gradient-to-br from-indigo-600 via-blue-600 to-violet-600 shadow-xl"
       >
-        {/* Glossy shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/30 opacity-40" />
+        {/* Glow */}
+        <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition duration-300" />
 
         {/* Content */}
         <div className="relative flex items-center justify-between gap-4">
           {/* Text */}
           <div>
-            <p className="text-xs uppercase tracking-wider text-black/70 mb-1 font-semibold">
+            <p className="text-xs uppercase tracking-wider text-white/70 mb-1">
               Announcement
             </p>
 
-            <h2 className="text-lg font-extrabold font-serif tracking-tighter leading-snug">
+            <h2 className="text-white font-bold text-lg leading-snug">
               First time more & fast gain through ALFA TRADE 🚀
             </h2>
 
-            <p className="text-sm text-black/80 mt-1">
+            <p className="text-white/80 text-sm mt-1">
               Alpha Trade has reached a record $35 trillion+ in 2025
             </p>
           </div>
 
           {/* Arrow */}
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md">
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 group-hover:bg-white/30 transition">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-black"
+              className="w-5 h-5 text-white group-hover:translate-x-1 transition"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

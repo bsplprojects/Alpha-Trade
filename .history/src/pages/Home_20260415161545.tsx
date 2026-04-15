@@ -21,7 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import Popup from "@/components/Popup";
 import { useEffect, useState } from "react";
-import logo from "../../assets/AlphaLogo2.png";
+import logo from "../../assets/AlphaLogo.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -55,55 +55,54 @@ const Home = () => {
   const displayedMarket = marketData.slice(0, 3);
 
   return (
-    <div className="page-content bg-black/90 min-h-screen ">
+    <div className="page-content bg-white min-h-screen ">
       {/* Header - Premium Card */}
-      <div className="relative mx-4 mt-6 rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/80 p-5 sm:p-6 shadow-2xl overflow-hidden">
-        {/* Background glow */}
+      <div className="relative mx-4 mt-6 rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800/80 p-6 shadow-2xl overflow-hidden">
+        {/* Subtle animated background glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-violet-500/10" />
 
-        <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="relative flex items-center justify-between">
           {/* Brand */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-4">
             <div className="relative">
-              <div className="p-2 sm:p-3 rounded-2xl  ">
+              <div className="p-3 rounded-2xl bg-gradient-to-br from-blue-600 to-violet-600 shadow-lg shadow-blue-500/30">
                 <img
                   src={logo}
                   alt="Alpha Trade"
-                  className="w-16 h-16 sm:w-14 sm:h-14 object-contain drop-shadow-md"
+                  className="w-12 h-12 object-contain drop-shadow-md"
                 />
               </div>
-
-              {/* Status */}
-              <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 sm:w-4 sm:h-4 bg-emerald-400 rounded-full border-2 sm:border-[2.5px] border-zinc-950 animate-pulse" />
+              {/* Status indicator */}
+              <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-[2.5px] border-zinc-950 animate-pulse" />
             </div>
 
             <div>
-              <h1 className="text-2xl sm:text-2xl font-bold text-white tracking-tight">
+              <h1 className="text-2xl font-bold text-black tracking-tighter">
                 Alpha Trade
               </h1>
-              <p className="text-[12px] sm:text-xs text-zinc-400 font-medium">
+              <p className="text-xs text-zinc-400 font-medium">
                 AI-Powered Trading
               </p>
             </div>
           </div>
 
           {/* Total Assets */}
-          <div className="text-left sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
-            <p className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-[2px] text-zinc-500 font-medium">
+          <div className="text-right">
+            <p className="text-xs uppercase tracking-[2px] text-zinc-500 font-medium">
               TOTAL ASSETS
             </p>
-
-            <div className="flex items-baseline gap-1 sm:justify-end mt-1">
-              <span className="text-4xl sm:text-4xl font-bold text-yellow-500 tracking-tight">
+            <div className="flex items-baseline gap-1 justify-end mt-1">
+              <span className="text-4xl font-semibold text-black tracking-tighter">
                 ${data?.data[0]?.LevelIncome?.toLocaleString() || "0.00"}
               </span>
+              <span className="text-emerald-400 text-sm font-medium">USD</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Hero Banner - More Premium & Dynamic */}
-      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[470px] shadow-2xl">
+      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[390px] shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-600" />
 
         {/* Glassmorphic overlay */}
@@ -119,7 +118,7 @@ const Home = () => {
               LIVE TRADING ACTIVE
             </div>
 
-            <h2 className="text-5xl font-bold font-serif tracking-tighter leading-none">
+            <h2 className="text-5xl font-bold tracking-tighter leading-none">
               Up to <span className="text-amber-200">5%</span>
               <br />
               Daily Returns
@@ -127,7 +126,7 @@ const Home = () => {
           </div>
 
           <div className="space-y-5">
-            <div className="flex items-center gap-3 text-sm mt-3 sm:mt-0">
+            <div className="flex items-center gap-3 text-sm">
               <div className="flex-1 h-px bg-white/30" />
               <span className="text-black/70 font-medium">POWERED BY AI</span>
               <div className="flex-1 h-px bg-white/30" />
@@ -142,7 +141,7 @@ const Home = () => {
 
                 {/* Text */}
                 <div>
-                  <p className="text-[11px] tracking-widest text-white uppercase mb-1">
+                  <p className="text-[11px] tracking-widest text-black/70 uppercase mb-1">
                     AI Strategy
                   </p>
                   <p className="font-semibold text-black text-sm">
@@ -159,7 +158,7 @@ const Home = () => {
 
                 {/* Text */}
                 <div>
-                  <p className="text-[11px] tracking-widest text-white uppercase mb-1 text-nowrap">
+                  <p className="text-[11px] tracking-widest text-black/70 uppercase mb-1">
                     Trading Window
                   </p>
                   <p className="font-semibold text-black text-sm">
@@ -184,7 +183,7 @@ const Home = () => {
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.25),transparent)]" />
 
-          <div className="relative h-full flex flex-col items-center justify-center gap-4 text-white">
+          <div className="relative h-full flex flex-col items-center justify-center gap-4 text-black">
             <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center group-active:rotate-12 transition-transform">
               <CreditCard size={36} className="drop-shadow-md" />
             </div>
@@ -208,7 +207,7 @@ const Home = () => {
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.25),transparent)]" />
 
-          <div className="relative h-full flex flex-col items-center justify-center gap-4 text-white">
+          <div className="relative h-full flex flex-col items-center justify-center gap-4 text-black">
             <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center group-active:-rotate-12 transition-transform">
               <ArrowDownToLine size={36} className="drop-shadow-md" />
             </div>
@@ -233,7 +232,7 @@ const Home = () => {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center mb-4 shadow-inner group-hover:scale-110 transition-transform">
             <MessageCircle size={28} className="text-zinc-950" />
           </div>
-          <p className="font-semibold text-white">Support CC</p>
+          <p className="font-semibold text-black">Support CC</p>
           <p className="text-xs text-zinc-400 mt-1">Customer Care</p>
         </Link>
 
@@ -245,7 +244,7 @@ const Home = () => {
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center mb-4 shadow-inner group-hover:scale-110 transition-transform">
             <Megaphone size={28} className="text-zinc-950" />
           </div>
-          <p className="font-semibold text-white">Support Team</p>
+          <p className="font-semibold text-black">Support Team</p>
           <p className="text-xs text-zinc-400 mt-1">Updates & News</p>
         </Link>
       </div>
@@ -253,63 +252,15 @@ const Home = () => {
       {/* Trading Time Reminder */}
       <div className="mx-4 mt-8 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-5">
         <div className="flex items-center gap-3">
-          <div className="text-3xl">
-            <Clock1 color="white" size={36} />
-          </div>
+          <div className="text-3xl"><Clock1 color="white" size={36}/></div>
           <div>
-            <p className="font-semibold text-white">Trading Window</p>
-            <p className="text-sm text-amber-600">
+            <p className="font-semibold text-black">Trading Window</p>
+            <p className="text-sm text-amber-300">
               07:00 PM – 08:00 PM (Daily)
             </p>
           </div>
         </div>
-      </div>
-
-      <div
-        onClick={() => window.open("/alpha-trade.pdf", "_blank")}
-        className="mx-4 mt-4 rounded-3xl p-5 cursor-pointer relative overflow-hidden shadow-2xl text-black"
-        style={{
-          background: "linear-gradient(135deg, #f59e0b, #ea580c, #7f1d1d)",
-        }}
-      >
-        {/* Glossy shine effect */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-white/30 opacity-40" />
-
-        {/* Content */}
-        <div className="relative flex items-center justify-between gap-4">
-          {/* Text */}
-          <div>
-            <p className="text-xs uppercase tracking-wider text-black/70 mb-1 font-semibold">
-              Announcement
-            </p>
-
-            <h2 className="text-lg font-extrabold font-serif tracking-tighter leading-snug">
-              First time more & fast gain through ALFA TRADE 🚀
-            </h2>
-
-            <p className="text-sm text-black/80 mt-1">
-              Alpha Trade has reached a record $35 trillion+ in 2025
-            </p>
-          </div>
-
-          {/* Arrow */}
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-black"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-        </div>
+        
       </div>
 
       {/* Popup */}

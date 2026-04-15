@@ -103,7 +103,7 @@ const Home = () => {
       </div>
 
       {/* Hero Banner - More Premium & Dynamic */}
-      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[470px] shadow-2xl">
+      <div className="relative mx-4 mt-6 rounded-3xl overflow-hidden h-[420px] shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-600" />
 
         {/* Glassmorphic overlay */}
@@ -119,7 +119,7 @@ const Home = () => {
               LIVE TRADING ACTIVE
             </div>
 
-            <h2 className="text-5xl font-bold font-serif tracking-tighter leading-none">
+            <h2 className="text-5xl font-bold tracking-tighter leading-none">
               Up to <span className="text-amber-200">5%</span>
               <br />
               Daily Returns
@@ -283,7 +283,7 @@ const Home = () => {
               Announcement
             </p>
 
-            <h2 className="text-lg font-extrabold font-serif tracking-tighter leading-snug">
+            <h2 className="text-lg font-extrabold font-mono tracking-tighter leading-snug">
               First time more & fast gain through ALFA TRADE 🚀
             </h2>
 

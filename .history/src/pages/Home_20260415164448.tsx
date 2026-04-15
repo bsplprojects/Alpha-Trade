@@ -88,12 +88,12 @@ const Home = () => {
           </div>
 
           {/* Total Assets */}
-          <div className="text-left sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
+          <div className="text-center sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
             <p className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-[2px] text-zinc-500 font-medium">
               TOTAL ASSETS
             </p>
 
-            <div className="flex items-baseline gap-1 sm:justify-end mt-1">
+            <div className="flex items-baseline gap-1 justify-center sm:justify-end mt-1">
               <span className="text-4xl sm:text-4xl font-bold text-yellow-500 tracking-tight">
                 ${data?.data[0]?.LevelIncome?.toLocaleString() || "0.00"}
               </span>

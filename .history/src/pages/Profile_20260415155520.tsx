@@ -38,7 +38,7 @@ const menuItems: MenuItem[] = [
 
 const menuItems2: MenuItem[] = [
   { icon: MessageSquare, label: "Message Center" },
-  { icon: Heart, label: "Referral link", path: "/invite-friends" },
+  { icon: Heart, label: "Invite Friends", path: "/invite-friends" },
 ];
 
 const Profile = () => {

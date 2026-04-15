@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { http } from "@/utils/http";
-import logo from "../../assets/AlphaLogo2.png";
+import logo from "../../assets/AlphaLogo.png";
 
 const Login = () => {
   const navigate = useNavigate();
