@@ -26,7 +26,7 @@ const menuItems: MenuItem[] = [
   { icon: CreditCard, label: "Deposit record", path: "/recharge-record" },
   {
     icon: ArrowDownToLine,
-    label: "Payout record",
+    label: "Withdrawal record",
     path: "/withdrawal-record",
   },
   { icon: FileText, label: "My Order", path: "/order" },

@@ -94,13 +94,16 @@ const Team = () => {
     <div className="page-content bg-background">
       <PageHeader title="My team" />
 
-      {/* Stats */}
+      {/* Stats Card */}
+
       <div className="mx-3 mt-4 grid grid-cols-2 gap-2">
         {/* Team Size */}
-        <div className="rounded-2xl bg-gradient-to-br from-blue-900 to-blue-950 p-4 text-white shadow-md">
-          <p className="text-xs uppercase text-yellow-300">Team Size</p>
+        <div className="rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-950 p-4 text-white shadow-md">
+          <p className="text-xs uppercase tracking-wide text-indigo-200">
+            Team Size
+          </p>
           <p className="text-2xl font-bold mt-1">{totalTeams?.length || 0}</p>
-          <p className="text-xs text-yellow-300 mt-1">
+          <p className="text-xs text-indigo-200 mt-1">
             Today:{" "}
             <span className="font-semibold text-white">
               {teamToday?.length || 0}
@@ -109,12 +112,14 @@ const Team = () => {
         </div>
 
         {/* Deposit Members */}
-        <div className="rounded-2xl bg-gradient-to-br from-blue-900 to-blue-950 p-4 text-white shadow-md">
-          <p className="text-xs uppercase text-yellow-300">Deposit Members</p>
+        <div className="rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-950 p-4 text-white shadow-md">
+          <p className="text-xs uppercase tracking-wide text-indigo-200">
+            Deposit Members
+          </p>
           <p className="text-2xl font-bold mt-1">
             {depositMembers?.length || 0}
           </p>
-          <p className="text-xs text-yellow-300 mt-1">
+          <p className="text-xs text-indigo-200 mt-1">
             Effective Today:{" "}
             <span className="font-semibold text-white">
               {effectiveTeam?.length || 0}
@@ -123,12 +128,14 @@ const Team = () => {
         </div>
 
         {/* Team Deposit */}
-        <div className="rounded-2xl bg-gradient-to-br from-blue-900 to-blue-950 p-4 text-white shadow-md">
-          <p className="text-xs uppercase text-yellow-300">Team Deposit</p>
+        <div className="rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-950 p-4 text-white shadow-md">
+          <p className="text-xs uppercase tracking-wide text-indigo-200">
+            Team Deposit
+          </p>
           <p className="text-xl font-bold mt-1">
             ${depositAmount?.toFixed(2) || 0}
           </p>
-          <p className="text-xs text-yellow-300 mt-1">
+          <p className="text-xs text-indigo-200 mt-1">
             Withdrawn:{" "}
             <span className="font-semibold text-white">
               ${dashboardTeam?.TeamTotalDeduction?.toFixed(2) || 0}
@@ -136,11 +143,13 @@ const Team = () => {
           </p>
         </div>
 
-        {/* Today Income */}
-        <div className="rounded-2xl bg-gradient-to-br from-blue-900 to-blue-950 p-4 text-white shadow-md">
-          <p className="text-xs uppercase text-yellow-300">Today’s Income</p>
+        {/* Today’s Income */}
+        <div className="rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-950 p-4 text-white shadow-md">
+          <p className="text-xs uppercase tracking-wide text-indigo-200">
+            Today’s Income
+          </p>
           {isLoading ? (
-            <Loader2 className="animate-spin mt-3 text-yellow-300" />
+            <Loader2 className="animate-spin mt-3" />
           ) : (
             <p className="text-2xl font-bold mt-1">
               ${dashboardTeam?.TeamTotalIncome?.toFixed(2) || 0}
@@ -149,12 +158,12 @@ const Team = () => {
         </div>
 
         {/* Total Revenue */}
-        <div className="col-span-2 rounded-2xl border-2 border-yellow-400 p-4 text-blue-900 bg-yellow-50 shadow-md">
-          <p className="text-xs uppercase text-center text-blue-900">
+        <div className="col-span-2 rounded-2xl border-2 border-indigo-500 p-4 text-indigo-500 shadow-md">
+          <p className="text-xs uppercase tracking-wide text-indigo-500 text-center">
             Total Revenue
           </p>
           {isLoading ? (
-            <Loader2 className="animate-spin mt-3 mx-auto text-blue-900" />
+            <Loader2 className="animate-spin mt-3 mx-auto" />
           ) : (
             <p className="text-3xl font-bold mt-1 text-center">
               ${dashboardTeam?.TeamRevenue?.toFixed(2) || 0}
@@ -163,19 +172,22 @@ const Team = () => {
         </div>
       </div>
 
-      {/* Level Select */}
       <div className="w-full px-3 py-2">
         <Select
           value={activeLevel}
           onValueChange={(val) => setActiveLevel(Number(val))}
         >
-          <SelectTrigger className="w-full border-yellow-400 focus:ring-blue-900">
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Level" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               {levels.map((level) => (
-                <SelectItem key={level} value={level}>
+                <SelectItem
+                  key={level}
+                  value={level}
+                  onClick={() => setActiveLevel(level)}
+                >
                   Level {level}
                 </SelectItem>
               ))}
@@ -184,48 +196,66 @@ const Team = () => {
         </Select>
       </div>
 
-      {/* Table */}
+      {/* Level Tabs */}
+      {/* <div className="flex border-b border-border  bg-card">
+        {[1, 2, 3].map((level) => (
+          <button
+            key={level}
+            onClick={() => setActiveLevel(level)}
+            className={`flex-1 py-4 text-center font-medium transition-colors  ${
+              activeLevel === level
+                ? "text-primary border-b-2 border-primary"
+                : "text-muted-foreground hover:border-b"
+            }`}
+          >
+            Level {level}
+          </button>
+        ))}
+      </div> */}
+
       {filteredTeams?.length > 0 && (
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-yellow-100">
-              <TableHead>Sr.</TableHead>
-              <TableHead>Invitation Id</TableHead>
-              <TableHead>Joining Date</TableHead>
-              <TableHead>Activation Date</TableHead>
-              <TableHead>Amount</TableHead>
-              <TableHead className="text-right">Status</TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {filteredTeams?.map((d, idx) => (
-              <TableRow key={idx}>
-                <TableCell>{idx + 1}</TableCell>
-                <TableCell>{d?.ConsumerId}</TableCell>
-                <TableCell>{d?.JoiningDate}</TableCell>
-                <TableCell>{d?.ActiveDate?.split(" ")[0]}</TableCell>
-
-                <TableCell className="text-right">${d?.Amount}</TableCell>
-
-                <TableCell
-                  className={`text-right font-medium ${
-                    Number(d?.Amount) > 0 ? "text-blue-900" : "text-red-500"
-                  }`}
-                >
-                  {Number(d?.Amount) > 0 ? "Active" : "Deactive"}
-                </TableCell>
+        <>
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-zinc-200">
+                <TableHead className="w-[100px]">Sr.</TableHead>
+                <TableHead className="text-nowrap">Invitation Id</TableHead>
+                {/* <TableHead className="text-nowrap">Sponsor Id</TableHead> */}
+                <TableHead className="text-nowrap">Joining Date</TableHead>
+                <TableHead className="text-nowrap">Activation Date</TableHead>
+                <TableHead className="text-nowrap">Amount</TableHead>
+                <TableHead className="text-right">Status</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {filteredTeams?.map((d, idx) => (
+                <TableRow key={idx}>
+                  <TableCell>{idx + 1}</TableCell>
+                  {/* <TableCell>{d?.ConsumerId}</TableCell> */}
+                  <TableCell>{d?.ConsumerId}</TableCell>
+                  <TableCell>{d?.JoiningDate}</TableCell>
+                  <TableCell>{d?.ActiveDate?.split(" ")[0]}</TableCell>
+                  {/* <TableCell>{d?.Mobile}</TableCell> */}
+                  <TableCell className="text-right">${d?.Amount}</TableCell>
+                  <TableCell
+                    className={`text-right font-medium ${
+                      Number(d?.Amount) > 0 ? "text-indigo-600" : "text-red-500"
+                    }`}
+                  >
+                    {Number(d?.Amount) > 0 ? "Active" : "Deactive"}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </>
       )}
 
-      {/* Empty */}
+      {/* Empty State */}
       {filteredTeams?.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
-          <div className="w-20 h-20 rounded-2xl bg-yellow-100 flex items-center justify-center mb-4">
-            <FileText size={40} className="opacity-50 text-blue-900" />
+          <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mb-4">
+            <FileText size={40} className="opacity-50" />
           </div>
           <span>No data found</span>
         </div>

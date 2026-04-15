@@ -9,19 +9,19 @@ const AdminDashboard = () => {
       </h1>
 
       <div className="grid grid-cols-2 gap-2 mt-5">
-        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left text-white">
+        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left">
           Total Members
           <p className="text-left text-3xl text-white font-semibold">0</p>
         </div>
-        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left text-white">
+        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left">
           Total Recharge
           <p className="text-left text-3xl text-white font-semibold">0</p>
         </div>
-        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left text-white">
+        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left">
           Active Members
           <p className="text-left text-3xl text-white font-semibold">0</p>
         </div>
-        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left text-white">
+        <div className="p-2 rounded-lg shadow-md bg-background px-4 action-card text-left">
           Inactive Members
           <p className="text-left text-3xl text-white font-semibold">0</p>
         </div>

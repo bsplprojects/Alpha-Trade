@@ -66,7 +66,7 @@ const Login = () => {
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-white to-yellow-100">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl bg-white shadow-2xl  p-8">
+        <div className="relative rounded-3xl bg-white shadow-2xl border border-yellow-200 p-8">
           {/* Header */}
           <header className="text-center mb-8">
             {/* Logo */}
@@ -94,7 +94,7 @@ const Login = () => {
                 placeholder="User ID"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="pl-10 h-12 border  rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
+                className="pl-10 h-12 border border-yellow-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
                 required
               />
             </div>
@@ -108,7 +108,7 @@ const Login = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 pr-10 h-12 border  rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
+                className="pl-10 pr-10 h-12 border border-yellow-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
                 required
               />
 

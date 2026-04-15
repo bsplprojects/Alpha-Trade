@@ -235,7 +235,7 @@ const Signup = () => {
       <Popup
         isOpen={open}
         onClose={() => setOpen(false)}
-        title="Registered Successfully"
+        title=""
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600">Here are your credentials:</p>

@@ -21,18 +21,14 @@ const Popup = ({ isOpen, onClose, children, title }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-      {/* Overlay */}
+    <div className="fixed inset-0 z-1000 flex items-center justify-center ">
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
       />
-
-      {/* Modal */}
-      <div className="relative z-[10000] w-[90%] max-w-md bg-white rounded-xl shadow-xl p-6 animate-scaleIn">
-        <div className="flex items-center">
+      <div className="relative z-10 w-[90%] max-w-md bg-background rounded-xl  shadow-xl p-6 animate-scaleIn">
+        <div className="flex items-center ">
           <h1 className="text-lg font-semibold">{title}</h1>
-
           <button
             onClick={onClose}
             className="absolute top-3 right-3 text-muted-foreground hover:text-foreground"

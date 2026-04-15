@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import {
-  Eye,
-  EyeOff,
-  Mail,
-  Lock,
-  Phone,
-  MailOpen,
-  LogIn,
-  User,
-} from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Phone, MailOpen, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
@@ -63,19 +54,25 @@ const Login = () => {
   }, [mob, pass]);
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-50 via-white to-yellow-100">
+    <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 via-white to-indigo-100">
       <div className="w-full max-w-md px-6">
         {/* Card */}
-        <div className="relative rounded-3xl bg-white shadow-2xl  p-8">
+        <div className="relative rounded-3xl bg-white backdrop-blur-2xl shadow-2xl border border-indigo-100 p-8">
+          {/* Glow Effect
+          <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 blur-3xl rounded-full"></div> */}
+
           {/* Header */}
-          <header className="text-center mb-8">
-            {/* Logo */}
-            <div className="flex items-center justify-center mb-4">
-              <img src={logo} alt="" width={200} />
+          <header className="text-center mb-8 relative z-10">
+            {/* Logo + Brand */}
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                <img src={logo} alt="" width={200} />
+              </h1>
             </div>
 
-            {/* Title */}
-            <h2 className="text-2xl font-semibold text-blue-900">
+            {/* Welcome Text */}
+            <h2 className="text-2xl font-semibold text-gray-900">
               Welcome Back
             </h2>
 
@@ -83,39 +80,37 @@ const Login = () => {
               Sign in to continue to your account
             </p>
           </header>
-
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-5">
-            {/* User ID */}
+          <form onSubmit={handleLogin} className="space-y-5 relative z-10">
+            {/* Invitation ID */}
             <div className="relative group">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-900 transition" />
+              <USer className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
               <Input
                 type="text"
                 placeholder="User ID"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="pl-10 h-12 border  rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
+                className="pl-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 required
               />
             </div>
 
             {/* Password */}
             <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-blue-900 transition" />
-
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-indigo-600 transition" />
               <Input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 pr-10 h-12 border  rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
+                className="pl-10 pr-10 h-12 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                 required
               />
 
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-blue-900 transition"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -127,7 +122,7 @@ const Login = () => {
 
             {/* Forgot Password */}
             <div className="flex justify-end text-sm">
-              <button className="text-blue-900 hover:text-yellow-500 transition">
+              <button className="text-indigo-600 hover:underline">
                 Forgot password?
               </button>
             </div>
@@ -136,7 +131,7 @@ const Login = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full h-12 text-white text-lg font-semibold rounded-xl bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 shadow-lg hover:shadow-xl transition-all"
+              className="w-full h-12 text-white text-lg font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all"
             >
               {isLoading ? (
                 "Signing you in..."
@@ -154,7 +149,7 @@ const Login = () => {
             Don&apos;t have an account?{" "}
             <Link
               to="/signup"
-              className="text-blue-900 font-semibold hover:text-yellow-500 transition"
+              className="text-indigo-600 font-semibold hover:underline"
             >
               Sign Up
             </Link>

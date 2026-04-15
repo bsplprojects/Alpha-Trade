@@ -23,7 +23,7 @@ const Popup = ({ isOpen, onClose, title, children }: any) => {
       />
 
       {/* Modal */}
-      <div className="relative z-[100000] w-[90%]  max-w-md bg-white rounded-2xl shadow-2xl p-6 animate-in fade-in zoom-in-95">
+      <div className="relative z-[100000] w-[25%] max-w-md bg-white rounded-2xl shadow-2xl p-6 animate-in fade-in zoom-in-95">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-lg font-semibold">{title}</h1>
           <button onClick={onClose}>
@@ -140,7 +140,7 @@ const Signup = () => {
               <div className="relative">
                 <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                 <Input
-                  type="number"
+                  type="tel"
                   placeholder="Contact number"
                   value={data.contact}
                   onChange={(e) =>
@@ -235,7 +235,7 @@ const Signup = () => {
       <Popup
         isOpen={open}
         onClose={() => setOpen(false)}
-        title="Registered Successfully"
+        title="🎉 Account Created Successfully"
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600">Here are your credentials:</p>

@@ -108,7 +108,7 @@ const Login = () => {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 pr-10 h-12 border  rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
+                className="pl-10 pr-10 h-12 border border-yellow-300 rounded-xl focus:ring-2 focus:ring-blue-900 focus:border-blue-900"
                 required
               />
 
