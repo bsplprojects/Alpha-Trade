@@ -114,13 +114,13 @@ const Recharge = () => {
           <span className="text-xl font-bold text-foreground">$</span>
           <input
             type="number"
-            disabled
             value={(amount / usdtInrRate).toFixed(2)}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="0"
             className="flex-1 bg-transparent text-lg outline-none text-foreground placeholder:text-muted-foreground"
           />
         </div>
+       
 
         {/* Quick Selection */}
         <div className="mt-4">
@@ -138,7 +138,7 @@ const Recharge = () => {
                     : "border-border text-foreground hover:border-primary"
                 }`}
               >
-                ₹{value}
+                {value}
               </button>
             ))}
           </div>
@@ -153,7 +153,7 @@ const Recharge = () => {
                     : "border-border text-foreground hover:border-primary"
                 }`}
               >
-                ₹{value}
+                {value}
               </button>
             ))}
           </div>

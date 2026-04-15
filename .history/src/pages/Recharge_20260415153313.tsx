@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Check, Circle } from "lucide-react";
 import Popup from "../components/Popup";
 import { Button } from "@/components/ui/button";
-import useLiveUsdtRate from "@/hooks/useLiveUsdtRate";
 
 interface PaymentChannel {
   id: string;
@@ -43,7 +42,6 @@ const rupeesWordsMap = {
 const Recharge = () => {
   const navigate = useNavigate();
   const [selectedChannel, setSelectedChannel] = useState("pay1");
-  const { rate: usdtInrRate } = useLiveUsdtRate();
   const [showPopup, setShowPopup] = useState(false);
   const [amount, setAmount] = useState("");
 
@@ -114,13 +112,15 @@ const Recharge = () => {
           <span className="text-xl font-bold text-foreground">$</span>
           <input
             type="number"
-            disabled
-            value={(amount / usdtInrRate).toFixed(2)}
+            value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="0"
             className="flex-1 bg-transparent text-lg outline-none text-foreground placeholder:text-muted-foreground"
           />
         </div>
+        <p className="text-muted-foreground mt-1 uppercase font-semibold">
+          {rupeesWordsMap[Number(amount)]} {amount ? "only" : ""}
+        </p>
 
         {/* Quick Selection */}
         <div className="mt-4">
@@ -138,7 +138,7 @@ const Recharge = () => {
                     : "border-border text-foreground hover:border-primary"
                 }`}
               >
-                ₹{value}
+                {value}
               </button>
             ))}
           </div>
@@ -153,7 +153,7 @@ const Recharge = () => {
                     : "border-border text-foreground hover:border-primary"
                 }`}
               >
-                ₹{value}
+                {value}
               </button>
             ))}
           </div>

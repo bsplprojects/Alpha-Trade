@@ -114,7 +114,7 @@ const Recharge = () => {
           <span className="text-xl font-bold text-foreground">$</span>
           <input
             type="number"
-            disabled
+            disa
             value={(amount / usdtInrRate).toFixed(2)}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="0"

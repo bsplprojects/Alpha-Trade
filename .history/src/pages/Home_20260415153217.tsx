@@ -252,7 +252,7 @@ const Home = () => {
       </div>
 
       {/* Referral */}
-      {/* <div className="mx-3 mt-4 rounded-2xl bg-gradient-to-r from-blue-900 to-blue-950 p-5 text-white">
+      <div className="mx-3 mt-4 rounded-2xl bg-gradient-to-r from-blue-900 to-blue-950 p-5 text-white">
         <h3 className="font-bold">LEVEL UP YOUR EARNINGS</h3>
         <p className="text-yellow-300 mt-1">
           Earn <span className="font-semibold text-white">10% bonus</span>
@@ -261,7 +261,7 @@ const Home = () => {
         <button className="mt-3 bg-yellow-400 text-blue-900 px-4 py-2 rounded-xl font-semibold">
           Share
         </button>
-      </div> */}
+      </div>
 
       {/* Popup Fix Colors */}
       <Popup isOpen={isOpen} onClose={() => setIsOpen(false)}>
