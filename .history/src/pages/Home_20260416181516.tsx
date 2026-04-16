@@ -29,7 +29,6 @@ import logo from "../../assets/AlphaLogo2.png";
 const Home = () => {
   const navigate = useNavigate();
   const marketData = useMarketData();
-  const [copied, setCopied] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const memberId = sessionStorage.getItem("memberId");
 
@@ -57,19 +56,6 @@ const Home = () => {
 
   // Show only first 3 items
   const displayedMarket = marketData.slice(0, 3);
-
-  const referralLink = "https://alphatrade24.com/signup?ref=AT11111";
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(referralLink);
-      setCopied(true);
-
-      setTimeout(() => setCopied(false), 1500);
-    } catch (err) {
-      console.error("Copy failed", err);
-    }
-  };
 
   return (
     <div className="page-content bg-white min-h-screen ">
