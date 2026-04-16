@@ -212,7 +212,7 @@ const Team = () => {
               </p>
               <p className="text-xs text-black mt-3">
                 Withdrawn:{" "}
-                <span className="font-semibold text-black/70">
+                <span className="font-semibold text-black">
                   ${dashboardTeam?.TeamTotalDeduction?.toFixed(2) || 0}
                 </span>
               </p>
@@ -238,7 +238,7 @@ const Team = () => {
           {/* Total Revenue - Highlighted */}
           <div className="mt-6 pt-6 border-t border-white/30  relative z-10">
             <div className="bg-white/20 border border-white/30 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
-              <p className="text-xs uppercase tracking-widest text-black/70">
+              <p className="text-xs uppercase tracking-widest text-black">
                 Total Revenue
               </p>
               {isLoading ? (

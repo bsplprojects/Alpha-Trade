@@ -188,7 +188,7 @@ const Team = () => {
               onClick={() => setType("deposit")}
               className="bg-white/10 backdrop-blur-md shadow-lg border border-white/30 shadow-orange-700  rounded-2xl p-4 cursor-pointer hover:bg-white/15 transition-all active:scale-[0.98]"
             >
-              <p className="text-xs uppercase tracking-tight text-black/70">
+              <p className="text-xs uppercase tracking-tight text-black">
                 Deposit Members
               </p>
               <p className="text-3xl font-bold mt-2 text-black">
@@ -204,7 +204,7 @@ const Team = () => {
 
             {/* Team Deposit */}
             <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
-              <p className="text-xs uppercase tracking-tight text-black/70">
+              <p className="text-xs uppercase tracking-tight text-black">
                 Team Deposit
               </p>
               <p className="text-3xl font-bold mt-2 text-black">
@@ -212,7 +212,7 @@ const Team = () => {
               </p>
               <p className="text-xs text-black mt-3">
                 Withdrawn:{" "}
-                <span className="font-semibold text-black/70">
+                <span className="font-semibold text-black">
                   ${dashboardTeam?.TeamTotalDeduction?.toFixed(2) || 0}
                 </span>
               </p>
@@ -220,7 +220,7 @@ const Team = () => {
 
             {/* Today’s Income */}
             <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
-              <p className="text-xs uppercase tracking-tight text-black/70">
+              <p className="text-xs uppercase tracking-tight text-black">
                 Today’s Income
               </p>
               {isLoading ? (
@@ -238,7 +238,7 @@ const Team = () => {
           {/* Total Revenue - Highlighted */}
           <div className="mt-6 pt-6 border-t border-white/30  relative z-10">
             <div className="bg-white/20 border border-white/30 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
-              <p className="text-xs uppercase tracking-widest text-black/70">
+              <p className="text-xs uppercase tracking-widest text-black">
                 Total Revenue
               </p>
               {isLoading ? (

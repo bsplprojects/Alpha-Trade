@@ -148,17 +148,17 @@ const Assets = () => {
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.BCLevelIncome || 0}
               </div>
-              <div className="text-xs uppercase tracking-tight text-black/70 mt-2">
+              <div className="text-xs uppercase tracking-widest text-black/70 mt-2">
                 Level Income
               </div>
             </button>
 
             {/* Total Income - Highlighted */}
             <div className="col-span-2 bg-white/15 backdrop-blur-md border shadow-lg shadow-orange-700  border-white/30 p-6 rounded-2xl text-center">
-              <div className="text-4xl font-bold text-black">
+              <div className="text-4xl font-bold text-white">
                 ${data?.data[0]?.TotalIncome || 0}
               </div>
-              <div className="text-sm font-semibold uppercase tracking-tight text-black mt-1">
+              <div className="text-sm font-semibold uppercase tracking-widest text-orange-100 mt-1">
                 Total Income
               </div>
             </div>
