@@ -167,6 +167,7 @@ const Recharge = () => {
                     onClick={() => {
                       setAmount(inrValue);
 
+                      // 👉 sync input also
                       const usdt = inrValue / usdtInrRate;
                       setUsdtInput(usdt.toFixed(2));
                     }}

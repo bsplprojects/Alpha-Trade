@@ -203,7 +203,7 @@ const Team = () => {
             </div>
 
             {/* Team Deposit */}
-            <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
+            <div className="bg-white/10 shadow-lg shadow-orange-700  backdrop-blur-md rounded-2xl p-4">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Team Deposit
               </p>
@@ -219,7 +219,7 @@ const Team = () => {
             </div>
 
             {/* Today’s Income */}
-            <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
+            <div className="bg-white/10 shadow-lg shadow-orange-700  backdrop-blur-md rounded-2xl p-4">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Today’s Income
               </p>
@@ -236,8 +236,8 @@ const Team = () => {
           </div>
 
           {/* Total Revenue - Highlighted */}
-          <div className="mt-6 pt-6 border-t border-white/30  relative z-10">
-            <div className="bg-white/20 border border-white/30 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
+          <div className="mt-6 pt-6 border-t border-white/30 relative z-10">
+            <div className="bg-white/20 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Total Revenue
               </p>

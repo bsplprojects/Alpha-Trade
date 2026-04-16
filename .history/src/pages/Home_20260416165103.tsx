@@ -255,14 +255,14 @@ const Home = () => {
       <div className="mx-4 mt-8 bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-5">
         <div className="flex items-center gap-3">
           <div className="text-3xl">
-            <Link2 color="black" size={36} />
+            <Link2 color="black" size={36} className=""/>
           </div>
           <div>
             <p className="font-semibold text-black ">Referral Link</p>
             <Link
               to={"https://alphatrade24.com/signup?ref=AT11111"}
               target="_blank"
-              className="text-sm text-amber-600 underline animate-pulse"
+              className="text-sm text-amber-600 underline"
             >
               https://alphatrade24.com/signup?ref=AT11111
             </Link>

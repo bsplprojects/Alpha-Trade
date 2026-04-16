@@ -83,7 +83,7 @@ const Assets = () => {
           />
 
           {/* HEADER - Total Assets */}
-          <div className="flex shadow-lg shadow-orange-700 border border-white/30  items-start justify-between bg-white/10 backdrop-blur-md p-5 rounded-2xl mb-6 relative z-10">
+          <div className="flex shadow-lg shadow-orange-700  items-start justify-between bg-white/10 backdrop-blur-md p-5 rounded-2xl mb-6 relative z-10">
             <div>
               <div className="text-4xl font-bold tracking-tight">
                 ${data?.data[0]?.LevelIncome || 0}
@@ -95,7 +95,7 @@ const Assets = () => {
           {/* STATS GRID */}
           <div className="grid grid-cols-2 gap-4 relative z-10">
             {/* Total Deposit */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  p-4 rounded-2xl text-center">
+            <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-center">
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.Airdrop || 0}
               </div>
@@ -105,7 +105,7 @@ const Assets = () => {
             </div>
 
             {/* Total Payout */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  p-4 rounded-2xl text-center">
+            <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-center">
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.TotalDeduction || 0}
               </div>
@@ -117,7 +117,7 @@ const Assets = () => {
             {/* Trade Income */}
             <button
               onClick={() => navigate("/trade-income-report")}
-              className="bg-white/10 backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.ROIIncome || 0}
@@ -130,7 +130,7 @@ const Assets = () => {
             {/* Referral Income */}
             <button
               onClick={() => navigate("/referal-income-report")}
-              className="bg-white/10 backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="bg-white/10 backdrop-blur-md p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.SponsorIncome || 0}
@@ -143,7 +143,7 @@ const Assets = () => {
             {/* Level Income - Full Width */}
             <button
               onClick={() => navigate("/level-income-report")}
-              className="col-span-2 bg-white/10 border border-white/30 backdrop-blur-md shadow-lg shadow-orange-700  p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="col-span-2 bg-white/10 backdrop-blur-md p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.BCLevelIncome || 0}
@@ -154,7 +154,7 @@ const Assets = () => {
             </button>
 
             {/* Total Income - Highlighted */}
-            <div className="col-span-2 bg-white/15 backdrop-blur-md border shadow-lg shadow-orange-700  border-white/30 p-6 rounded-2xl text-center">
+            <div className="col-span-2 bg-white/15 backdrop-blur-md border border-white/30 p-6 rounded-2xl text-center">
               <div className="text-4xl font-bold text-white">
                 ${data?.data[0]?.TotalIncome || 0}
               </div>
@@ -165,7 +165,7 @@ const Assets = () => {
           </div>
 
           {/* Bottom Branding */}
-          <div className="flex justify-center mt-8 opacity-75 shadow-lg  relative z-10">
+          <div className="flex justify-center mt-8 opacity-75 relative z-10">
             <div className="text-xs flex items-center gap-2 text-orange-100">
               <span>POWERED BY AI</span>
               <div className="w-px h-3 bg-white/40" />

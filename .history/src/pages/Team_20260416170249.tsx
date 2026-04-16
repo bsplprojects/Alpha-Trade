@@ -112,37 +112,13 @@ const Team = () => {
       {/* Stats */}
       <div className="mx-3 mt-6">
         <div className="relative rounded-3xl bg-gradient-to-br from-orange-500 via-orange-600 to-red-700 p-6 text-white shadow-2xl overflow-hidden">
-          {/* Enhanced Shiny White Diagonal Gradient Overlay */}
+          {/* Shiny Gradient Overlay - Center Highlight */}
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/10 to-transparent pointer-events-none"
             style={{
-              background: `
-          linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.45) 0%,
-            rgba(255, 255, 255, 0.25) 40%,
-            rgba(255, 255, 255, 0.08) 70%,
-            transparent 65%
-          )
-        `,
-              transform: "rotate(18deg) translate(-25%, -30%)",
-              filter: "blur(1px)",
-            }}
-          />
-
-          {/* Optional second subtle shine layer for more depth */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-60"
-            style={{
-              background: `
-          linear-gradient(
-            120deg,
-            transparent 30%,
-            rgba(255, 255, 255, 0.35) 45%,
-            transparent 60%
-          )
-        `,
-              transform: "rotate(-10deg) translate(15%, 20%)",
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 40%, transparent 70%)",
+              transform: "rotate(12deg) translate(-20%, -15%)",
             }}
           />
 
@@ -155,7 +131,7 @@ const Team = () => {
 
           {/* Main Title */}
           <div className="text-center mb-8 relative z-10">
-            <p className="text-4xl font-bold tracking-tighter text-black/70  drop-shadow-sm font-serif">
+            <p className="text-4xl font-bold tracking-tight drop-shadow-sm">
               Team Dashboard
             </p>
             <p className="text-orange-100 mt-1 text-sm">
@@ -167,7 +143,7 @@ const Team = () => {
             {/* Team Size */}
             <div
               onClick={() => setType("team")}
-              className="bg-white/10 backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  rounded-2xl p-4 cursor-pointer hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-4 cursor-pointer hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Team Size
@@ -186,7 +162,7 @@ const Team = () => {
             {/* Deposit Members */}
             <div
               onClick={() => setType("deposit")}
-              className="bg-white/10 backdrop-blur-md shadow-lg border border-white/30 shadow-orange-700  rounded-2xl p-4 cursor-pointer hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-4 cursor-pointer hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Deposit Members
@@ -203,7 +179,7 @@ const Team = () => {
             </div>
 
             {/* Team Deposit */}
-            <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Team Deposit
               </p>
@@ -219,7 +195,7 @@ const Team = () => {
             </div>
 
             {/* Today’s Income */}
-            <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Today’s Income
               </p>
@@ -236,8 +212,8 @@ const Team = () => {
           </div>
 
           {/* Total Revenue - Highlighted */}
-          <div className="mt-6 pt-6 border-t border-white/30  relative z-10">
-            <div className="bg-white/20 border border-white/30 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
+          <div className="mt-6 pt-6 border-t border-white/30 relative z-10">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Total Revenue
               </p>

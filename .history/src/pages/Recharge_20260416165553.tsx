@@ -42,7 +42,6 @@ const rupeesWordsMap = {
 
 const Recharge = () => {
   const navigate = useNavigate();
-  const [usdtInput, setUsdtInput] = useState("");
   const [selectedChannel, setSelectedChannel] = useState("pay1");
   const { rate: usdtInrRate } = useLiveUsdtRate();
   const [showPopup, setShowPopup] = useState(false);
@@ -136,17 +135,15 @@ const Recharge = () => {
                 const val = e.target.value;
                 setUsdtInput(val);
 
-                const usdt = parseFloat(val);
-                if (!isNaN(usdt)) {
-                  setAmount(usdt * usdtInrRate);
-                }
+                const usdtValue = parseFloat(val) || 0;
+                setAmount(usdtValue * usdtInrRate);
               }}
               onBlur={() => {
                 const num = parseFloat(usdtInput) || 0;
                 setUsdtInput(num.toFixed(2));
               }}
               placeholder="0.00"
-              className="flex-1 bg-transparent text-4xl font-semibold outline-none text-emerald-950 "
+              className="flex-1 bg-transparent text-4xl font-semibold outline-none text-emerald-950 placeholder:text-emerald-300"
             />
             <div className="text-sm font-medium text-emerald-600">USDT</div>
           </div>
@@ -165,10 +162,7 @@ const Recharge = () => {
                   <button
                     key={inrValue}
                     onClick={() => {
-                      setAmount(inrValue);
-
-                      const usdt = inrValue / usdtInrRate;
-                      setUsdtInput(usdt.toFixed(2));
+                      setAmount(inrValue); // Set internal amount as INR
                     }}
                     className={`py-3.5 rounded-2xl border text-sm font-semibold transition-all ${
                       isSelected

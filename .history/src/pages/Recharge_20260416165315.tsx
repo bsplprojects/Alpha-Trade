@@ -42,7 +42,6 @@ const rupeesWordsMap = {
 
 const Recharge = () => {
   const navigate = useNavigate();
-  const [usdtInput, setUsdtInput] = useState("");
   const [selectedChannel, setSelectedChannel] = useState("pay1");
   const { rate: usdtInrRate } = useLiveUsdtRate();
   const [showPopup, setShowPopup] = useState(false);
@@ -130,23 +129,14 @@ const Recharge = () => {
             <input
               type="number"
               step="0.01"
-              onFocus={(e) => e.target.select()}
-              value={usdtInput}
+              onFocus={}
+              value={(amount / usdtInrRate).toFixed(2)}
               onChange={(e) => {
-                const val = e.target.value;
-                setUsdtInput(val);
-
-                const usdt = parseFloat(val);
-                if (!isNaN(usdt)) {
-                  setAmount(usdt * usdtInrRate);
-                }
-              }}
-              onBlur={() => {
-                const num = parseFloat(usdtInput) || 0;
-                setUsdtInput(num.toFixed(2));
+                const usdtValue = parseFloat(e.target.value) || 0;
+                setAmount(usdtValue * usdtInrRate); // Convert typed USDT → INR amount
               }}
               placeholder="0.00"
-              className="flex-1 bg-transparent text-4xl font-semibold outline-none text-emerald-950 "
+              className="flex-1 bg-transparent text-4xl font-semibold outline-none text-emerald-950 placeholder:text-emerald-300"
             />
             <div className="text-sm font-medium text-emerald-600">USDT</div>
           </div>
@@ -165,10 +155,7 @@ const Recharge = () => {
                   <button
                     key={inrValue}
                     onClick={() => {
-                      setAmount(inrValue);
-
-                      const usdt = inrValue / usdtInrRate;
-                      setUsdtInput(usdt.toFixed(2));
+                      setAmount(inrValue); // Set internal amount as INR
                     }}
                     className={`py-3.5 rounded-2xl border text-sm font-semibold transition-all ${
                       isSelected

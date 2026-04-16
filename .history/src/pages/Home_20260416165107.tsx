@@ -262,7 +262,7 @@ const Home = () => {
             <Link
               to={"https://alphatrade24.com/signup?ref=AT11111"}
               target="_blank"
-              className="text-sm text-amber-600 underline animate-pulse"
+              className="text-sm text-amber-600 underline"
             >
               https://alphatrade24.com/signup?ref=AT11111
             </Link>

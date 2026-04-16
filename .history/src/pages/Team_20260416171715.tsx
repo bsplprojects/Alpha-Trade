@@ -236,8 +236,8 @@ const Team = () => {
           </div>
 
           {/* Total Revenue - Highlighted */}
-          <div className="mt-6 pt-6 border-t border-white/30  relative z-10">
-            <div className="bg-white/20 border border-white/30 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
+          <div className="mt-6 pt-6 border-t border-white/30 relative z-10">
+            <div className="bg-white/20 shadow-lg shadow-orange-700 backdrop-blur-md rounded-2xl p-6 text-center">
               <p className="text-xs uppercase tracking-widest text-orange-200">
                 Total Revenue
               </p>

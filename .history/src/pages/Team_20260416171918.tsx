@@ -268,7 +268,7 @@ const Team = () => {
       {/* Level Select */}
       <div className="w-full px-3 py-2">
         <Select
-          value={activeLevel}
+          value={activeLevel as number}
           onValueChange={(val) => setActiveLevel(Number(val))}
         >
           <SelectTrigger className="w-full border-yellow-400 focus:ring-blue-900">

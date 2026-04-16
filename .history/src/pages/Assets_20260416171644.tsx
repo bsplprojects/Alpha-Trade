@@ -83,7 +83,7 @@ const Assets = () => {
           />
 
           {/* HEADER - Total Assets */}
-          <div className="flex shadow-lg shadow-orange-700 border border-white/30  items-start justify-between bg-white/10 backdrop-blur-md p-5 rounded-2xl mb-6 relative z-10">
+          <div className="flex shadow-lg shadow-orange-700  items-start justify-between bg-white/10 backdrop-blur-md p-5 rounded-2xl mb-6 relative z-10">
             <div>
               <div className="text-4xl font-bold tracking-tight">
                 ${data?.data[0]?.LevelIncome || 0}

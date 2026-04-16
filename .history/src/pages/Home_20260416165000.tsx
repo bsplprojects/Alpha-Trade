@@ -258,13 +258,9 @@ const Home = () => {
             <Link2 color="black" size={36} />
           </div>
           <div>
-            <p className="font-semibold text-black ">Referral Link</p>
-            <Link
-              to={"https://alphatrade24.com/signup?ref=AT11111"}
-              target="_blank"
-              className="text-sm text-amber-600 underline animate-pulse"
-            >
-              https://alphatrade24.com/signup?ref=AT11111
+            <p className="font-semibold text-black">Referral Link</p>
+            <Link to={} className="text-sm text-amber-600">
+                https://alphatrade24.com/signup?ref=AT11111
             </Link>
           </div>
         </div>

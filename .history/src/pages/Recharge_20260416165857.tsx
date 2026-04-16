@@ -165,10 +165,7 @@ const Recharge = () => {
                   <button
                     key={inrValue}
                     onClick={() => {
-                      setAmount(inrValue);
-
-                      const usdt = inrValue / usdtInrRate;
-                      setUsdtInput(usdt.toFixed(2));
+                      setAmount(inrValue); // Set internal amount as INR
                     }}
                     className={`py-3.5 rounded-2xl border text-sm font-semibold transition-all ${
                       isSelected
