@@ -1,0 +1,20 @@
+import React from "react";
+import PageHeader from "@/components/PageHeader";
+import { Input } from "postcss";
+
+const FixedDeposit = () => {
+  return (
+    <main>
+      <PageHeader title="Fixed Deposit" />
+
+      <section>
+        <div>
+          <label>Id</label>
+          <Input
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default FixedDeposit;
