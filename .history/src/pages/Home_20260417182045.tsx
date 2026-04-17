@@ -73,7 +73,7 @@ const Home = () => {
   return (
     <div className="page-content bg-white min-h-screen">
       {/* Header - Premium Card */}
-      <div className="relative mx-4 mt-2 rounded-3xl bg-gradient-to-r from-orange-500/50 to-red-500/50 border border-orange-400 shadow p-5 sm:p-6  overflow-hidden">
+      <div className="relative mx-4 mt-2 rounded-3xl bg-gradient-to-r from-orange-500/50 to-red-500/50 border border-orange-200 p-5 sm:p-6 shadow-2xl overflow-hidden">
         {/* Background glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-violet-500/10" />
 
@@ -81,11 +81,11 @@ const Home = () => {
           {/* Brand */}
           <div className="flex items-center gap-3 sm:gap-4">
             <div className="relative">
-              <div className="p-2 sm:p-3 rounded-2xl  border border-orange-500 bg-white/20 shadow-md">
+              <div className="p-2 sm:p-3 rounded-2xl  ">
                 <img
                   src={logo}
                   alt="Alpha Trade"
-                  className="w-24 h-24 sm:w-14 sm:h-14 object-contain drop-shadow-md"
+                  className="w-16 h-16 sm:w-14 sm:h-14 object-contain drop-shadow-md"
                 />
               </div>
 
@@ -94,10 +94,10 @@ const Home = () => {
             </div>
 
             <div>
-              <h1 className="text-3xl sm:text-2xl font-bold text-black tracking-tight">
+              <h1 className="text-2xl sm:text-2xl font-bold text-white tracking-tight">
                 Alpha Trade
               </h1>
-              <p className="text-[15px] sm:text-xs text-zinc-700 font-medium">
+              <p className="text-[12px] sm:text-xs text-zinc-400 font-medium">
                 AI-Powered Trading
               </p>
             </div>
@@ -105,12 +105,12 @@ const Home = () => {
 
           {/* Total Assets */}
           <div className="text-left sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
-            <p className="text-[13px]  sm:text-xs uppercase  sm:tracking-wider text-zinc-700 font-medium">
+            <p className="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-[2px] text-zinc-500 font-medium">
               TOTAL ASSETS
             </p>
 
             <div className="flex items-baseline gap-1 sm:justify-end mt-1">
-              <span className="text-4xl sm:text-4xl font-bold text-red-500 tracking-tight">
+              <span className="text-4xl sm:text-4xl font-bold text-yellow-500 tracking-tight">
                 ${data?.data[0]?.LevelIncome?.toLocaleString() || "0.00"}
               </span>
             </div>

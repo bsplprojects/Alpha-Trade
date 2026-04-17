@@ -85,7 +85,7 @@ const Home = () => {
                 <img
                   src={logo}
                   alt="Alpha Trade"
-                  className="w-24 h-24 sm:w-14 sm:h-14 object-contain drop-shadow-md"
+                  className="w-16 h-16 sm:w-14 sm:h-14 object-contain drop-shadow-md"
                 />
               </div>
 
@@ -94,10 +94,10 @@ const Home = () => {
             </div>
 
             <div>
-              <h1 className="text-3xl sm:text-2xl font-bold text-black tracking-tight">
+              <h1 className="text-2xl sm:text-2xl font-bold text-black tracking-tight">
                 Alpha Trade
               </h1>
-              <p className="text-[15px] sm:text-xs text-zinc-700 font-medium">
+              <p className="text-[12px] sm:text-xs text-zinc-700 font-medium">
                 AI-Powered Trading
               </p>
             </div>
@@ -105,7 +105,7 @@ const Home = () => {
 
           {/* Total Assets */}
           <div className="text-left sm:text-right border-t sm:border-none border-zinc-800 pt-3 sm:pt-0">
-            <p className="text-[13px]  sm:text-xs uppercase  sm:tracking-wider text-zinc-700 font-medium">
+            <p className="text-[10px]  sm:text-xs uppercase tracking-tight sm:tracking-[2px] text-zinc-700 font-medium">
               TOTAL ASSETS
             </p>
 
