@@ -360,7 +360,7 @@ const Home = () => {
           <p className="font-medium text-lg">Join Our Community</p>
 
           <a
-            href="https://t.me/alphatrade36?direct"
+            href="t.me/alphatrade36?direct"
             target="_blank"
             className="block w-full bg-blue-600 hover:bg-blue-700 transition-colors py-4 rounded-2xl font-semibold text-black"
           >

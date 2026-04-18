@@ -16,12 +16,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Loader2 } from "lucide-react";
-import useLiveUsdtRate from "@/hooks/useLiveUsdtRate";
 
 const FixedDeposit = () => {
   const [amount, setAmount] = useState();
-  const [usdtInput, setUsdtInput] = useState("");
-  const { rate: usdtInrRate } = useLiveUsdtRate();
   const client = useQueryClient();
   const memberId = sessionStorage.getItem("memberId");
   const quickAmounts = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000];
@@ -94,24 +91,12 @@ const FixedDeposit = () => {
           <label>Amount</label>
           <Input
             type="number"
-            value={usdtInput}
-            onChange={(e) => {
-              const val = e.target.value;
-              setUsdtInput(val);
-
-              const usdt = parseFloat(val);
-              if (!isNaN(usdt)) {
-                setAmount(usdt * usdtInrRate);
-              }
-            }}
-            onBlur={() => {
-              const num = parseFloat(usdtInput) || 0;
-              setUsdtInput(num.toFixed(2));
-            }}
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
         <div className="mt-6">
-          <p className="text-center text-primary text-sm mb-4 font-medium">
+          <p className="text-center text-emerald-600/70 text-sm mb-4 font-medium">
             Quick Selection (INR)
           </p>
 
@@ -130,7 +115,7 @@ const FixedDeposit = () => {
                   }}
                   className={`py-3.5 rounded-2xl border text-sm font-semibold transition-all ${
                     isSelected
-                      ? "border-primary bg-primary text-white shadow-sm"
+                      ? "border-orange-600 bg-orange-600 text-white shadow-sm"
                       : "border-orange-100 hover:border-orange-300 bg-white text-orange-800 hover:bg-orange-50"
                   }`}
                 >

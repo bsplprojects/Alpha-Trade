@@ -21,9 +21,9 @@ const channels: PaymentChannel[] = [
 ];
 
 const quickAmounts = [
-  1000, 2000, 5000, 10000, 50000, 100000, 500000, 1000000, 1500000, 2000000,
-  2500000, 3000000,
+  1000, 2000, 
 ];
+
 
 const Recharge = () => {
   const navigate = useNavigate();
@@ -142,7 +142,7 @@ const Recharge = () => {
               Quick Selection (INR)
             </p>
 
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {quickAmounts.map((inrValue) => {
                 const isSelected = Math.round(amount) === inrValue; // Compare with INR amount
 

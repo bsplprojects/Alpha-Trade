@@ -242,7 +242,7 @@ const Home = () => {
       {/* Support Links - Clean & Elegant */}
       <div className="px-4 mt-6 grid grid-cols-2 gap-4">
         <Link
-          to="https://t.me/alphatrade36?direct"
+          to="https://t.me/+kwzbxbtYbQFhZjU1"
           target="_blank"
           className="group flex flex-col items-center justify-center bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 rounded-3xl p-6 transition-all duration-300 active:scale-95"
         >
@@ -254,7 +254,7 @@ const Home = () => {
         </Link>
 
         <Link
-          to="https://t.me/alphatrade36?direct"
+          to=""
           target="_blank"
           className="group flex flex-col items-center justify-center bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 rounded-3xl p-6 transition-all duration-300 active:scale-95"
         >
@@ -360,7 +360,7 @@ const Home = () => {
           <p className="font-medium text-lg">Join Our Community</p>
 
           <a
-            href="https://t.me/alphatrade36?direct"
+            href="t.me/alphatrade36?direct"
             target="_blank"
             className="block w-full bg-blue-600 hover:bg-blue-700 transition-colors py-4 rounded-2xl font-semibold text-black"
           >

@@ -95,19 +95,7 @@ const FixedDeposit = () => {
           <Input
             type="number"
             value={usdtInput}
-            onChange={(e) => {
-              const val = e.target.value;
-              setUsdtInput(val);
-
-              const usdt = parseFloat(val);
-              if (!isNaN(usdt)) {
-                setAmount(usdt * usdtInrRate);
-              }
-            }}
-            onBlur={() => {
-              const num = parseFloat(usdtInput) || 0;
-              setUsdtInput(num.toFixed(2));
-            }}
+            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
         <div className="mt-6">
