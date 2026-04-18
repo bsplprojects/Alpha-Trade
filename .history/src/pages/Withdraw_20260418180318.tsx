@@ -14,13 +14,9 @@ const Withdraw = () => {
   const [password, setPassword] = useState("");
   const memberId = sessionStorage.getItem("memberId");
 
-  const { data: withdrawlHistory } = useQuery({
-    queryKey: ["withdrawl"],
-    queryFn: async () => {
-      const res = await http.get(`/BankTransferReport?Status=`);
-      return res.data;
-    },
-  });
+  const {} = useQuery({
+    
+  })
 
   const { data: bankDetails } = useQuery({
     queryKey: ["bank-details"],

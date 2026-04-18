@@ -204,7 +204,7 @@ const Team = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 pt-5">
+          <div className="flex flex-col gap-5 bg-green-500 pt-5">
             {/* Team Deposit */}
             <div className="bg-white/10 shadow-lg mt-5! shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
               <p className="text-xs uppercase tracking-tight text-black/70">

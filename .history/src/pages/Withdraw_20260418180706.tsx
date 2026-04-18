@@ -22,6 +22,7 @@ const Withdraw = () => {
     },
   });
 
+
   const { data: bankDetails } = useQuery({
     queryKey: ["bank-details"],
     queryFn: async () => {

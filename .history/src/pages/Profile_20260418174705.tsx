@@ -236,7 +236,7 @@ const Profile = () => {
         ))}
       </div>
 
-      <div className="bg-card mt-0 bg-gradient-to-r from-orange-300 to-red-500">
+      <div className="bg-card mt-2 bg-gradient-to-r from-orange-300 to-red-500">
         {menuItems2.map((item, index) => (
           <button
             key={index}

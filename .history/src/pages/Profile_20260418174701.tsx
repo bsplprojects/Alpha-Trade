@@ -202,7 +202,7 @@ const Profile = () => {
               <div className="text-sm  tracking-tight text-black/70">
                 Estimated Income
               </div>
-              <div className="text-3xl font-bold mt-2 text-black">
+              <div className="text-3xl font-bold mt-3 text-black">
                 ${dashboardData?.data[0]?.TotalIncome || 0}
               </div>
             </div>
@@ -236,7 +236,7 @@ const Profile = () => {
         ))}
       </div>
 
-      <div className="bg-card mt-0 bg-gradient-to-r from-orange-300 to-red-500">
+      <div className="bg-card mt-2 bg-gradient-to-r from-orange-300 to-red-500">
         {menuItems2.map((item, index) => (
           <button
             key={index}

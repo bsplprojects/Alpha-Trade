@@ -22,6 +22,8 @@ const Withdraw = () => {
     },
   });
 
+  console.log(withdrawlHistory.data);
+
   const { data: bankDetails } = useQuery({
     queryKey: ["bank-details"],
     queryFn: async () => {

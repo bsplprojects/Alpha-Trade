@@ -173,17 +173,6 @@ const Assets = () => {
                 Level Income
               </div>
             </button>
-            <button
-              // onClick={() => navigate("/level-income-report")}
-              className="col-span-2 flex flex-col-reverse bg-white/10 border border-white/30 backdrop-blur-md shadow-lg shadow-orange-700  p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
-            >
-              <div className="text-3xl font-bold">
-                {/* ${data?.data[0]?.BCLevelIncome || 0} */}$0
-              </div>
-              <div className="text-xs uppercase tracking-tight text-black/70 mt-2">
-                Salary Income
-              </div>
-            </button>
 
             {/* Total Income - Highlighted */}
             <div className="col-span-2 bg-white/15 backdrop-blur-md border shadow-lg shadow-orange-700  border-white/30 p-6 rounded-2xl text-center">

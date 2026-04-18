@@ -91,21 +91,21 @@ const Assets = () => {
           />
 
           {/* HEADER - Total Assets */}
-          <div className="grid grid-cols-1 gap-1 mb-1">
-            <div className=" shadow-lg  shadow-orange-700 border border-white/30  bg-white/10 backdrop-blur-md p-4 rounded-2xl  relative z-10">
-              <div className="flex flex-col-reverse items-center">
-                <div className="text-3xl font-bold tracking-tight">
+          <div className="grid grid-cols-1 gap-1">
+            <div className="flex shadow-lg  shadow-orange-700 border border-white/30  items-center text-center justify-between bg-white/10 backdrop-blur-md p-5 rounded-2xl mb-6 relative z-10">
+              <div>
+                <div className="text-4xl font-bold tracking-tight">
                   ${data?.data[0]?.LevelIncome || 0}
                 </div>
-                <div className="text-sm text-black/80 mt-1 ">Total Assets</div>
+                <div className="text-sm text-black/80 mt-1">Total Assets</div>
               </div>
             </div>
             <Link
               to="/fixed-deposit"
-              className=" shadow-lg shadow-orange-700 border border-white/30  i bg-white/10 backdrop-blur-md p-4 rounded-2xl  relative z-10"
+              className="flex shadow-lg shadow-orange-700 border border-white/30  items-start justify-between bg-white/10 backdrop-blur-md p-5 rounded-2xl mb-6 relative z-10"
             >
-              <div className="flex flex-col-reverse items-center">
-                <div className="text-3xl font-bold tracking-tight">
+              <div>
+                <div className="text-4xl font-bold tracking-tight">
                   ${data?.data[0]?.BinaryIncome || 0}
                 </div>
                 <div className="text-sm text-black/80 mt-1">Fixed Deposit</div>
@@ -114,23 +114,23 @@ const Assets = () => {
           </div>
 
           {/* STATS GRID */}
-          <div className="flex flex-col  gap-1 relative z-10">
+          <div className="flex flex-col  gap-4 relative z-10">
             {/* Total Deposit */}
-            <div className="bg-white/10 flex flex-col-reverse backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  p-4 rounded-2xl text-center ">
+            <div className="bg-white/10 backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  p-4 rounded-2xl text-center">
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.Airdrop || 0}
               </div>
-              <div className="text-xs uppercase tracking-tight text-black/80 mt-1">
+              <div className="text-xs uppercase tracking-tight text-black/80 mt-2">
                 Total Deposit
               </div>
             </div>
 
             {/* Total Payout */}
-            <div className="bg-white/10 flex flex-col-reverse backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  p-4 rounded-2xl text-center">
+            <div className="bg-white/10 backdrop-blur-md border border-white/30 shadow-lg shadow-orange-700  p-4 rounded-2xl text-center">
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.TotalDeduction || 0}
               </div>
-              <div className="text-xs uppercase tracking-tight text-black/80 mt-1">
+              <div className="text-xs uppercase tracking-tight text-black/80 mt-2">
                 Total Payout
               </div>
             </div>
@@ -138,12 +138,12 @@ const Assets = () => {
             {/* Trade Income */}
             <button
               onClick={() => navigate("/trade-income-report")}
-              className="bg-white/10 flex flex-col-reverse backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="bg-white/10 backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.ROIIncome || 0}
               </div>
-              <div className="text-xs uppercase tracking-tight text-black/80 mt-1">
+              <div className="text-xs uppercase tracking-tight text-black/80 mt-2">
                 Trade Income
               </div>
             </button>
@@ -151,7 +151,7 @@ const Assets = () => {
             {/* Referral Income */}
             <button
               onClick={() => navigate("/referal-income-report")}
-              className="bg-white/10 flex flex-col-reverse backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="bg-white/10 backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.SponsorIncome || 0}
@@ -164,24 +164,13 @@ const Assets = () => {
             {/* Level Income - Full Width */}
             <button
               onClick={() => navigate("/level-income-report")}
-              className="col-span-2 flex flex-col-reverse bg-white/10 border border-white/30 backdrop-blur-md shadow-lg shadow-orange-700  p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
+              className="col-span-2 bg-white/10 border border-white/30 backdrop-blur-md shadow-lg shadow-orange-700  p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
             >
               <div className="text-3xl font-bold">
                 ${data?.data[0]?.BCLevelIncome || 0}
               </div>
               <div className="text-xs uppercase tracking-tight text-black/70 mt-2">
                 Level Income
-              </div>
-            </button>
-            <button
-              // onClick={() => navigate("/level-income-report")}
-              className="col-span-2 flex flex-col-reverse bg-white/10 border border-white/30 backdrop-blur-md shadow-lg shadow-orange-700  p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
-            >
-              <div className="text-3xl font-bold">
-                {/* ${data?.data[0]?.BCLevelIncome || 0} */}$0
-              </div>
-              <div className="text-xs uppercase tracking-tight text-black/70 mt-2">
-                Salary Income
               </div>
             </button>
 

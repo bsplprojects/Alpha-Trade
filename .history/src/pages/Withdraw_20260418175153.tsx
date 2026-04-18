@@ -5,7 +5,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useWithdrawl } from "../admin/features/Withdrawl/hook";
 
 const Withdraw = () => {
   const navigate = useNavigate();
@@ -13,14 +12,6 @@ const Withdraw = () => {
   const [amount, setAmount] = useState("");
   const [password, setPassword] = useState("");
   const memberId = sessionStorage.getItem("memberId");
-
-  const { data: withdrawlHistory } = useQuery({
-    queryKey: ["withdrawl"],
-    queryFn: async () => {
-      const res = await http.get(`/BankTransferReport?Status=`);
-      return res.data;
-    },
-  });
 
   const { data: bankDetails } = useQuery({
     queryKey: ["bank-details"],
@@ -42,7 +33,7 @@ const Withdraw = () => {
     },
   });
 
-  const fee = (20 * Number(amount)) / 100;
+  const fee = (2 * Number(amount)) / 100;
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -170,7 +161,6 @@ const Withdraw = () => {
           <span className="text-xl font-bold text-primary">$</span>
           <input
             type="number"
-            min={0}
             value={amount}
             onChange={(e) => {
               if (

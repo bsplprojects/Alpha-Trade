@@ -164,7 +164,7 @@ const Team = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 relative z-10 mb-3!">
+          <div className="grid grid-cols-2 gap-4 relative z-10">
             {/* Team Size */}
             <div
               onClick={() => setType("team")}
@@ -201,40 +201,6 @@ const Team = () => {
                   {effectiveTeam?.length || 0}
                 </span>
               </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-5 pt-5">
-            {/* Team Deposit */}
-            <div className="bg-white/10 shadow-lg mt-5! shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
-              <p className="text-xs uppercase tracking-tight text-black/70">
-                Team Deposit
-              </p>
-              <p className="text-3xl font-bold mt-2 text-black">
-                ${depositAmount?.toFixed(2) || 0}
-              </p>
-              <p className="text-xs text-black mt-3">
-                Withdrawn:{" "}
-                <span className="font-semibold text-black/70">
-                  ${dashboardTeam?.TeamTotalDeduction?.toFixed(2) || 0}
-                </span>
-              </p>
-            </div>
-
-            {/* Today’s Income */}
-            <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
-              <p className="text-xs uppercase tracking-tight text-black/70">
-                Today’s Income
-              </p>
-              {isLoading ? (
-                <div className="mt-4">
-                  <Loader2 className="animate-spin text-black" size={28} />
-                </div>
-              ) : (
-                <p className="text-3xl font-bold mt-2 text-black">
-                  ${dashboardTeam?.TeamTotalIncome?.toFixed(2) || 0}
-                </p>
-              )}
             </div>
           </div>
 

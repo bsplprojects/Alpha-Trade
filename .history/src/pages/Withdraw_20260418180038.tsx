@@ -5,7 +5,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { http } from "@/utils/http";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useWithdrawl } from "../admin/features/Withdrawl/hook";
 
 const Withdraw = () => {
   const navigate = useNavigate();
@@ -14,13 +13,7 @@ const Withdraw = () => {
   const [password, setPassword] = useState("");
   const memberId = sessionStorage.getItem("memberId");
 
-  const { data: withdrawlHistory } = useQuery({
-    queryKey: ["withdrawl"],
-    queryFn: async () => {
-      const res = await http.get(`/BankTransferReport?Status=`);
-      return res.data;
-    },
-  });
+  const { withdrawlHistoryMutation, addRemarkMutation } = useWithdrawl();
 
   const { data: bankDetails } = useQuery({
     queryKey: ["bank-details"],

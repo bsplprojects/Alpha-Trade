@@ -164,7 +164,7 @@ const Team = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 relative z-10 mb-3!">
+          <div className="grid grid-cols-2 gap-4 relative z-10">
             {/* Team Size */}
             <div
               onClick={() => setType("team")}
@@ -204,9 +204,9 @@ const Team = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 pt-5">
+          <div className="">
             {/* Team Deposit */}
-            <div className="bg-white/10 shadow-lg mt-5! shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
+            <div className="bg-white/10 shadow-lg shadow-orange-700 border border-white/30  backdrop-blur-md rounded-2xl p-4">
               <p className="text-xs uppercase tracking-tight text-black/70">
                 Team Deposit
               </p>
