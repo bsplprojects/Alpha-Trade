@@ -75,7 +75,7 @@ const JoiningReport = () => {
       return response.data;
     },
     onSuccess: () => {
-      reportMembers.mutate();
+     report
     },
   });
 

@@ -91,10 +91,10 @@ const Withdraw = () => {
     //   return;
     // }
 
-    // if (hours < 7 || hours >= 8) {
-    //   toast.error("You can withdraw only between 7 AM and 8 AM");
-    //   return;
-    // }
+    if (hours < 7 || hours >= 8) {
+      toast.error("You can withdraw only between 7 AM and 8 AM");
+      return;
+    }
 
     mutation.mutate();
   };

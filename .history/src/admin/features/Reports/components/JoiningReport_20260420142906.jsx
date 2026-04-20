@@ -25,7 +25,6 @@ import { useMemo, useState } from "react";
 import { useAdminReports } from "../hook";
 import { Trash } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { http } from "../../../../utils/http";
 
 const JoiningReport = () => {
   const client = useQueryClient();
@@ -75,12 +74,11 @@ const JoiningReport = () => {
       return response.data;
     },
     onSuccess: () => {
-      reportMembers.mutate();
+      reportMembers.refetch();
     },
   });
 
   const handleDelete = (id) => {
-    console.log(id);
     deleteMutation.mutate(id);
   };
 
