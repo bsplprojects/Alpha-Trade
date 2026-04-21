@@ -109,7 +109,7 @@ const ConfirmOrder = ({ data, type }) => {
 
     setTimeout(() => {
       mutation.mutate();
-    }, 30000);
+    }, 15000);
   };
 
   // console.log(dashboardData);

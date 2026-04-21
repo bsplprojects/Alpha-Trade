@@ -80,7 +80,6 @@ const JoiningReport = () => {
   });
 
   const handleDelete = (id) => {
-    console.log(id);
     deleteMutation.mutate(id);
   };
 

@@ -70,6 +70,14 @@ const Home = () => {
     }
   };
 
+  const handlePDFDownload = () => {
+    const pdfUrl = "/Alpha-trade.pdf";
+    const link = document.createElement("a");
+    link.href = pdfUrl;
+    link.download = "AlphaTrade.pdf";
+    link.click();
+  };
+
   return (
     <div className="page-content bg-white min-h-screen">
       {/* Header - Premium Card */}
@@ -258,8 +266,14 @@ const Home = () => {
           target="_blank"
           className="group flex flex-col items-center justify-center bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 rounded-3xl p-6 transition-all duration-300 active:scale-95"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-400 flex items-center justify-center mb-4 shadow-inner group-hover:scale-110 transition-transform">
-            <Megaphone size={28} className="text-zinc-950" />
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br  flex items-center justify-center mb-4 shadow-inner group-hover:scale-110 transition-transform">
+            {/* <Megaphone size={28} className="text-zinc-950" />
+             */}
+            <img
+              width={200}
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFFElEQVR4nO2Z6U8idxzGJ1qbiFfFAwVvxPVYz+1ud/u2/Qf6YrOb9m3fti/6ZjcmjW92QW1tEUE813pXdHHjVQ8afdOk2Zg0tV4Dcg2MoFwe7Qas8m1+dGOzMgTYGcEmPsknkPmS5/k+hBnIgGHXuta1aOu+AmJrlw7v1akO6utUB8/rfnZt1KkOnLUq1wkCPa9THaz7Zug1y4d3sQaIwaKt9+cduTVLzsbaJZe5VuWCsFhymWpVLlHlsj0n4ovXzB1l1Cw6O2sWnZ6aRRfQw+mpXnDJby0fpUdm+Xnnp9ULDkf1ghOYpGreYa9acDy8tMVvrUJc1by9u2reAZdJ5by9A2Uxu/wUybo5Z5+rnHNARJi1z6JMZpZfhbiKGdvczVk7RJKKWdtSuQLepV2gfNrWXTFth2hQPm2X013+s/IpG0STsqn9B2+1fKnyMK1s0mYre2GDaFL6Yt9RMkWGf4ktndzrLJ3ch6vADeW+LKzli5/bc0qUe54byj24CpQo9zzlCjIv5AKCCWtjycQe+KHYheIhPRQPasNn2ACCMdLfc+I141YQjJl9j1RzwbhVFNr2DRAjUFhNAmR4Af6gDl5aX0G4Oj45g5+Mx/DRpAGKRwg/X8EYCaVDOvhixQL8Qa3/fNwKxeMWM6aA2KD78xXWe8VjVqCiqE8DdORyn8KHYzrgj5jPPfnDBHwwpoOXlr/A6/X6MgLlCxSWO8ELjFrr+T9agIrCZ2qgqyntIRT264A/ugtFA3r4ZMYIu8cnvuURKCNQftGo5XHQAoXDFmXRiAWoKOihX+DIcwYFvRoo7DfAVysW8JyenS+PQBmB8ouGLeNBCxQMkeuFw7tARX43DkwI+eT3qP2WR6BZoPyCYXIteIFB0lEwRAIVeV3bjBRAPgjvheUR6Hig/PxBsy1ogbx+0pM/QAIVuR3MFEA+CC9FAXQ8UH7eAOkOWiD3B7Mnr98MVOTItxgpgHwQXooC6Hig/Nx+cwgF+syO3D4zUMGTMVMA+SC8FAXQ8UD5uX2m4B8hXq9pPeeZCajgSjcZKYB8uLItcP/tfxKjWaB8Xq8p+EnM7TEqeb0EUJHdtsFIAeTD7dDAl4tmvysRmgXK5/YQwS+j2V3Gem43AVRkSTbh0H1Ku0CWZAO4XUbIblfDx6NaMB54zgv4ZgHys7uMj4IWyOzS381G5hRkSXHo+c1OuwCndf0/3/YdqOzB4VfTsa/AG7OL+Z3E7ZB+zHE6DERWhxH8kOuBJ9mGr1cssLb3Co49Z2Ev/wvxJ2S2br3p264DnmQLPp8hgHNx9hqO3GgM+W5eptwg4sgNQEm7HjIlat8SGeINyPj+j/AQbwJHpqX05Uh3/n2kyM1sNwixUMVuNeVkSA2eTJkBrgIZMoObLSd4WDhKl+rkGVI9XAXS2/RtWLhKbiHYaRKdLb1NB1FForVnd26/3X3TdLH+YVqrDqIJW6y7j9ERW6ztYIu1EA1SxTtSjLYUEJvaop1M/U4LEaVFO4M1LL9DvwD6du4kWSnfambfa9mBSJDSoplGmRij6lyNS2nWyFO+2YFLRsrYO0+l5CbNg+QmjS25WQMMs5/SrKF3woaqJOFmWlIjLktqxN1JTWqgRSPuTmxStyW3rLOxSCv+Cc5LEOKiRBFOJIrUEB44kSBSC5EHFnU1QEz8E/wO6+n2Y5YQH2c9xddYQtyRIMQ9CPScJcR/981E24/ihdu3r8TfrNe6Fvb/1z8GHNGAqjC+xwAAAABJRU5ErkJggg=="
+              alt="zoom"
+            ></img>
           </div>
           <p className="font-semibold text-white">Support Team</p>
           <p className="text-xs text-zinc-400 mt-1">Updates & News</p>
@@ -331,7 +345,10 @@ const Home = () => {
           </div>
 
           {/* Arrow */}
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md">
+          <button
+            onClick={handlePDFDownload}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-5 h-5 text-black"
@@ -346,7 +363,7 @@ const Home = () => {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </div>
+          </button>
         </div>
       </div>
 

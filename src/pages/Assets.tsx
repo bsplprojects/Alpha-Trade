@@ -148,7 +148,7 @@ const Assets = () => {
               </div>
             </button>
 
-            {/* Referral Income */}
+            {/* level Income */}
             <button
               onClick={() => navigate("/referal-income-report")}
               className="bg-white/10 flex flex-col-reverse backdrop-blur-md p-4 shadow-lg border border-white/30 shadow-orange-700  rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
@@ -157,11 +157,11 @@ const Assets = () => {
                 ${data?.data[0]?.SponsorIncome || 0}
               </div>
               <div className="text-xs uppercase tracking-tight text-black/80 mt-2">
-                Referral Income
+                Level Income
               </div>
             </button>
 
-            {/* Level Income - Full Width */}
+            {/* Referral Income - Full Width */}
             <button
               onClick={() => navigate("/level-income-report")}
               className="col-span-2 flex flex-col-reverse bg-white/10 border border-white/30 backdrop-blur-md shadow-lg shadow-orange-700  p-4 rounded-2xl text-center hover:bg-white/15 transition-all active:scale-[0.98]"
@@ -170,7 +170,7 @@ const Assets = () => {
                 ${data?.data[0]?.BCLevelIncome || 0}
               </div>
               <div className="text-xs uppercase tracking-tight text-black/70 mt-2">
-                Level Income
+                Referral Income
               </div>
             </button>
             <button

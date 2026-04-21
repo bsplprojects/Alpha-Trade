@@ -44,7 +44,7 @@ import {
 } from "@reown/appkit/react";
 import { BrowserProvider, Contract, ethers } from "ethers";
 import { bsc } from "viem/chains";
-import usdt_qr from "../../assets/usdt_qr.png";
+import usdt_qr from "../../assets/usdt_qr.jpeg";
 
 const USDT_ADDRESS = "0x55d398326f99059ff775485246999027b3197955";
 
@@ -174,7 +174,7 @@ const ConfirmRecharge = () => {
     try {
       if (!walletProvider || !address) return "0";
 
-      const provider = new BrowserProvider(walletProvider);
+      const provider = new BrowserProvider(walletProvider!);
 
       const usdtContract = new Contract(USDT_ADDRESS, USDT_ABI, provider);
 
@@ -192,7 +192,7 @@ const ConfirmRecharge = () => {
     fetchUsdtBalance();
   }, [walletProvider, address]);
 
-  const bnbAddress = "0x630ad659796d4c2f2cf6aa4474fde4e618ba73f5";
+  const bnbAddress = "0xd36208950De3d8791a94EbC4c6536778A258636C";
 
   return (
     <main className="page-content">
