@@ -85,9 +85,10 @@ const FixedDeposit = () => {
     mutation.mutate(formData);
   };
 
-  const totalAmount = fds?.data
-    ?.filter((d) => d?.Status === "Success")
-    ?.reduce((total, d) => total + parseFloat(d?.amount), 0);
+  const totalAmount = fds?.data?.reduce(
+    (total, d) => total + parseFloat(d.amount),
+    0
+  );
 
   if (isLoading)
     return (
@@ -106,7 +107,7 @@ const FixedDeposit = () => {
           <p className="text-sm font-medium opacity-80">Fixed Deposit Amount</p>
 
           {/* Amount */}
-          <h1 className="text-3xl font-bold mt-2">$ {totalAmount}</h1>
+          <h1 className="text-3xl font-bold mt-2">$ {totalBa}</h1>
           {/* <h1 className="text-3xl font-bold mt-2">$ 0</h1> */}
         </div>
 

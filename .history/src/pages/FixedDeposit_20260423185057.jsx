@@ -85,9 +85,10 @@ const FixedDeposit = () => {
     mutation.mutate(formData);
   };
 
-  const totalAmount = fds?.data
-    ?.filter((d) => d?.Status === "Success")
-    ?.reduce((total, d) => total + parseFloat(d?.amount), 0);
+  const totalAmount = fds?.data?.reduce(
+    (total, d) => total + parseFloat(d.amount),
+    0
+  );
 
   if (isLoading)
     return (
@@ -103,11 +104,11 @@ const FixedDeposit = () => {
       <section className="mx-4 my-8 flex flex-col gap-4">
         <div className="w-full max-w-full rounded-2xl p-5 bg-gradient-to-r from-orange-500 to-red-600 text-black shadow-xl">
           {/* Top Label */}
-          <p className="text-sm font-medium opacity-80">Fixed Deposit Amount</p>
+          <p className="text-sm font-medium opacity-80">Total Amount</p>
 
           {/* Amount */}
-          <h1 className="text-3xl font-bold mt-2">$ {totalAmount}</h1>
-          {/* <h1 className="text-3xl font-bold mt-2">$ 0</h1> */}
+          {/* <h1 className="text-3xl font-bold mt-2">$ {data?.data?.Balance}</h1> */}
+          <h1 className="text-3xl font-bold mt-2">$ 0</h1>
         </div>
 
         <img src={fdQr} alt="fd-qr" className="w-full" />

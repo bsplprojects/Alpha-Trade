@@ -188,7 +188,7 @@ const JoiningReport = () => {
                 <TableCell>
                   {
                     <img
-                      src={`https://api.alphatrade24.com/${d.Nominee_Relation}`}
+                      src={`https://api.alphatrade24.com${d.Nominee_Relation}`}
                       alt=""
                     />
                   }

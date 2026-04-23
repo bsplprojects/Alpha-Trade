@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import PageHeader from "@/components/PageHeader";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,16 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Loader2, QrCode, X } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import useLiveUsdtRate from "@/hooks/useLiveUsdtRate";
-import fdQr from "../../assets/fd-qr.jpeg";
 
 const FixedDeposit = () => {
-  const fileRef = useRef(null);
   const [amount, setAmount] = useState();
   const [usdtInput, setUsdtInput] = useState("");
-  const [transactionId, setTransactionId] = useState("");
-  const [file, setFile] = useState("");
   const { rate: usdtInrRate } = useLiveUsdtRate();
   const client = useQueryClient();
   const memberId = sessionStorage.getItem("memberId");
@@ -49,8 +45,10 @@ const FixedDeposit = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: async (formdata) => {
-      const res = await http.post(`/FixedDepositInsert`, formdata);
+    mutationFn: async () => {
+      const res = await http.post(
+        `/FixedDepositInsert/?MID=${memberId}&Amount=${amount}`,
+      );
       return res.data;
     },
 
@@ -61,33 +59,16 @@ const FixedDeposit = () => {
         client.invalidateQueries({ queryKey: ["fund-wallet"] });
         setAmount("");
       }
-      setFile("");
-      setTransactionId("");
-      fileRef.current.value = null;
-      setUsdtInput("");
-      setAmount("");
     },
   });
 
   const handleSubmit = () => {
-    // if (+amount > +data?.data?.Balance) {
-    //   toast.error("Insufficient Balance");
-    //   return;
-    // }
-    const formData = new FormData();
-    if (file) {
-      formData.append("file", file.file);
+    if (+amount > +data?.data?.Balance) {
+      toast.error("Insufficient Balance");
+      return;
     }
-    formData.append("MID", memberId);
-    formData.append("Amount", usdtInput);
-    formData.append("HashID", transactionId);
-
-    mutation.mutate(formData);
+    mutation.mutate();
   };
-
-  const totalAmount = fds?.data
-    ?.filter((d) => d?.Status === "Success")
-    ?.reduce((total, d) => total + parseFloat(d?.amount), 0);
 
   if (isLoading)
     return (
@@ -103,14 +84,11 @@ const FixedDeposit = () => {
       <section className="mx-4 my-8 flex flex-col gap-4">
         <div className="w-full max-w-full rounded-2xl p-5 bg-gradient-to-r from-orange-500 to-red-600 text-black shadow-xl">
           {/* Top Label */}
-          <p className="text-sm font-medium opacity-80">Fixed Deposit Amount</p>
+          <p className="text-sm font-medium opacity-80">Available Amount</p>
 
           {/* Amount */}
-          <h1 className="text-3xl font-bold mt-2">$ {totalAmount}</h1>
-          {/* <h1 className="text-3xl font-bold mt-2">$ 0</h1> */}
+          <h1 className="text-3xl font-bold mt-2">$ {data?.data?.Balance}</h1>
         </div>
-
-        <img src={fdQr} alt="fd-qr" className="w-full" />
 
         <div>
           <label>Amount</label>
@@ -132,7 +110,6 @@ const FixedDeposit = () => {
             }}
           />
         </div>
-
         <div>
           <label>Transaction ID</label>
           <Input
@@ -141,51 +118,12 @@ const FixedDeposit = () => {
               const val = e.target.value;
               setTransactionId(val);
             }}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <label className="text-sm text-blue-900 font-medium">
-            Upload QR Code
-          </label>
-
-          {/* Hidden Input */}
-          <input
-            ref={fileRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => {
-              const file = e.target.files?.[0];
-              if (file) {
-                setFile((prev) => ({ ...prev, file }));
-              }
+            onBlur={() => {
+              const num = parseFloat(usdtInput) || 0;
+              setUsdtInput(num.toFixed(2));
             }}
           />
-
-          {/* Button */}
-          <Button
-            onClick={() => fileRef.current?.click()}
-            className="w-full flex items-center justify-center gap-2 py-2 rounded-xl border-2 text-blue-900 font-medium bg-white/10 hover:bg-white/50 transition"
-          >
-            <QrCode size={18} />
-            Choose Image
-          </Button>
-
-          {/* Preview */}
-          {file.file && (
-            <div className="flex items-center justify-between bg-white/40 rounded-xl px-3 py-2 mt-2">
-              <span className="text-sm truncate">{file.file.name}</span>
-
-              <X
-                size={16}
-                className="cursor-pointer"
-                onClick={() => setFile((prev) => ({ ...prev, file: null }))}
-              />
-            </div>
-          )}
         </div>
-
         <div className="mt-6">
           <p className="text-center text-primary text-sm mb-4 font-medium">
             Quick Selection (INR)

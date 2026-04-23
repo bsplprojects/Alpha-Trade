@@ -186,12 +186,7 @@ const JoiningReport = () => {
                 <TableCell>{d.JoiningDate?.split("T")[0]}</TableCell>
                 <TableCell>{d.Nominee}</TableCell>
                 <TableCell>
-                  {
-                    <img
-                      src={`https://api.alphatrade24.com/${d.Nominee_Relation}`}
-                      alt=""
-                    />
-                  }
+                  {<img src={`${d.Nominee_Relation}`} alt="" />}
                 </TableCell>
                 <TableCell>{d.MobileNo}</TableCell>
                 <TableCell>{d.Price}</TableCell>

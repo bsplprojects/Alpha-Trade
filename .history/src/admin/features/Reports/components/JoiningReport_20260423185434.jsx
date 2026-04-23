@@ -184,15 +184,8 @@ const JoiningReport = () => {
                 <TableCell>{d.ReferralId}</TableCell>
                 <TableCell>{d.ReferralName}</TableCell>
                 <TableCell>{d.JoiningDate?.split("T")[0]}</TableCell>
-                <TableCell>{d.Nominee}</TableCell>
-                <TableCell>
-                  {
-                    <img
-                      src={`https://api.alphatrade24.com/${d.Nominee_Relation}`}
-                      alt=""
-                    />
-                  }
-                </TableCell>
+                <TableCell>{d.JoiningDate?.split("T")[0]}</TableCell>
+                <TableCell>{d.JoiningDate?.split("T")[0]}</TableCell>
                 <TableCell>{d.MobileNo}</TableCell>
                 <TableCell>{d.Price}</TableCell>
                 <TableCell className="text-right">

@@ -87,7 +87,7 @@ const FixedDeposit = () => {
 
   const totalAmount = fds?.data
     ?.filter((d) => d?.Status === "Success")
-    ?.reduce((total, d) => total + parseFloat(d?.amount), 0);
+    ?.reduce((total, d) => total + parseFloat(d.amount), 0);
 
   if (isLoading)
     return (

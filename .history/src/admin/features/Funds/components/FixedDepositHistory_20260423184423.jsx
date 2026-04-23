@@ -219,7 +219,7 @@ const FixedDepositHistory = () => {
                   <TableCell className="font-medium">{index + 1}</TableCell>
                   <TableCell>{d.MID}</TableCell>
                   <TableCell>{d.HashID}</TableCell>
-                  <TableCell className="text-nowrap">
+                  <TableCell className>
                     {d.toDate?.split("T")[0]} {d.rDate?.split("T")[1]}
                   </TableCell>
                   <TableCell>{d.amount > 0 ? `$${d.amount}` : `-`}</TableCell>
