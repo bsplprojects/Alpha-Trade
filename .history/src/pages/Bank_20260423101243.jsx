@@ -10,17 +10,15 @@ import { toast } from "sonner";
 const Bank = () => {
   const navigate = useNavigate();
   const fileRef = useRef(null);
-  const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
     address: "",
-    UserID: "",
     file: null,
   });
 
   const mutation = useMutation({
     mutationFn: async (formData) => {
-      const res = await http.post("/BankDetailsImage", formData);
+      const res = await http.post("/BankDetails", formData);
       return res.data;
     },
     onSuccess: (res) => {
@@ -28,12 +26,12 @@ const Bank = () => {
         toast.success("Details saved successfully");
         setData({ address: "", file: null });
       } else {
-        toast.error("Something went wrong");
+        toast.error(res?.message || "Something went wrong");
       }
     },
-    onError: (err) => {
-      toast.error(err.response.data.message);
-    },
+    onError:(err)=>{
+      
+    }
   });
 
   const handleSubmit = () => {
@@ -44,10 +42,9 @@ const Bank = () => {
 
     const formData = new FormData();
     formData.append("Address", data.address);
-    formData.append("UserID", memberId);
 
     if (data.file) {
-      formData.append("file", data.file);
+      formData.append("Image", data.file);
     }
 
     mutation.mutate(formData);

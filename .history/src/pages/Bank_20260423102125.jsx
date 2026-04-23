@@ -10,11 +10,9 @@ import { toast } from "sonner";
 const Bank = () => {
   const navigate = useNavigate();
   const fileRef = useRef(null);
-  const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
     address: "",
-    UserID: "",
     file: null,
   });
 
@@ -28,7 +26,7 @@ const Bank = () => {
         toast.success("Details saved successfully");
         setData({ address: "", file: null });
       } else {
-        toast.error("Something went wrong");
+        toast.error(res?.message || "Something went wrong");
       }
     },
     onError: (err) => {
@@ -44,10 +42,9 @@ const Bank = () => {
 
     const formData = new FormData();
     formData.append("Address", data.address);
-    formData.append("UserID", memberId);
 
     if (data.file) {
-      formData.append("file", data.file);
+      formData.append("Image", data.file);
     }
 
     mutation.mutate(formData);

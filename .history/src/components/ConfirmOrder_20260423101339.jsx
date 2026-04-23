@@ -100,10 +100,10 @@ const ConfirmOrder = ({ data, type }) => {
     const now = new Date();
     const hour = now.getHours();
 
-    if (hour < 19 || hour >= 20) {
-      toast.error("You can withdraw only between 7 PM to 8 PM");
-      return;
-    }
+    // if (hour < 19 || hour >= 20) {
+    //   toast.error("You can withdraw only between 7 PM to 8 PM");
+    //   return;
+    // }
 
     setLoading(true);
 

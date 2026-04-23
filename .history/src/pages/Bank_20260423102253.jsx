@@ -28,7 +28,7 @@ const Bank = () => {
         toast.success("Details saved successfully");
         setData({ address: "", file: null });
       } else {
-        toast.error("Something went wrong");
+        toast.error(res?.message || "Something went wrong");
       }
     },
     onError: (err) => {
@@ -47,7 +47,7 @@ const Bank = () => {
     formData.append("UserID", memberId);
 
     if (data.file) {
-      formData.append("file", data.file);
+      formData.append("Image", data.file);
     }
 
     mutation.mutate(formData);
