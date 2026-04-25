@@ -63,23 +63,25 @@ const Team = () => {
     (d, index) => d?.SponsorId !== "Admin",
   );
 
+  console.log(object)
+
   const filteredTeams = useMemo(() => {
     return teams?.data?.filter((t) => {
       const isLevelMatch = Number(t?.Level) === activeLevel;
 
       const isActive = Number(t?.Amount) > 0;
 
-      // if (type === "deposit") {
-      //   return isLevelMatch && isActive;
-      // }
+      if (type === "deposit") {
+        return isLevelMatch && isActive;
+      }
 
-      // if (type === "team") {
-      //   return isLevelMatch && !isActive;
-      // }
+      if (type === "team") {
+        return isLevelMatch && !isActive;
+      }
 
       return isLevelMatch;
     });
-  }, [teams, activeLevel]);
+  }, [teams, activeLevel, type]);
 
   const depositMembers = useMemo(() => {
     return teams?.data?.filter((t) => Number(t?.Amount) > 0);
@@ -104,6 +106,8 @@ const Team = () => {
       return date.getDate() === joiningDate.getDate();
     });
   }, [teams]);
+
+  console.log(filteredTeams);
 
   return (
     <div className="page-content bg-background">
@@ -308,10 +312,8 @@ const Team = () => {
               <TableRow key={idx}>
                 <TableCell>{idx + 1}</TableCell>
                 <TableCell>{d?.ConsumerId}</TableCell>
-                <TableCell className="text-nowrap">{d?.JoiningDate}</TableCell>
-                <TableCell className="text-nowrap">
-                  {d?.ActiveDate?.split(" ")[0]}
-                </TableCell>
+                <TableCell>{d?.JoiningDate}</TableCell>
+                <TableCell>{d?.ActiveDate?.split(" ")[0]}</TableCell>
 
                 <TableCell className="text-right">${d?.Amount}</TableCell>
 

@@ -41,7 +41,7 @@ const Recharge = () => {
     const value = Number(usdtInput);
 
     if (!value || isNaN(value) || value <= 10) {
-      toast.error("Amount should be more than 10 USDT");
+      toast.error("Amount should be at least 10 USDT");
       return;
     }
 

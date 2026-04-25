@@ -38,10 +38,9 @@ const Recharge = () => {
   //   setAmount(value.toString());
   // };
   const handleConfirm = () => {
-    const value = Number(usdtInput);
-
-    if (!value || isNaN(value) || value <= 10) {
-      toast.error("Amount should be more than 10 USDT");
+    console.log(usdtInput);
+    if (!amount || amount < 10) {
+      toast.error("Amount should be greater than 10");
       return;
     }
 

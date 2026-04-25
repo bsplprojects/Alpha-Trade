@@ -63,6 +63,8 @@ const Team = () => {
     (d, index) => d?.SponsorId !== "Admin",
   );
 
+  console.log(teams?.data);
+
   const filteredTeams = useMemo(() => {
     return teams?.data?.filter((t) => {
       const isLevelMatch = Number(t?.Level) === activeLevel;
@@ -308,10 +310,8 @@ const Team = () => {
               <TableRow key={idx}>
                 <TableCell>{idx + 1}</TableCell>
                 <TableCell>{d?.ConsumerId}</TableCell>
-                <TableCell className="text-nowrap">{d?.JoiningDate}</TableCell>
-                <TableCell className="text-nowrap">
-                  {d?.ActiveDate?.split(" ")[0]}
-                </TableCell>
+                <TableCell>{d?.JoiningDate}</TableCell>
+                <TableCell>{d?.ActiveDate?.split(" ")[0]}</TableCell>
 
                 <TableCell className="text-right">${d?.Amount}</TableCell>
 

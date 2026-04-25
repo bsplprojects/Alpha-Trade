@@ -37,11 +37,10 @@ const Recharge = () => {
   // const handleQuickSelect = (value: number) => {
   //   setAmount(value.toString());
   // };
-  const handleConfirm = () => {
-    const value = Number(usdtInput);
 
-    if (!value || isNaN(value) || value <= 10) {
-      toast.error("Amount should be more than 10 USDT");
+  const handleConfirm = () => {
+    if (usdtInput < 10) {
+      toast.error("Amount should be greater than 10");
       return;
     }
 
@@ -180,7 +179,7 @@ const Recharge = () => {
         <div className="px-1 pt-4">
           <Button
             onClick={handleConfirm}
-            // disabled={!amount || !selectedChannel}
+            disabled={!amount || !selectedChannel}
             className="w-full h-14 text-lg font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl shadow-lg shadow-emerald-500/30 transition-all disabled:opacity-60"
           >
             Confirm Deposit

@@ -309,9 +309,7 @@ const Team = () => {
                 <TableCell>{idx + 1}</TableCell>
                 <TableCell>{d?.ConsumerId}</TableCell>
                 <TableCell className="text-nowrap">{d?.JoiningDate}</TableCell>
-                <TableCell className="text-nowrap">
-                  {d?.ActiveDate?.split(" ")[0]}
-                </TableCell>
+                <TableCell>{d?.ActiveDate?.split(" ")[0]}</TableCell>
 
                 <TableCell className="text-right">${d?.Amount}</TableCell>
 
