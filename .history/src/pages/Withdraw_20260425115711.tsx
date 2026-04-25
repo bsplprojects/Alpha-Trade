@@ -58,7 +58,7 @@ const Withdraw = () => {
         navigate("/withdrawal-record");
         toast.success(data?.message);
       }else{
-        toast.success(data?.message);
+        
       }
     },
   });

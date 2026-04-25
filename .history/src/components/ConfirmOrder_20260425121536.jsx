@@ -120,7 +120,7 @@ const ConfirmOrder = ({ data, type }) => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-3 bg-white/80 px-6 py-5 rounded-2xl shadow-xl">
             <Loader />
-            <p className="text-sm font-medium text-gray-400">
+            <p className="text-sm font-medium text-gray-700">
               Processing your order...
             </p>
           </div>

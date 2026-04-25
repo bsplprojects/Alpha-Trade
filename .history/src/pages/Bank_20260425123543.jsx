@@ -29,7 +29,7 @@ const Bank = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      client.invalidateQueries(["member-details", memberId]);
+      
       if (res?.status === "SUCCESS") {
         toast.success("Details saved successfully");
         setData({ address: "", password: " ", file: null });

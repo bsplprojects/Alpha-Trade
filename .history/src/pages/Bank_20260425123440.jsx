@@ -2,7 +2,7 @@ import { ArrowLeft, QrCode, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { http } from "@/utils/http";
 import { toast } from "sonner";
@@ -11,7 +11,6 @@ import { useMember } from "../hooks/useMember";
 const Bank = () => {
   const navigate = useNavigate();
   const fileRef = useRef(null);
-  const client = useQueryClient();
   const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
@@ -29,7 +28,6 @@ const Bank = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      client.invalidateQueries(["member-details", memberId]);
       if (res?.status === "SUCCESS") {
         toast.success("Details saved successfully");
         setData({ address: "", password: " ", file: null });

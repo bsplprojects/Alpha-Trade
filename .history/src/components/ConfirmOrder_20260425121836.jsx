@@ -116,7 +116,7 @@ const ConfirmOrder = ({ data, type }) => {
 
   return (
     <div className="mt-4">
-      {(loading || mutation.isPending) && (
+      {(!loading || mutation.isPending) && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
           <div className="flex flex-col items-center gap-3 bg-white/80 px-6 py-5 rounded-2xl shadow-xl">
             <Loader />

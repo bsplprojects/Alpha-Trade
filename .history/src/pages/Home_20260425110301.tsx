@@ -70,12 +70,26 @@ const Home = () => {
     }
   };
 
-  const handlePDFDownload = () => {
+  const handlePDFDownload = async () => {
     const pdfUrl = "/assets/Alpha-trade.pdf";
-    const link = document.createElement("a");
-    link.href = pdfUrl;
-    link.download = "AlphaTrade.pdf";
-    link.click();
+
+    try {
+      const response = await fetch(pdfUrl);
+      const blob = await response.blob();
+
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = blobUrl;
+      link.download = "AlphaTrade.pdf";
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
   };
 
   return (

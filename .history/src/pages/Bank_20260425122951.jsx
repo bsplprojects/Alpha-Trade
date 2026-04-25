@@ -2,8 +2,8 @@ import { ArrowLeft, QrCode, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRef, useState } from "react";
 import { http } from "@/utils/http";
 import { toast } from "sonner";
 import { useMember } from "../hooks/useMember";
@@ -11,12 +11,10 @@ import { useMember } from "../hooks/useMember";
 const Bank = () => {
   const navigate = useNavigate();
   const fileRef = useRef(null);
-  const client = useQueryClient();
   const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
     address: "",
-    password: "",
     UserID: "",
     file: null,
   });
@@ -29,10 +27,9 @@ const Bank = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      client.invalidateQueries(["member-details", memberId]);
       if (res?.status === "SUCCESS") {
         toast.success("Details saved successfully");
-        setData({ address: "", password: " ", file: null });
+        setData({ address: "", file: null });
       } else {
         toast.error("Something went wrong");
       }
@@ -59,12 +56,6 @@ const Bank = () => {
 
     mutation.mutate(formData);
   };
-
-  useEffect(() => {
-    if (member?.Nominee) {
-      setData({ address: member?.Nominee });
-    }
-  }, [member]);
 
   return (
     <main className="min-h-screen bg-background">
@@ -140,7 +131,7 @@ const Bank = () => {
 
           <div className="space-y-1">
             <label className="text-sm text-blue-900 font-medium">
-              Withdrawal Password
+              Password<span className="text-red-500">*</span>
             </label>
             <Input
               value={data.password}

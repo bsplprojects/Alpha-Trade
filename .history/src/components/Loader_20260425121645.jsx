@@ -13,7 +13,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="18" y="2" width="12" height="12" fill="#a81c05">
+        <rect x="18" y="2" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -22,7 +22,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="34" y="2" width="12" height="12" fill="#a81c05">
+        <rect x="34" y="2" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -31,7 +31,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="2" y="18" width="12" height="12" fill="#a81c05">
+        <rect x="2" y="18" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -40,7 +40,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="18" y="18" width="12" height="12" fill="#a81c05">
+        <rect x="18" y="18" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -49,7 +49,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="34" y="18" width="12" height="12" fill="#a81c05">
+        <rect x="34" y="18" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -58,7 +58,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="2" y="34" width="12" height="12" fill="#a81c05">
+        <rect x="2" y="34" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -67,7 +67,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="18" y="34" width="12" height="12" fill="#a81c05">
+        <rect x="18" y="34" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"
@@ -76,7 +76,7 @@ const Loader = () => {
             repeatCount="indefinite"
           ></animate>
         </rect>
-        <rect x="34" y="34" width="12" height="12" fill="#a81c05">
+        <rect x="34" y="34" width="12" height="12" fill="#EE3315">
           <animate
             attributeName="opacity"
             values="1;0.3;1"

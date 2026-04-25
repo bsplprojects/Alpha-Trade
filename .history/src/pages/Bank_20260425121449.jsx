@@ -2,8 +2,8 @@ import { ArrowLeft, QrCode, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRef, useState } from "react";
 import { http } from "@/utils/http";
 import { toast } from "sonner";
 import { useMember } from "../hooks/useMember";
@@ -11,17 +11,16 @@ import { useMember } from "../hooks/useMember";
 const Bank = () => {
   const navigate = useNavigate();
   const fileRef = useRef(null);
-  const client = useQueryClient();
   const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
     address: "",
-    password: "",
     UserID: "",
     file: null,
   });
 
   const { data: member } = useMember(memberId);
+  console.log(member);
 
   const mutation = useMutation({
     mutationFn: async (formData) => {
@@ -29,10 +28,9 @@ const Bank = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      client.invalidateQueries(["member-details", memberId]);
       if (res?.status === "SUCCESS") {
         toast.success("Details saved successfully");
-        setData({ address: "", password: " ", file: null });
+        setData({ address: "", file: null });
       } else {
         toast.error("Something went wrong");
       }
@@ -51,7 +49,6 @@ const Bank = () => {
     const formData = new FormData();
     formData.append("Address", data.address);
     formData.append("UserID", memberId);
-    formData.append("Password", data.password);
 
     if (data.file) {
       formData.append("file", data.file);
@@ -59,12 +56,6 @@ const Bank = () => {
 
     mutation.mutate(formData);
   };
-
-  useEffect(() => {
-    if (member?.Nominee) {
-      setData({ address: member?.Nominee });
-    }
-  }, [member]);
 
   return (
     <main className="min-h-screen bg-background">
@@ -136,24 +127,6 @@ const Bank = () => {
                 />
               </div>
             )}
-          </div>
-
-          <div className="space-y-1">
-            <label className="text-sm text-blue-900 font-medium">
-              Withdrawal Password
-            </label>
-            <Input
-              value={data.password}
-              type="password"
-              onChange={(e) =>
-                setData((prev) => ({
-                  ...prev,
-                  password: e.target.value,
-                }))
-              }
-              placeholder="Enter password"
-              className="bg-white/90"
-            />
           </div>
 
           {/* Submit */}

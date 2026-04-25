@@ -4,7 +4,6 @@ import { toast } from "sonner";
 
 export function useMember(memberId) {
   const client = useQueryClient();
- 
   const { data, isLoading, error } = useQuery({
     queryKey: ["member-details", memberId],
     queryFn: async () => {

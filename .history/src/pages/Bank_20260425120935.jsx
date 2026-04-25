@@ -2,8 +2,8 @@ import { ArrowLeft, QrCode, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRef, useState } from "react";
 import { http } from "@/utils/http";
 import { toast } from "sonner";
 import { useMember } from "../hooks/useMember";
@@ -11,17 +11,16 @@ import { useMember } from "../hooks/useMember";
 const Bank = () => {
   const navigate = useNavigate();
   const fileRef = useRef(null);
-  const client = useQueryClient();
   const memberId = sessionStorage.getItem("memberId");
 
   const [data, setData] = useState({
     address: "",
-    password: "",
     UserID: "",
     file: null,
   });
 
   const { data: member } = useMember(memberId);
+  console.log(member);
 
   const mutation = useMutation({
     mutationFn: async (formData) => {
@@ -29,10 +28,9 @@ const Bank = () => {
       return res.data;
     },
     onSuccess: (res) => {
-      client.invalidateQueries(["member-details", memberId]);
       if (res?.status === "SUCCESS") {
         toast.success("Details saved successfully");
-        setData({ address: "", password: " ", file: null });
+        setData({ address: "", file: null });
       } else {
         toast.error("Something went wrong");
       }
@@ -51,7 +49,6 @@ const Bank = () => {
     const formData = new FormData();
     formData.append("Address", data.address);
     formData.append("UserID", memberId);
-    formData.append("Password", data.password);
 
     if (data.file) {
       formData.append("file", data.file);
@@ -59,12 +56,6 @@ const Bank = () => {
 
     mutation.mutate(formData);
   };
-
-  useEffect(() => {
-    if (member?.Nominee) {
-      setData({ address: member?.Nominee });
-    }
-  }, [member]);
 
   return (
     <main className="min-h-screen bg-background">
@@ -76,7 +67,7 @@ const Bank = () => {
 
       {/* Card */}
       <div className="p-5">
-        <div className=" p-5 bg-gradient-to-br bg-white shadow-xl space-y-5">
+        <div className="rounded-3xl p-5 bg-gradient-to-br bg-white shadow-xl space-y-5">
           {/* Address */}
           <div className="space-y-1">
             <label className="text-sm text-blue-900 font-medium">
@@ -138,24 +129,6 @@ const Bank = () => {
             )}
           </div>
 
-          <div className="space-y-1">
-            <label className="text-sm text-blue-900 font-medium">
-              Withdrawal Password
-            </label>
-            <Input
-              value={data.password}
-              type="password"
-              onChange={(e) =>
-                setData((prev) => ({
-                  ...prev,
-                  password: e.target.value,
-                }))
-              }
-              placeholder="Enter password"
-              className="bg-white/90"
-            />
-          </div>
-
           {/* Submit */}
           <Button
             onClick={handleSubmit}
@@ -164,37 +137,19 @@ const Bank = () => {
           >
             {mutation.isPending ? "Saving..." : "Save Details"}
           </Button>
+
+
+
         </div>
 
-        <div className="max-w-xl mt-5! mx-auto bg-white   p-6 ">
-          {/* Header */}
-          <h2 className="text-xl font-semibold text-gray-800 mb-4 border-b pb-3">
-            Payment Details
-          </h2>
-
-          {/* Address Section */}
-          <div className="mb-5">
-            <p className="text-sm text-gray-500 mb-1 font-semibold">
-              BEP 20 USDT Address
-            </p>
-            <div className="border rounded-lg p-3 break-all text-sm text-gray-800 font-medium">
-              {member?.Nominee || "Not Available"}
+            <div>
+              <h1>BEP 20 USDT Address</h1>
+              <p>{member?.Nominee}</p>
             </div>
-          </div>
-
-          {/* Image Section */}
-          <div>
-            <p className="text-sm text-gray-500 mb-2">QR Code</p>
-            <div className="flex justify-center">
-              <img
-                src={`https://api.alphatrade24.com${member?.Nominee_Relation}`}
-                alt="QR Code"
-                width={200}
-                className="w-32 h-32 object-contain rounded-xl border border-gray-200 shadow-sm"
-              />
+            <div>
+              <h1>Image</h1>
+              <img>{member?.Nominee}</img>
             </div>
-          </div>
-        </div>
       </div>
     </main>
   );
