@@ -49,10 +49,10 @@ const MarketItem = ({
     <div
       className={`flex items-center justify-between py-3 px-4 border-b border-border animate-fade-in cursor-pointer hover:bg-muted/50 transition-colors  ${
         isHighlighted
-          ? "animate-pulse bg-orange-300 border border-orange-400"
+          ? "animate-pulse bg-orange-100 border border-orange-400"
           : ""
       }`}
-      onClick={() => isHighlighted && navigate(`/market/${code}`)}
+      onClick={() => navigate(`/market/${code}`)}
     >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-lg">

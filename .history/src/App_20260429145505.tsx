@@ -65,7 +65,6 @@ import FixedDeposit from "./pages/FixedDeposit";
 import { AppKitProvider } from "@reown/appkit/react";
 import { bsc } from "viem/chains";
 import MessageCenter from "./pages/MessageCenter";
-import Gallery from "./pages/Gallery";
 
 const queryClient = new QueryClient();
 
@@ -107,7 +106,7 @@ const App = () => (
                 path="/gallery"
                 element={
                   <Protected>
-                    <Gallery />
+                    <MessageCenter />
                   </Protected>
                 }
               />

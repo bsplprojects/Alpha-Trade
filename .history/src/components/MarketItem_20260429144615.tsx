@@ -52,7 +52,7 @@ const MarketItem = ({
           ? "animate-pulse bg-orange-300 border border-orange-400"
           : ""
       }`}
-      onClick={() => isHighlighted && navigate(`/market/${code}`)}
+      onClick={() => isHig navigate(`/market/${code}`)}
     >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-lg">

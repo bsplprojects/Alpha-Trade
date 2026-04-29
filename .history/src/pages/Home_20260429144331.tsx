@@ -312,7 +312,7 @@ const Home = () => {
               <polygon fill="#fff" points="37,31 31,27 31,21 37,17"></polygon>
             </svg>
           </div>
-          <p className="font-semibold text-white">Zoom</p>
+          <p className="font-semibold text-white">Support Team</p>
           <small className="font-semibold text-yellow-500 text-xs text-nowrap">
             Time: 07:30 PM - 08:00 PM
           </small>
@@ -358,7 +358,7 @@ const Home = () => {
       </div>
 
       <div
-        // onClick={() => window.open("/alpha-trade.pdf", "_blank")}
+        onClick={() => window.open("/alpha-trade.pdf", "_blank")}
         className="mx-4 mt-4 rounded-3xl p-5 cursor-pointer relative overflow-hidden shadow-2xl text-black"
         style={{
           background: "linear-gradient(135deg, #f59e0b, #ea580c, #7f1d1d)",
@@ -385,24 +385,25 @@ const Home = () => {
           </div>
 
           {/* Arrow */}
-          <Link to={"/gallery"}>
-            <button className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-black"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </Link>
+          <button
+            onClick={handlePDFDownload}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-white/30 backdrop-blur-md"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 text-black"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
         </div>
       </div>
 

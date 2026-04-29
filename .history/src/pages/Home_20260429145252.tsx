@@ -358,7 +358,7 @@ const Home = () => {
       </div>
 
       <div
-        // onClick={() => window.open("/alpha-trade.pdf", "_blank")}
+        onClick={() => window.open("/alpha-trade.pdf", "_blank")}
         className="mx-4 mt-4 rounded-3xl p-5 cursor-pointer relative overflow-hidden shadow-2xl text-black"
         style={{
           background: "linear-gradient(135deg, #f59e0b, #ea580c, #7f1d1d)",
