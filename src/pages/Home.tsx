@@ -118,7 +118,7 @@ const Home = () => {
             </p>
 
             <div className="flex items-baseline gap-1 sm:justify-end mt-1">
-              <span className="text-4xl sm:text-4xl font-bold text-red-500 tracking-tight">
+              <span className="text-4xl sm:text-4xl font-bold text-yellow-300 tracking-tight">
                 ${data?.data[0]?.LevelIncome?.toLocaleString() || "0.00"}
               </span>
             </div>
@@ -254,28 +254,68 @@ const Home = () => {
           target="_blank"
           className="group flex flex-col items-center justify-center bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 rounded-3xl p-6 transition-all duration-300 active:scale-95"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center mb-4 shadow-inner group-hover:scale-110 transition-transform">
-            <MessageCircle size={28} className="text-zinc-950" />
+          <div className="w-16 h-16 mb-5 rounded-2xl bg-gradient-to-br  flex items-center justify-center  shadow-inner group-hover:scale-110 transition-transform">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              width="100"
+              height="100"
+              viewBox="0 0 48 48"
+            >
+              <path
+                fill="#29b6f6"
+                d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"
+              ></path>
+              <path
+                fill="#fff"
+                d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733 l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468 c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z"
+              ></path>
+              <path
+                fill="#b0bec5"
+                d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"
+              ></path>
+              <path
+                fill="#cfd8dc"
+                d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912 c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z"
+              ></path>
+            </svg>
           </div>
           <p className="font-semibold text-white">Support CC</p>
+          {/* <small className="font-semibold text-zinc-900 text-xs text-nowrap">
+            Time: 07:30 PM - 08:00 PM
+          </small> */}
           <p className="text-xs text-zinc-400 mt-1">Customer Care</p>
         </Link>
 
         <Link
-          to="https://t.me/alphatrade36?direct"
+          to="https://zoom.us/j/92968016024?pwd=6EfcnyjBONfdkGY9nMClSh2IYp3dn5.1"
           target="_blank"
           className="group flex flex-col items-center justify-center bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-yellow-400/30 rounded-3xl p-6 transition-all duration-300 active:scale-95"
         >
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br  flex items-center justify-center mb-4 shadow-inner group-hover:scale-110 transition-transform">
             {/* <Megaphone size={28} className="text-zinc-950" />
              */}
-            <img
-              width={200}
-              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFFElEQVR4nO2Z6U8idxzGJ1qbiFfFAwVvxPVYz+1ud/u2/Qf6YrOb9m3fti/6ZjcmjW92QW1tEUE813pXdHHjVQ8afdOk2Zg0tV4Dcg2MoFwe7Qas8m1+dGOzMgTYGcEmPsknkPmS5/k+hBnIgGHXuta1aOu+AmJrlw7v1akO6utUB8/rfnZt1KkOnLUq1wkCPa9THaz7Zug1y4d3sQaIwaKt9+cduTVLzsbaJZe5VuWCsFhymWpVLlHlsj0n4ovXzB1l1Cw6O2sWnZ6aRRfQw+mpXnDJby0fpUdm+Xnnp9ULDkf1ghOYpGreYa9acDy8tMVvrUJc1by9u2reAZdJ5by9A2Uxu/wUybo5Z5+rnHNARJi1z6JMZpZfhbiKGdvczVk7RJKKWdtSuQLepV2gfNrWXTFth2hQPm2X013+s/IpG0STsqn9B2+1fKnyMK1s0mYre2GDaFL6Yt9RMkWGf4ktndzrLJ3ch6vADeW+LKzli5/bc0qUe54byj24CpQo9zzlCjIv5AKCCWtjycQe+KHYheIhPRQPasNn2ACCMdLfc+I141YQjJl9j1RzwbhVFNr2DRAjUFhNAmR4Af6gDl5aX0G4Oj45g5+Mx/DRpAGKRwg/X8EYCaVDOvhixQL8Qa3/fNwKxeMWM6aA2KD78xXWe8VjVqCiqE8DdORyn8KHYzrgj5jPPfnDBHwwpoOXlr/A6/X6MgLlCxSWO8ELjFrr+T9agIrCZ2qgqyntIRT264A/ugtFA3r4ZMYIu8cnvuURKCNQftGo5XHQAoXDFmXRiAWoKOihX+DIcwYFvRoo7DfAVysW8JyenS+PQBmB8ouGLeNBCxQMkeuFw7tARX43DkwI+eT3qP2WR6BZoPyCYXIteIFB0lEwRAIVeV3bjBRAPgjvheUR6Hig/PxBsy1ogbx+0pM/QAIVuR3MFEA+CC9FAXQ8UH7eAOkOWiD3B7Mnr98MVOTItxgpgHwQXooC6Hig/Nx+cwgF+syO3D4zUMGTMVMA+SC8FAXQ8UD5uX2m4B8hXq9pPeeZCajgSjcZKYB8uLItcP/tfxKjWaB8Xq8p+EnM7TEqeb0EUJHdtsFIAeTD7dDAl4tmvysRmgXK5/YQwS+j2V3Gem43AVRkSTbh0H1Ku0CWZAO4XUbIblfDx6NaMB54zgv4ZgHys7uMj4IWyOzS381G5hRkSXHo+c1OuwCndf0/3/YdqOzB4VfTsa/AG7OL+Z3E7ZB+zHE6DERWhxH8kOuBJ9mGr1cssLb3Co49Z2Ev/wvxJ2S2br3p264DnmQLPp8hgHNx9hqO3GgM+W5eptwg4sgNQEm7HjIlat8SGeINyPj+j/AQbwJHpqX05Uh3/n2kyM1sNwixUMVuNeVkSA2eTJkBrgIZMoObLSd4WDhKl+rkGVI9XAXS2/RtWLhKbiHYaRKdLb1NB1FForVnd26/3X3TdLH+YVqrDqIJW6y7j9ERW6ztYIu1EA1SxTtSjLYUEJvaop1M/U4LEaVFO4M1LL9DvwD6du4kWSnfambfa9mBSJDSoplGmRij6lyNS2nWyFO+2YFLRsrYO0+l5CbNg+QmjS25WQMMs5/SrKF3woaqJOFmWlIjLktqxN1JTWqgRSPuTmxStyW3rLOxSCv+Cc5LEOKiRBFOJIrUEB44kSBSC5EHFnU1QEz8E/wO6+n2Y5YQH2c9xddYQtyRIMQ9CPScJcR/981E24/ihdu3r8TfrNe6Fvb/1z8GHNGAqjC+xwAAAABJRU5ErkJggg=="
-              alt="zoom"
-            ></img>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              width="100"
+              height="100"
+              viewBox="0 0 48 48"
+            >
+              <circle cx="24" cy="24" r="20" fill="#2196f3"></circle>
+              <path
+                fill="#fff"
+                d="M29,31H14c-1.657,0-3-1.343-3-3V17h15c1.657,0,3,1.343,3,3V31z"
+              ></path>
+              <polygon fill="#fff" points="37,31 31,27 31,21 37,17"></polygon>
+            </svg>
           </div>
           <p className="font-semibold text-white">Support Team</p>
+          <small className="font-semibold text-yellow-500 text-xs text-nowrap">
+            Time: 07:30 PM - 08:00 PM
+          </small>
           <p className="text-xs text-zinc-400 mt-1">Updates & News</p>
         </Link>
       </div>

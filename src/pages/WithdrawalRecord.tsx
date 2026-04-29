@@ -24,6 +24,8 @@ const WithdrawalRecord = () => {
     },
   });
 
+  console.log(record);
+
   return (
     <div className="page-content">
       <header className="header-gradient flex items-center gap-2">
@@ -49,11 +51,8 @@ const WithdrawalRecord = () => {
                   key={index}
                   className="bg-white border rounded-xl shadow-sm p-4 grid grid-cols-1 gap-2"
                 >
-                  <Info label="Account No" value={d?.ACCNO} />
-                  <Info label="Account Name" value={d?.ACCName} />
-                  <Info label="IFSC Code" value={d?.IFSC} />
-                  <Info label="Bank" value={d?.Bank} />
-                  <Info label="Mode" value={d?.Mode} />
+                  <Info label="Wallet Address" value={d?.Bank} />
+                  <Info label="Mode" value={d?.PayMode} />
                   <Info label="Amount" value={`$${d?.Amount}`} />
 
                   <Info
@@ -69,19 +68,23 @@ const WithdrawalRecord = () => {
                     <p className="text-muted-foreground">Status</p>
                     <span
                       className={`inline-flex  px-3 py-1 rounded-full text-xs font-bold
-            ${
-              d?.Status === "Approved"
-                ? "bg-indigo-100 text-indigo-700"
-                : d?.Status === "Pending"
-                  ? "bg-red-100 text-red-700"
-                  : "bg-red-100 text-red-700"
-            }`}
+                              ${
+                                d?.Status === "Approved"
+                                  ? "bg-indigo-100 text-indigo-700"
+                                  : d?.Status === "Pending"
+                                    ? "bg-red-100 text-red-700"
+                                    : "bg-red-100 text-red-700"
+                              }`}
                     >
                       {d?.Status}
                     </span>
                   </div>
 
                   <Info label="Remark" value={d?.Remark} />
+                  <div className="flex items-center gap-3">
+                    <p className="text-muted-foreground">QR: </p>
+                    <img src="" alt="" />
+                  </div>
                 </div>
               ))}
             </div>

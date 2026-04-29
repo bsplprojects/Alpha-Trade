@@ -144,7 +144,7 @@ const ConfirmOrder = ({ data, type }) => {
       <div className="grid grid-cols-2 gap-2 mt-5">
         <div className="p-2 border bg-white rounded-xl">
           <span className="font-semibold">Balance</span>
-          <p>${fundWallet?.data?.Balance}</p>
+          <p>${dashboardData?.data[0]?.TotalMemberDeactive}</p>
         </div>
         <div className="p-2 border bg-white rounded-xl">
           <span className="font-semibold">Lockup Time</span>
